@@ -1,0 +1,299 @@
+{
+  "common": {
+    "home": "Accueil",
+    "jobs": "Offres d'emploi",
+    "news": "Actualités",
+    "services": "Services",
+    "about": "À propos",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "signup": "S'inscrire",
+    "apply": "Candidater",
+    "readMore": "Lire la suite",
+    "seeMore": "Voir plus",
+    "back": "Retour",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "reset": "Réinitialiser",
+    "filter": "Filtrer",
+    "close": "Fermer",
+    "submit": "Envoyer",
+    "loading": "Chargement...",
+    "noData": "Aucune donnée",
+    "language": "Langue",
+    "created": "Créé le",
+    "error": "Erreur",
+    "darkMode": "Mode clair",
+    "lightMode": "Mode sombre"
+  },
+  "header": {
+    "title": "Talent Power Service",
+    "login": "Connexion",
+    "apply": "Candidater"
+  },
+  "landing": {
+    "hero": {
+      "badge": "Leader en ingénierie terrain",
+      "title1": "Expertise Technique",
+      "title2": "Excellence Opérationnelle",
+      "description": "TPS met à disposition des ingénieurs et techniciens spécialisés en télécoms fibre (FTTH) et BTP/ingénierie terrain. Staffing rapide, sélection technique crédible, accompagnement opérationnel.",
+      "cta1": "Découvrir les offres",
+      "cta2": "Nos services"
+    },
+    "carousel": {
+      "conception": {
+        "title": "Conception & Études",
+        "description": "Ingénierie d'études techniques"
+      },
+      "fibre": {
+        "title": "Fibre Optique",
+        "description": "Déploiement FTTH"
+      },
+      "greenEnergy": {
+        "title": "Énergie Verte",
+        "description": "Solutions durables"
+      },
+      "solar": {
+        "title": "Énergie Solaire",
+        "description": "Installations photovoltaïques"
+      },
+      "network5g": {
+        "title": "Réseau 5G",
+        "description": "Déploiement nouvelle génération"
+      },
+      "fibreOptic": {
+        "title": "Infrastructure Fibre",
+        "description": "Réseaux haute performance"
+      }
+    },
+    "stats": {
+      "professionals": "Professionnels",
+      "projects": "Projets réalisés",
+      "delay": "Délai moyen",
+      "satisfaction": "Satisfaction"
+    },
+    "services": {
+      "telecom": {
+        "title": "Télécoms Fibre",
+        "description": "Expertise complète dans le déploiement de la fibre optique. Ingénierie d'études, techniciens FTTH, conduite de travaux et déploiement pour vos projets d'infrastructure."
+      },
+      "btp": {
+        "title": "BTP / Ingénierie",
+        "description": "Compétences terrain pour vos projets de construction. Chefs d'équipe/chantier, secrétariat technique, fonctions de coordination terrain et conducteurs de travaux."
+      },
+      "staffing": {
+        "title": "Staffing Rapide",
+        "description": "Base de données interne et réseau actif avec cooptation pour un time-to-staff optimisé. Réponse rapide à vos besoins en ressources techniques."
+      },
+      "support": {
+        "title": "Accompagnement",
+        "description": "Montée en compétence initiale, habilitations électriques, travail en hauteur, CACES. Formation et support pour garantir la réussite de vos projets."
+      },
+      "readMore": "EN SAVOIR PLUS"
+    },
+    "process": {
+      "title": "Notre processus",
+      "subtitle": "Un processus éprouvé de bout en bout pour garantir la qualité",
+      "steps": {
+        "qualification": "Qualification",
+        "qualificationDesc": "Analyse du besoin client",
+        "sourcing": "Sourcing",
+        "sourcingDesc": "Recherche et présélection",
+        "interviews": "Entretiens",
+        "interviewsDesc": "Sélection technique",
+        "alignment": "Alignement",
+        "alignmentDesc": "Négociation économique",
+        "onboarding": "Onboarding",
+        "onboardingDesc": "Formation et intégration"
+      }
+    },
+    "testimonials": {
+      "title": "Témoignages",
+      "subtitle": "Découvrez ce que nos clients et partenaires disent de TPS"
+    },
+    "cta": {
+      "title": "Prêt à démarrer ?",
+      "description": "Que vous soyez un client à la recherche de talents ou un professionnel cherchant de nouvelles opportunités, TPS est votre partenaire de confiance.",
+      "button1": "Voir les offres",
+      "button2": "Nos services"
+    },
+    "keyStats": {
+      "title": "Chiffres clés",
+      "subtitle": "Notre impact mesuré sur le terrain et auprès de nos clients"
+    },
+    "footer": {
+      "tagline": "Expertise technique et excellence opérationnelle en télécoms fibre et BTP.",
+      "navigation": "Navigation",
+      "sectors": "Secteurs",
+      "contact": "Contact",
+      "copyright": "© 2026 Talent Power Service. Tous droits réservés.",
+      "sectorsList": {
+        "telecom": "Télécoms Fibre (FTTH)",
+        "btp": "BTP / Ingénierie Terrain",
+        "projectManagement": "Conduite de travaux",
+        "engineering": "Ingénierie d'études"
+      }
+    },
+    "testimonialsList": {
+      "testimonial1": {
+        "text": "TPS a su répondre rapidement à nos besoins en ingénieurs fibre optique. Leur sélection technique est excellente et les profils proposés correspondent parfaitement à nos attentes.",
+        "author": "Marie Dubois",
+        "role": "Directrice des Projets",
+        "company": "Orange"
+      },
+      "testimonial2": {
+        "text": "Un partenaire de confiance pour nos projets BTP. L'accompagnement opérationnel et la qualité des profils font de TPS notre partenaire privilégié pour le staffing technique.",
+        "author": "Jean Martin",
+        "role": "Chef de Projet",
+        "company": "Bouygues Construction"
+      },
+      "testimonial3": {
+        "text": "Délai de réponse exceptionnel et profils très qualifiés. TPS comprend nos besoins et propose des solutions adaptées. Je recommande vivement leurs services.",
+        "author": "Sophie Laurent",
+        "role": "Responsable RH",
+        "company": "SFR"
+      }
+    }
+  },
+  "jobs": {
+    "title": "Offres d'emploi",
+    "subtitle": "Découvrez les opportunités de carrière dans les télécoms fibre et le BTP",
+    "filters": {
+      "title": "Filtres de recherche",
+      "sector": "Secteur",
+      "location": "Localisation",
+      "contractType": "Type de contrat",
+      "search": "Recherche",
+      "allSectors": "Tous les secteurs",
+      "allTypes": "Tous les types",
+      "keywords": "Mots-clés"
+    },
+    "sectors": {
+      "telecom": "Télécoms Fibre",
+      "btp": "BTP"
+    },
+    "contractTypes": {
+      "regie": "Régie",
+      "tjm": "TJM",
+      "package": "Package"
+    },
+    "noResults": "Aucune offre trouvée",
+    "noResultsDesc": "Essayez de modifier vos critères de recherche",
+    "viewDetails": "Voir détails",
+    "apply": "Postuler maintenant",
+    "share": "Partager",
+    "notFound": "Offre non trouvée",
+    "seeAll": "Voir toutes les offres"
+  },
+  "news": {
+    "title": "Actualités TPS",
+    "subtitle": "Restez informé de l'actualité de TPS, de nos projets et de nos réalisations",
+    "noNews": "Aucune actualité pour le moment",
+    "readMore": "Lire la suite",
+    "notFound": "Article non trouvé",
+    "seeAll": "Voir toutes les actualités"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "signup": "S'inscrire"
+    },
+    "signup": {
+      "title": "Inscription",
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "S'inscrire",
+      "hasAccount": "Déjà un compte ?",
+      "login": "Se connecter"
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "description": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+      "email": "Email",
+      "submit": "Envoyer",
+      "backToLogin": "Retour à la connexion"
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "code": "Code de réinitialisation",
+      "password": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Réinitialiser"
+    }
+  },
+  "backoffice": {
+    "dashboard": {
+      "title": "Back Office",
+      "subtitle": "Gérez les offres d'emploi et les articles de votre plateforme",
+      "jobs": "Offres d'emploi",
+      "jobsDesc": "Gérez les offres d'emploi publiées sur la plateforme",
+      "news": "Articles",
+      "newsDesc": "Gérez les articles et actualités publiés sur la plateforme",
+      "manageJobs": "Gérer les offres",
+      "manageNews": "Gérer les articles",
+      "backToSite": "Retour au site"
+    },
+    "jobs": {
+      "title": "Gestion des offres d'emploi",
+      "subtitle": "Créez, modifiez et supprimez les offres d'emploi",
+      "new": "Nouvelle offre",
+      "noJobs": "Aucune offre d'emploi",
+      "createFirst": "Créer la première offre",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "form": {
+        "title": "Titre",
+        "sector": "Secteur",
+        "location": "Localisation",
+        "contractType": "Type de contrat",
+        "tjm": "TJM (€)",
+        "description": "Description",
+        "requirements": "Profil recherché (une ligne par élément)",
+        "requirementsPlaceholder": "Expérience de 3 ans minimum\nMaîtrise de la fibre optique\nPermis B requis",
+        "responsibilities": "Missions (une ligne par élément)",
+        "responsibilitiesPlaceholder": "Installation de réseaux fibre\nMaintenance des équipements\nGestion des interventions",
+        "benefits": "Avantages (une ligne par élément)",
+        "benefitsPlaceholder": "Télétravail possible\nFormation continue\nMutuelle entreprise",
+        "language": "Langue",
+        "create": "Créer",
+        "update": "Modifier"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer l'offre \"{title}\" ?",
+      "deleteTitle": "Confirmation de suppression"
+    },
+    "news": {
+      "title": "Gestion des articles",
+      "subtitle": "Créez, modifiez et supprimez les articles et actualités",
+      "new": "Nouvel article",
+      "noNews": "Aucun article",
+      "createFirst": "Créer le premier article",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "form": {
+        "title": "Titre",
+        "category": "Catégorie",
+        "excerpt": "Extrait (résumé court)",
+        "content": "Contenu",
+        "publish": "Publier immédiatement",
+        "language": "Langue",
+        "create": "Créer",
+        "update": "Modifier"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer l'article \"{title}\" ?",
+      "deleteTitle": "Confirmation de suppression",
+      "published": "Publié",
+      "draft": "Brouillon"
+    }
+  }
+}
+

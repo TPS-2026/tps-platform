@@ -1,0 +1,299 @@
+{
+  "common": {
+    "home": "Home",
+    "jobs": "Job Offers",
+    "news": "News",
+    "services": "Services",
+    "about": "About",
+    "login": "Login",
+    "logout": "Logout",
+    "signup": "Sign Up",
+    "apply": "Apply",
+    "readMore": "Read more",
+    "seeMore": "See more",
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "reset": "Reset",
+    "filter": "Filter",
+    "close": "Close",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "noData": "No data",
+    "language": "Language",
+    "created": "Created on",
+    "error": "Error",
+    "darkMode": "Light Mode",
+    "lightMode": "Dark Mode"
+  },
+  "header": {
+    "title": "Talent Power Service",
+    "login": "Login",
+    "apply": "Apply"
+  },
+  "landing": {
+    "hero": {
+      "badge": "Leader in field engineering",
+      "title1": "Technical Expertise",
+      "title2": "Operational Excellence",
+      "description": "TPS provides engineers and technicians specialized in fiber optics (FTTH) and construction/field engineering. Fast staffing, credible technical selection, operational support.",
+      "cta1": "Discover offers",
+      "cta2": "Our services"
+    },
+    "carousel": {
+      "conception": {
+        "title": "Design & Studies",
+        "description": "Technical engineering"
+      },
+      "fibre": {
+        "title": "Fiber Optics",
+        "description": "FTTH deployment"
+      },
+      "greenEnergy": {
+        "title": "Green Energy",
+        "description": "Sustainable solutions"
+      },
+      "solar": {
+        "title": "Solar Energy",
+        "description": "Photovoltaic installations"
+      },
+      "network5g": {
+        "title": "5G Network",
+        "description": "Next generation deployment"
+      },
+      "fibreOptic": {
+        "title": "Fiber Infrastructure",
+        "description": "High performance networks"
+      }
+    },
+    "stats": {
+      "professionals": "Professionals",
+      "projects": "Completed projects",
+      "delay": "Average delay",
+      "satisfaction": "Satisfaction"
+    },
+    "services": {
+      "telecom": {
+        "title": "Fiber Optics",
+        "description": "Complete expertise in fiber optic deployment. Engineering studies, FTTH technicians, project management and deployment for your infrastructure projects."
+      },
+      "btp": {
+        "title": "Construction / Engineering",
+        "description": "Field skills for your construction projects. Team/site managers, technical secretariat, field coordination functions and project managers."
+      },
+      "staffing": {
+        "title": "Fast Staffing",
+        "description": "Internal database and active network with co-optation for optimized time-to-staff. Quick response to your technical resource needs."
+      },
+      "support": {
+        "title": "Support",
+        "description": "Initial skills development, electrical certifications, work at height, CACES. Training and support to ensure the success of your projects."
+      },
+      "readMore": "LEARN MORE"
+    },
+    "process": {
+      "title": "Our Process",
+      "subtitle": "A proven end-to-end process to ensure quality",
+      "steps": {
+        "qualification": "Qualification",
+        "qualificationDesc": "Client needs analysis",
+        "sourcing": "Sourcing",
+        "sourcingDesc": "Research and preselection",
+        "interviews": "Interviews",
+        "interviewsDesc": "Technical selection",
+        "alignment": "Alignment",
+        "alignmentDesc": "Economic negotiation",
+        "onboarding": "Onboarding",
+        "onboardingDesc": "Training and integration"
+      }
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "subtitle": "Discover what our clients and partners say about TPS"
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "description": "Whether you're a client looking for talent or a professional seeking new opportunities, TPS is your trusted partner.",
+      "button1": "View offers",
+      "button2": "Our services"
+    },
+    "keyStats": {
+      "title": "Key Figures",
+      "subtitle": "Our measured impact on the field and with our clients"
+    },
+    "footer": {
+      "tagline": "Technical expertise and operational excellence in fiber optics and construction.",
+      "navigation": "Navigation",
+      "sectors": "Sectors",
+      "contact": "Contact",
+      "copyright": "© 2026 Talent Power Service. All rights reserved.",
+      "sectorsList": {
+        "telecom": "Fiber Optics (FTTH)",
+        "btp": "Construction / Field Engineering",
+        "projectManagement": "Project Management",
+        "engineering": "Engineering Studies"
+      }
+    },
+    "testimonialsList": {
+      "testimonial1": {
+        "text": "TPS was able to quickly respond to our needs for fiber optic engineers. Their technical selection is excellent and the profiles proposed perfectly match our expectations.",
+        "author": "Marie Dubois",
+        "role": "Project Director",
+        "company": "Orange"
+      },
+      "testimonial2": {
+        "text": "A trusted partner for our construction projects. The operational support and quality of profiles make TPS our preferred partner for technical staffing.",
+        "author": "Jean Martin",
+        "role": "Project Manager",
+        "company": "Bouygues Construction"
+      },
+      "testimonial3": {
+        "text": "Exceptional response time and highly qualified profiles. TPS understands our needs and proposes adapted solutions. I highly recommend their services.",
+        "author": "Sophie Laurent",
+        "role": "HR Manager",
+        "company": "SFR"
+      }
+    }
+  },
+  "jobs": {
+    "title": "Job Offers",
+    "subtitle": "Discover career opportunities in fiber optics and construction",
+    "filters": {
+      "title": "Search filters",
+      "sector": "Sector",
+      "location": "Location",
+      "contractType": "Contract type",
+      "search": "Search",
+      "allSectors": "All sectors",
+      "allTypes": "All types",
+      "keywords": "Keywords"
+    },
+    "sectors": {
+      "telecom": "Fiber Optics",
+      "btp": "Construction"
+    },
+    "contractTypes": {
+      "regie": "Managed",
+      "tjm": "Daily Rate",
+      "package": "Package"
+    },
+    "noResults": "No offers found",
+    "noResultsDesc": "Try modifying your search criteria",
+    "viewDetails": "View details",
+    "apply": "Apply now",
+    "share": "Share",
+    "notFound": "Offer not found",
+    "seeAll": "View all offers"
+  },
+  "news": {
+    "title": "TPS News",
+    "subtitle": "Stay informed about TPS news, our projects and achievements",
+    "noNews": "No news at the moment",
+    "readMore": "Read more",
+    "notFound": "Article not found",
+    "seeAll": "View all news"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "signup": "Sign up"
+    },
+    "signup": {
+      "title": "Sign Up",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Sign up",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Enter your email address and we will send you a link to reset your password.",
+      "email": "Email",
+      "submit": "Send",
+      "backToLogin": "Back to login"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "code": "Reset code",
+      "password": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Reset"
+    }
+  },
+  "backoffice": {
+    "dashboard": {
+      "title": "Back Office",
+      "subtitle": "Manage job offers and articles on your platform",
+      "jobs": "Job Offers",
+      "jobsDesc": "Manage job offers published on the platform",
+      "news": "Articles",
+      "newsDesc": "Manage articles and news published on the platform",
+      "manageJobs": "Manage offers",
+      "manageNews": "Manage articles",
+      "backToSite": "Back to site"
+    },
+    "jobs": {
+      "title": "Job Offers Management",
+      "subtitle": "Create, edit and delete job offers",
+      "new": "New offer",
+      "noJobs": "No job offers",
+      "createFirst": "Create the first offer",
+      "edit": "Edit",
+      "delete": "Delete",
+      "form": {
+        "title": "Title",
+        "sector": "Sector",
+        "location": "Location",
+        "contractType": "Contract type",
+        "tjm": "Daily Rate (€)",
+        "description": "Description",
+        "requirements": "Required profile (one item per line)",
+        "requirementsPlaceholder": "3+ years experience\nFiber optic expertise\nDriver's license required",
+        "responsibilities": "Responsibilities (one item per line)",
+        "responsibilitiesPlaceholder": "Fiber network installation\nEquipment maintenance\nIntervention management",
+        "benefits": "Benefits (one item per line)",
+        "benefitsPlaceholder": "Remote work possible\nContinuous training\nCompany health insurance",
+        "language": "Language",
+        "create": "Create",
+        "update": "Update"
+      },
+      "deleteConfirm": "Are you sure you want to delete the offer \"{title}\"?",
+      "deleteTitle": "Delete confirmation"
+    },
+    "news": {
+      "title": "Articles Management",
+      "subtitle": "Create, edit and delete articles and news",
+      "new": "New article",
+      "noNews": "No articles",
+      "createFirst": "Create the first article",
+      "edit": "Edit",
+      "delete": "Delete",
+      "form": {
+        "title": "Title",
+        "category": "Category",
+        "excerpt": "Excerpt (short summary)",
+        "content": "Content",
+        "publish": "Publish immediately",
+        "language": "Language",
+        "create": "Create",
+        "update": "Update"
+      },
+      "deleteConfirm": "Are you sure you want to delete the article \"{title}\"?",
+      "deleteTitle": "Delete confirmation",
+      "published": "Published",
+      "draft": "Draft"
+    }
+  }
+}
+

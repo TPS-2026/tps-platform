@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1766480766014",
+    "title": "Conducteur de Travaux Télécommunications FTTH (H/F)",
+    "sector": "telecom",
+    "location": "Villepinte",
+    "contractType": "regie",
+    "tjm": null,
+    "description": "Entreprise spécialisée dans les réseaux de télécommunications et le déploiement FTTH, nous intervenons sur des projets d’envergure pour des opérateurs nationaux et des collectivités. Dans le cadre du renforcement de nos équipes, nous recherchons un Conducteur de Travaux Télécommunications FTTH pour notre base opérationnelle de Villepinte.\n",
+    "requirements": [
+      "Formation Bac +2 à Bac +5 (Télécoms, Génie Civil, Réseaux, ou équivalent)",
+      "Expérience significative en conduite de travaux Télécommunications / FTTH",
+      "Maîtrise des environnements FTTH (opérateurs, RIP, normes, process)",
+      "Solides compétences en gestion de chantier et management d’équipes",
+      "Bonne maîtrise des outils informatiques (Excel, logiciels métiers FTTH)",
+      "Autonomie, rigueur, sens des responsabilités et esprit d’analyse",
+      "Permis B obligatoire"
+    ],
+    "responsibilities": [
+      "Préparation, organisation et planification des chantiers FTTH (D1, D2, D3)",
+      "Encadrement des équipes terrain (chefs d’équipe, techniciens, sous-traitants)",
+      "Suivi de l’avancement des travaux dans le respect des délais, coûts et qualité",
+      "Interface avec les donneurs d’ordres, collectivités, opérateurs et bureaux d’études",
+      "Gestion des approvisionnements et du matériel chantier",
+      "Contrôle de la conformité technique (GC, tirage, raccordement, mesures)",
+      "Suivi administratif des chantiers (DOE, rapports, situations, facturation)",
+      "Application et contrôle des règles QHSE",
+      "Participation aux réunions de chantier et comptes rendus"
+    ],
+    "benefits": [
+      "Avantages (une ligne par élément)"
+    ],
+    "createdAt": "2025-12-23T09:06:06.014Z",
+    "updatedAt": "2026-01-09T10:51:32.907Z",
+    "translations": {
+      "fr": {
+        "title": "Conducteur de Travaux Télécommunications FTTH (H/F)",
+        "description": "Entreprise spécialisée dans les réseaux de télécommunications et le déploiement FTTH, nous intervenons sur des projets d’envergure pour des opérateurs nationaux et des collectivités. Dans le cadre du renforcement de nos équipes, nous recherchons un Conducteur de Travaux Télécommunications FTTH pour notre base opérationnelle de Villepinte.\n",
+        "requirements": [
+          "Formation Bac +2 à Bac +5 (Télécoms, Génie Civil, Réseaux, ou équivalent)",
+          "Expérience significative en conduite de travaux Télécommunications / FTTH",
+          "Maîtrise des environnements FTTH (opérateurs, RIP, normes, process)",
+          "Solides compétences en gestion de chantier et management d’équipes",
+          "Bonne maîtrise des outils informatiques (Excel, logiciels métiers FTTH)",
+          "Autonomie, rigueur, sens des responsabilités et esprit d’analyse",
+          "Permis B obligatoire"
+        ],
+        "responsibilities": [
+          "Préparation, organisation et planification des chantiers FTTH (D1, D2, D3)",
+          "Encadrement des équipes terrain (chefs d’équipe, techniciens, sous-traitants)",
+          "Suivi de l’avancement des travaux dans le respect des délais, coûts et qualité",
+          "Interface avec les donneurs d’ordres, collectivités, opérateurs et bureaux d’études",
+          "Gestion des approvisionnements et du matériel chantier",
+          "Contrôle de la conformité technique (GC, tirage, raccordement, mesures)",
+          "Suivi administratif des chantiers (DOE, rapports, situations, facturation)",
+          "Application et contrôle des règles QHSE",
+          "Participation aux réunions de chantier et comptes rendus"
+        ],
+        "benefits": [
+          "Avantages (une ligne par élément)"
+        ]
+      },
+      "en": {
+        "title": "",
+        "description": "",
+        "requirements": [],
+        "responsibilities": [],
+        "benefits": []
+      }
+    }
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "name": "tps-platform",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "local-prod": "vite --mode production",
+    "build": "vite build",
+    "build-dev": "vite build --mode development",
+    "preview": "vite preview",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "@primeuix/themes": "^1.1.1",
+    "@primevue/auto-import-resolver": "^4.3.4",
+    "@primevue/core": "^4.4.0",
+    "@primevue/themes": "^4.3.4",
+    "@tailwindcss/vite": "^4.1.6",
+    "@vueuse/core": "^13.2.0",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "pinia": "^3.0.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.3.4",
+    "tailwindcss": "^4.1.6",
+    "tailwindcss-primeui": "^0.6.1",
+    "vue": "^3.5.13",
+    "vue-axios": "^3.5.2",
+    "vue-i18n": "^9.9.1",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "unplugin-vue-components": "^28.7.0",
+    "vite": "^6.2.4",
+    "vite-plugin-vue-devtools": "^7.7.2"
+  }
+}
