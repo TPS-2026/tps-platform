@@ -12,6 +12,10 @@
         </div>
         
         <form @submit.prevent="login" class="space-y-4">
+          <div v-if="route.query.expired" class="p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-sm text-yellow-200">
+            Votre session a expiré. Veuillez vous reconnecter.
+          </div>
+          
           <div>
             <label class="block text-sm font-medium mb-2 text-white/80">Email</label>
             <InputText v-model="email" type="email" required class="w-full"/>
@@ -78,13 +82,27 @@ export default {
           detail: 'Bienvenue !',
           life: 3000
         })
-        const next = route.query.next || 'home'
-        router.push({ name: next })
+        
+        // Handle redirect after login
+        const next = route.query.next
+        if (next) {
+          // If next is a full path (starts with /), use it directly
+          if (typeof next === 'string' && next.startsWith('/')) {
+            router.push(next)
+          } else {
+            // Otherwise, treat it as a route name
+            router.push({ name: next })
+          }
+        } else {
+          // Default redirect to backoffice dashboard
+          router.push({ name: 'backoffice-dashboard' })
+        }
       } catch (error) {
+        const errorMessage = error.response?.data?.message || error.message || 'Email ou mot de passe incorrect'
         toast.add({
           severity: 'error',
           summary: 'Erreur de connexion',
-          detail: 'Email ou mot de passe incorrect',
+          detail: errorMessage,
           life: 5000
         })
       } finally {
@@ -96,7 +114,8 @@ export default {
       email,
       password,
       loading,
-      login
+      login,
+      route
     }
   }
 }

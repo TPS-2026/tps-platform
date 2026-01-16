@@ -43,7 +43,7 @@
             :class="themeStore.isDark ? 'bg-blue-500/10' : 'bg-blue-500/20'"
           >
             <i 
-              class="pi pi-newspaper text-4xl transition-colors"
+              class="pi pi-calendar-plus text-4xl transition-colors"
               :class="themeStore.isDark ? 'text-blue-400/50' : 'text-blue-600/70'"
             ></i>
           </div>
@@ -57,18 +57,33 @@
           <div 
             v-for="article in newsStore.news" 
             :key="article.id"
-            class="group relative p-8 backdrop-blur-sm rounded-2xl transition-all duration-300 cursor-pointer hover:scale-105"
+            class="group relative overflow-hidden backdrop-blur-sm rounded-2xl transition-all duration-300 cursor-pointer hover:scale-105"
             :class="themeStore.isDark 
               ? 'bg-white/5 border border-white/10 hover:border-white/30' 
               : 'bg-white/90 border border-gray-200/50 hover:border-gray-300/70 shadow-lg'"
             @click="$router.push({ name: 'news-article', params: { id: article.id } })"
           >
-            <h3 
-              class="text-xl font-semibold mb-4 transition-colors line-clamp-2"
-              :class="themeStore.isDark 
-                ? 'text-white group-hover:text-blue-400' 
-                : 'text-gray-900 group-hover:text-blue-600'"
-            >{{ article.title }}</h3>
+            <!-- Cover Image -->
+            <div v-if="article.coverImage" class="relative h-48 w-full overflow-hidden">
+              <img 
+                :src="article.coverImage" 
+                :alt="article.title"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div 
+                class="absolute inset-0 bg-gradient-to-t transition-all"
+                :class="themeStore.isDark 
+                  ? 'from-black/60 via-transparent to-transparent' 
+                  : 'from-black/40 via-transparent to-transparent'"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 
+                class="text-xl font-semibold mb-4 transition-colors line-clamp-2"
+                :class="themeStore.isDark 
+                  ? 'text-white group-hover:text-blue-400' 
+                  : 'text-gray-900 group-hover:text-blue-600'"
+              >{{ article.title }}</h3>
             <div class="flex items-center gap-4 mb-4">
               <span 
                 class="text-sm flex items-center gap-2 transition-colors"
@@ -79,22 +94,23 @@
               </span>
               <Tag v-if="article.category" :value="article.category" severity="info" class="text-xs"/>
             </div>
-            <p 
-              class="mb-6 line-clamp-3 leading-relaxed transition-colors"
-              :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'"
-            >{{ article.excerpt || article.content }}</p>
-            <Button 
-              label="Lire la suite" 
-              severity="secondary" 
-              text
-              icon="pi pi-arrow-right"
-              iconPos="right"
-              class="transition-colors group-hover:translate-x-1 transition-transform"
-              :class="themeStore.isDark 
-                ? 'text-white hover:text-blue-400' 
-                : 'text-gray-700 hover:text-blue-600'"
-              @click.stop="$router.push({ name: 'news-article', params: { id: article.id } })"
-            />
+              <p 
+                class="mb-6 line-clamp-3 leading-relaxed transition-colors"
+                :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'"
+              >{{ article.excerpt || article.content }}</p>
+              <Button 
+                label="Lire la suite" 
+                severity="secondary" 
+                text
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                class="transition-colors group-hover:translate-x-1 transition-transform"
+                :class="themeStore.isDark 
+                  ? 'text-white hover:text-blue-400' 
+                  : 'text-gray-700 hover:text-blue-600'"
+                @click.stop="$router.push({ name: 'news-article', params: { id: article.id } })"
+              />
+            </div>
           </div>
         </div>
         

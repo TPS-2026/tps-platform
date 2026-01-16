@@ -1,25 +1,15 @@
 <template>
-  <div class="min-h-screen text-white overflow-x-hidden relative bg-gradient-to-br from-purple-900/30 via-blue-900/40 to-indigo-900/50">
-    <BackgroundEffects/>
-    
-    <div class="relative z-10 py-12 px-6 md:px-12 lg:px-24">
+  <BackOfficeLayout>
+    <div class="py-6 px-6 md:px-12">
       <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-8">
           <div>
-            <h1 class="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
               Gestion des articles
             </h1>
-            <p class="text-white/70">Créez, modifiez et supprimez les articles et actualités</p>
+            <p class="text-white/70 dark:text-gray-400">Créez, modifiez et supprimez les articles et actualités</p>
           </div>
           <div class="flex gap-3">
-            <Button 
-              label="Retour" 
-              icon="pi pi-arrow-left" 
-              severity="secondary" 
-              outlined
-              class="border-white/30 text-white hover:bg-white/10 transition-all"
-              @click="$router.push({ name: 'backoffice-dashboard' })"
-            />
             <Button 
               label="Nouvel article" 
               icon="pi pi-plus" 
@@ -32,14 +22,19 @@
 
         <div v-if="loading" class="text-center py-20">
           <ProgressSpinner size="large"/>
-          <p class="mt-4 text-white/70">Chargement...</p>
+          <p class="mt-4" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">Chargement...</p>
         </div>
 
-        <div v-else-if="articles.length === 0" class="text-center py-20 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
-          <div class="w-24 h-24 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="pi pi-newspaper text-4xl text-purple-400/50"></i>
+        <div v-else-if="articles.length === 0" 
+             class="text-center py-20 rounded-2xl"
+             :class="themeStore.isDark 
+               ? 'bg-white/5 backdrop-blur-sm border border-white/10' 
+               : 'bg-white border border-gray-200 shadow-sm'">
+          <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6"
+               :class="themeStore.isDark ? 'bg-purple-500/10' : 'bg-purple-50'">
+            <i class="pi pi-calendar-plus text-4xl" :class="themeStore.isDark ? 'text-purple-400/50' : 'text-purple-400'"></i>
           </div>
-          <p class="text-xl text-white/70 mb-4">Aucun article</p>
+          <p class="text-xl mb-4" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">Aucun article</p>
           <Button 
             label="Créer le premier article" 
             icon="pi pi-plus"
@@ -51,15 +46,18 @@
 
         <div v-else class="space-y-4">
           <div 
-            v-for="article in articles" 
+            v-for="article in articles.filter(a => a && a.id)" 
             :key="article.id"
-            class="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-white/30 transition-all"
+            class="p-6 rounded-2xl transition-all"
+            :class="themeStore.isDark 
+              ? 'bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30' 
+              : 'bg-white border border-gray-200 hover:border-gray-300 shadow-sm'"
           >
             <div class="flex items-start justify-between">
               <div class="flex-1">
-                <h3 class="text-xl font-semibold mb-2">{{ article.title }}</h3>
+                <h3 class="text-xl font-semibold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">{{ article.title }}</h3>
                 <div class="flex items-center gap-4 mb-3">
-                  <span class="text-sm text-white/60 flex items-center gap-2">
+                  <span class="text-sm flex items-center gap-2" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-500'">
                     <i class="pi pi-calendar"></i>
                     {{ formatDate(article.publishedAt || article.createdAt) }}
                   </span>
@@ -67,7 +65,7 @@
                   <Tag v-if="article.publishedAt" :value="'Publié'" severity="success" class="text-xs"/>
                   <Tag v-else :value="'Brouillon'" severity="warning" class="text-xs"/>
                 </div>
-                <p class="text-white/70 line-clamp-2 mb-3">{{ article.excerpt || article.content }}</p>
+                <p class="line-clamp-2 mb-3" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ article.excerpt || article.content }}</p>
               </div>
               <div class="flex gap-2 ml-4">
                 <Button 
@@ -75,7 +73,9 @@
                   severity="secondary" 
                   outlined
                   rounded
-                  class="border-white/30 text-white hover:bg-white/10"
+                  :class="themeStore.isDark 
+                    ? 'border-white/30 text-white hover:bg-white/10' 
+                    : 'border-gray-300 text-gray-700 hover:bg-gray-100'"
                   @click="openArticleDialog(article)"
                   v-tooltip.top="'Modifier'"
                 />
@@ -98,7 +98,7 @@
     <!-- Article Dialog -->
     <Dialog 
       v-model:visible="showDialog" 
-      :header="editingArticle ? 'Modifier l\'article' : 'Nouvel article'"
+      :header="isEditing ? 'Modifier l\'article' : 'Nouvel article'"
       :style="{ width: '90vw', maxWidth: '800px' }"
       :modal="true"
       class="p-fluid"
@@ -123,6 +123,20 @@
         </div>
 
         <div>
+          <label class="block text-sm font-medium mb-2">Image de couverture (URL)</label>
+          <InputText v-model="articleForm.coverImage" placeholder="/image.jpg" class="w-full" />
+          <small class="text-white/60 dark:text-gray-400 block mt-1">Chemin relatif depuis le dossier public (ex: /image.jpg)</small>
+          <div v-if="articleForm.coverImage" class="mt-3">
+            <img 
+              :src="articleForm.coverImage" 
+              alt="Aperçu" 
+              class="w-full h-48 object-cover rounded-lg border border-white/10 dark:border-gray-700"
+              @error="$event.target.style.display='none'"
+            />
+          </div>
+        </div>
+
+        <div>
           <label class="block text-sm font-medium mb-2">Extrait (résumé court)</label>
           <Textarea v-model="articleForm.excerpt" rows="3" class="w-full" />
         </div>
@@ -140,7 +154,7 @@
             @click="closeDialog"
           />
           <Button 
-            :label="editingArticle ? 'Modifier' : 'Créer'" 
+            :label="isEditing ? 'Modifier' : 'Créer'" 
             type="submit"
             severity="contrast"
             class="bg-gradient-to-r from-blue-500 to-purple-600 border-0"
@@ -151,24 +165,24 @@
 
     <!-- Delete Confirmation -->
     <ConfirmDialog />
-  </div>
+  </BackOfficeLayout>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
-import axios from 'axios'
-import BackgroundEffects from '@/components/BackgroundEffects.vue'
-
-const apiBaseURL = 'http://localhost:3000/api'
+import apiClient from '@/utils/axios.js'
+import BackOfficeLayout from './BackOfficeLayout.vue'
+import { useThemeStore } from '@/stores/theme.js'
 
 export default {
   name: 'NewsManagement',
   components: {
-    BackgroundEffects
+    BackOfficeLayout
   },
   setup() {
+    const themeStore = useThemeStore()
     const articles = ref([])
     const loading = ref(false)
     const showDialog = ref(false)
@@ -181,16 +195,19 @@ export default {
       category: '',
       excerpt: '',
       content: '',
+      coverImage: '',
       published: false
     })
 
     const fetchArticles = async () => {
       loading.value = true
       try {
-        const response = await axios.get(`${apiBaseURL}/news`, {
+        const response = await apiClient.get('/news', {
           params: { page: 1, pageSize: 100 }
         })
-        articles.value = response.data.items || response.data
+        const data = response.data.items || response.data || []
+        // Filter out any null or invalid articles
+        articles.value = Array.isArray(data) ? data.filter(a => a && a.id) : []
       } catch (error) {
         console.error('Error fetching articles:', error)
         toast.add({
@@ -199,28 +216,36 @@ export default {
           detail: 'Impossible de charger les articles',
           life: 3000
         })
+        articles.value = []
       } finally {
         loading.value = false
       }
     }
 
     const openArticleDialog = (article) => {
-      if (article) {
-        editingArticle.value = article
+      // Always reset first
+      editingArticle.value = null
+      
+      // If article is provided and has an id, we're editing
+      if (article && typeof article === 'object' && article.id) {
+        editingArticle.value = { ...article } // Create a copy to avoid reactivity issues
         articleForm.value = {
           title: article.title || '',
           category: article.category || '',
           excerpt: article.excerpt || '',
           content: article.content || '',
-          published: !!article.publishedAt
+          coverImage: article.coverImage || '', // Backend uses camelCase
+          published: !!article.published || !!article.publishedAt // Backend uses 'published' boolean
         }
       } else {
+        // Creating a new article
         editingArticle.value = null
         articleForm.value = {
           title: '',
           category: '',
           excerpt: '',
           content: '',
+          coverImage: '',
           published: false
         }
       }
@@ -230,12 +255,33 @@ export default {
     const closeDialog = () => {
       showDialog.value = false
       editingArticle.value = null
+      // Reset form
+      articleForm.value = {
+        title: '',
+        category: '',
+        excerpt: '',
+        content: '',
+        coverImage: '',
+        published: false
+      }
     }
 
     const saveArticle = async () => {
       try {
-        if (editingArticle.value) {
-          await axios.put(`${apiBaseURL}/news/${editingArticle.value.id}`, articleForm.value)
+        // Prepare article data according to backend model
+        const articleData = {
+          title: articleForm.value.title || '',
+          category: articleForm.value.category || '',
+          excerpt: articleForm.value.excerpt || '',
+          content: articleForm.value.content || '',
+          coverImage: articleForm.value.coverImage || '',
+          published: !!articleForm.value.published // Convert to boolean
+        }
+        
+        if (isEditing.value) {
+          // Update existing article
+          const articleId = editingArticle.value.id
+          await apiClient.put(`/news/${articleId}`, articleData)
           toast.add({
             severity: 'success',
             summary: 'Succès',
@@ -243,7 +289,8 @@ export default {
             life: 3000
           })
         } else {
-          await axios.post(`${apiBaseURL}/news`, articleForm.value)
+          // Create new article
+          await apiClient.post('/news', articleData)
           toast.add({
             severity: 'success',
             summary: 'Succès',
@@ -258,7 +305,7 @@ export default {
         toast.add({
           severity: 'error',
           summary: 'Erreur',
-          detail: 'Impossible de sauvegarder l\'article',
+          detail: error.response?.data?.message || 'Impossible de sauvegarder l\'article',
           life: 3000
         })
       }
@@ -272,7 +319,7 @@ export default {
         acceptClass: 'p-button-danger',
         accept: async () => {
           try {
-            await axios.delete(`${apiBaseURL}/news/${article.id}`)
+            await apiClient.delete(`/news/${article.id}`)
             toast.add({
               severity: 'success',
               summary: 'Succès',
@@ -302,6 +349,11 @@ export default {
       })
     }
 
+    // Computed property to safely check if we're editing
+    const isEditing = computed(() => {
+      return editingArticle.value && editingArticle.value.id
+    })
+
     onMounted(() => {
       fetchArticles()
     })
@@ -312,11 +364,13 @@ export default {
       showDialog,
       editingArticle,
       articleForm,
+      isEditing,
       openArticleDialog,
       closeDialog,
       saveArticle,
       confirmDelete,
-      formatDate
+      formatDate,
+      themeStore
     }
   }
 }

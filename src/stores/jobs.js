@@ -1,9 +1,6 @@
 import {defineStore} from 'pinia'
-import axios from "axios";
+import apiClient from '@/utils/axios.js'
 import {useI18nStore} from './i18n.js'
-
-// API Base URL - Always use localhost:3000 for now
-const apiBaseURL = 'http://localhost:3000/api'
 
 export const useJobsStore = defineStore('jobs', {
     state: () => ({
@@ -24,13 +21,13 @@ export const useJobsStore = defineStore('jobs', {
                 const i18nStore = useI18nStore()
                 const locale = i18nStore.currentLocale || 'fr'
                 const params = {...this.filters, ...filters, locale}
-                const response = await axios.get(`${apiBaseURL}/jobs`, { params })
+                const response = await apiClient.get('/jobs', { params })
                 this.jobs = response.data || []
                 console.log('Jobs fetched:', this.jobs.length)
                 return response.data
             } catch (error) {
                 console.error('Error fetching jobs:', error)
-                console.error('API URL:', `${apiBaseURL}/jobs`)
+                console.error('API URL:', '/jobs')
                 console.error('Error details:', error.response?.data || error.message)
                 this.jobs = []
                 throw error
@@ -42,7 +39,7 @@ export const useJobsStore = defineStore('jobs', {
             try {
                 const i18nStore = useI18nStore()
                 const locale = i18nStore.currentLocale || 'fr'
-                const response = await axios.get(`${apiBaseURL}/jobs/${jobId}`, { params: { locale } })
+                const response = await apiClient.get(`/jobs/${jobId}`, { params: { locale } })
                 this.currentJob = response.data
                 return response.data
             } catch (error) {
@@ -63,8 +60,8 @@ export const useJobsStore = defineStore('jobs', {
         },
         async submitApplication(jobId, applicationData) {
             try {
-                const response = await axios.post(
-                    `${apiBaseURL}/jobs/${jobId}/applications`,
+                const response = await apiClient.post(
+                    '/applications',
                     applicationData
                 )
                 return response.data

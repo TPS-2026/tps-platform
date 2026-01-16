@@ -12,6 +12,7 @@ const PORT = 3000;
 const DATA_DIR = path.join(__dirname, 'data');
 const JOBS_FILE = path.join(DATA_DIR, 'jobs.json');
 const NEWS_FILE = path.join(DATA_DIR, 'news.json');
+const APPLICATIONS_FILE = path.join(DATA_DIR, 'applications.json');
 
 // Middleware
 app.use(cors());
@@ -21,19 +22,30 @@ app.use(express.json());
 async function readJsonFile(filePath) {
   try {
     const data = await fs.readFile(filePath, 'utf-8');
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    return Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     if (error.code === 'ENOENT') {
+      console.log(`File ${filePath} does not exist, creating empty array`);
+      // Create empty file
+      await writeJsonFile(filePath, []);
       return [];
     }
+    console.error(`Error reading ${filePath}:`, error);
     throw error;
   }
 }
 
 // Helper function to write JSON file
 async function writeJsonFile(filePath, data) {
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+  try {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    console.log(`Successfully wrote to ${filePath}`);
+  } catch (error) {
+    console.error(`Error writing to ${filePath}:`, error);
+    throw error;
+  }
 }
 
 // ============ JOBS API ============
@@ -64,7 +76,9 @@ function getTranslatedContent(job, locale = 'fr') {
 // GET /api/jobs - Get all jobs with optional filters
 app.get('/api/jobs', async (req, res) => {
   try {
+    console.log('GET /api/jobs - Query params:', req.query);
     const jobs = await readJsonFile(JOBS_FILE);
+    console.log(`Found ${jobs.length} jobs in file`);
     const locale = req.query.locale || 'fr';
     let filteredJobs = [...jobs];
 
@@ -152,6 +166,7 @@ app.get('/api/jobs/:id', async (req, res) => {
 // POST /api/jobs - Create a new job
 app.post('/api/jobs', async (req, res) => {
   try {
+    console.log('POST /api/jobs - Received data:', JSON.stringify(req.body, null, 2));
     const jobs = await readJsonFile(JOBS_FILE);
     const newJob = {
       id: Date.now().toString(),
@@ -160,19 +175,41 @@ app.post('/api/jobs', async (req, res) => {
       updatedAt: new Date().toISOString()
     };
     
+    // Ensure translations structure exists
+    if (!newJob.translations) {
+      newJob.translations = {
+        fr: {
+          title: newJob.title || '',
+          description: newJob.description || '',
+          requirements: newJob.requirements || [],
+          responsibilities: newJob.responsibilities || [],
+          benefits: newJob.benefits || []
+        },
+        en: {
+          title: '',
+          description: '',
+          requirements: [],
+          responsibilities: [],
+          benefits: []
+        }
+      };
+    }
+    
     jobs.push(newJob);
     await writeJsonFile(JOBS_FILE, jobs);
     
+    console.log('Job created successfully:', newJob.id);
     res.status(201).json(newJob);
   } catch (error) {
     console.error('Error creating job:', error);
-    res.status(500).json({ error: 'Failed to create job' });
+    res.status(500).json({ error: 'Failed to create job', details: error.message });
   }
 });
 
 // PUT /api/jobs/:id - Update a job
 app.put('/api/jobs/:id', async (req, res) => {
   try {
+    console.log(`PUT /api/jobs/${req.params.id} - Received data:`, JSON.stringify(req.body, null, 2));
     const jobs = await readJsonFile(JOBS_FILE);
     const index = jobs.findIndex(j => j.id === req.params.id);
     
@@ -180,18 +217,42 @@ app.put('/api/jobs/:id', async (req, res) => {
       return res.status(404).json({ error: 'Job not found' });
     }
     
+    // Preserve existing fields and update with new data
+    const existingJob = jobs[index];
     jobs[index] = {
-      ...jobs[index],
+      ...existingJob,
       ...req.body,
       id: req.params.id,
+      createdAt: existingJob.createdAt, // Preserve original creation date
       updatedAt: new Date().toISOString()
     };
     
+    // Ensure translations structure exists
+    if (!jobs[index].translations) {
+      jobs[index].translations = {
+        fr: {
+          title: jobs[index].title || '',
+          description: jobs[index].description || '',
+          requirements: jobs[index].requirements || [],
+          responsibilities: jobs[index].responsibilities || [],
+          benefits: jobs[index].benefits || []
+        },
+        en: {
+          title: '',
+          description: '',
+          requirements: [],
+          responsibilities: [],
+          benefits: []
+        }
+      };
+    }
+    
     await writeJsonFile(JOBS_FILE, jobs);
+    console.log('Job updated successfully:', req.params.id);
     res.json(jobs[index]);
   } catch (error) {
     console.error('Error updating job:', error);
-    res.status(500).json({ error: 'Failed to update job' });
+    res.status(500).json({ error: 'Failed to update job', details: error.message });
   }
 });
 
@@ -333,6 +394,149 @@ app.delete('/api/news/:id', async (req, res) => {
   } catch (error) {
     console.error('Error deleting article:', error);
     res.status(500).json({ error: 'Failed to delete article' });
+  }
+});
+
+// ============ APPLICATIONS API ============
+
+// GET /api/applications - Get all applications with pagination
+app.get('/api/applications', async (req, res) => {
+  try {
+    console.log('GET /api/applications - Query params:', req.query);
+    const applications = await readJsonFile(APPLICATIONS_FILE);
+    
+    // Apply filters
+    let filteredApplications = [...applications];
+    
+    if (req.query.jobId) {
+      filteredApplications = filteredApplications.filter(app => app.jobId === req.query.jobId);
+    }
+    
+    if (req.query.status) {
+      filteredApplications = filteredApplications.filter(app => app.status === req.query.status);
+    }
+    
+    // Apply search filter
+    if (req.query.search) {
+      const searchTerm = req.query.search.toLowerCase().trim();
+      filteredApplications = filteredApplications.filter(app => {
+        const fullName = (app.fullName || '').toLowerCase();
+        const email = (app.email || '').toLowerCase();
+        const phone = (app.phone || '').toLowerCase();
+        const jobTitle = (app.jobTitle || '').toLowerCase();
+        const coverLetter = (app.coverLetter || '').toLowerCase();
+        
+        return fullName.includes(searchTerm) ||
+               email.includes(searchTerm) ||
+               phone.includes(searchTerm) ||
+               jobTitle.includes(searchTerm) ||
+               coverLetter.includes(searchTerm);
+      });
+    }
+    
+    // Sort by date (newest first)
+    filteredApplications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    
+    // Pagination
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 20;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    
+    const paginatedApplications = filteredApplications.slice(startIndex, endIndex);
+    
+    res.json({
+      items: paginatedApplications,
+      total: filteredApplications.length,
+      page,
+      pageSize,
+      totalPages: Math.ceil(filteredApplications.length / pageSize)
+    });
+  } catch (error) {
+    console.error('Error fetching applications:', error);
+    res.status(500).json({ error: 'Failed to fetch applications' });
+  }
+});
+
+// GET /api/applications/:id - Get a single application
+app.get('/api/applications/:id', async (req, res) => {
+  try {
+    const applications = await readJsonFile(APPLICATIONS_FILE);
+    const application = applications.find(a => a.id === req.params.id);
+    
+    if (!application) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    res.json(application);
+  } catch (error) {
+    console.error('Error fetching application:', error);
+    res.status(500).json({ error: 'Failed to fetch application' });
+  }
+});
+
+// POST /api/applications - Create a new application
+app.post('/api/applications', async (req, res) => {
+  try {
+    const applications = await readJsonFile(APPLICATIONS_FILE);
+    const newApplication = {
+      id: Date.now().toString(),
+      ...req.body,
+      status: 'pending', // pending, reviewed, accepted, rejected
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    
+    applications.push(newApplication);
+    await writeJsonFile(APPLICATIONS_FILE, applications);
+    
+    res.status(201).json(newApplication);
+  } catch (error) {
+    console.error('Error creating application:', error);
+    res.status(500).json({ error: 'Failed to create application' });
+  }
+});
+
+// PUT /api/applications/:id - Update an application
+app.put('/api/applications/:id', async (req, res) => {
+  try {
+    const applications = await readJsonFile(APPLICATIONS_FILE);
+    const index = applications.findIndex(a => a.id === req.params.id);
+    
+    if (index === -1) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    applications[index] = {
+      ...applications[index],
+      ...req.body,
+      id: req.params.id,
+      updatedAt: new Date().toISOString()
+    };
+    
+    await writeJsonFile(APPLICATIONS_FILE, applications);
+    res.json(applications[index]);
+  } catch (error) {
+    console.error('Error updating application:', error);
+    res.status(500).json({ error: 'Failed to update application' });
+  }
+});
+
+// DELETE /api/applications/:id - Delete an application
+app.delete('/api/applications/:id', async (req, res) => {
+  try {
+    const applications = await readJsonFile(APPLICATIONS_FILE);
+    const filteredApplications = applications.filter(a => a.id !== req.params.id);
+    
+    if (applications.length === filteredApplications.length) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    await writeJsonFile(APPLICATIONS_FILE, filteredApplications);
+    res.json({ message: 'Application deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting application:', error);
+    res.status(500).json({ error: 'Failed to delete application' });
   }
 });
 

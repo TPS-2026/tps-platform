@@ -36,30 +36,63 @@
         
         <div 
           v-else-if="article" 
-          class="p-8 backdrop-blur-sm rounded-2xl transition-colors"
+          class="overflow-hidden backdrop-blur-sm rounded-2xl transition-colors"
           :class="themeStore.isDark 
             ? 'bg-white/5 border border-white/10' 
             : 'bg-white/90 border border-gray-200/50 shadow-lg'"
         >
-          <h1 
-            class="text-3xl md:text-4xl font-bold mb-4 transition-colors"
-            :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
-          >{{ article.title }}</h1>
-          <div class="flex items-center gap-4 mb-8">
-            <span 
-              class="text-sm flex items-center gap-2 transition-colors"
-              :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
-            >
-              <i class="pi pi-calendar"></i>
-              {{ formatDate(article.publishedAt || article.createdAt) }}
-            </span>
-            <Tag v-if="article.category" :value="article.category" severity="info"/>
-          </div>
-          <div class="prose prose-invert max-w-none">
+          <!-- Cover Image -->
+          <div v-if="article.coverImage" class="relative h-64 md:h-96 w-full overflow-hidden">
+            <img 
+              :src="article.coverImage" 
+              :alt="article.title"
+              class="w-full h-full object-cover"
+            />
             <div 
-              class="whitespace-pre-line leading-relaxed text-lg transition-colors"
-              :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'"
-            >{{ article.content }}</div>
+              class="absolute inset-0 bg-gradient-to-t transition-all"
+              :class="themeStore.isDark 
+                ? 'from-black/70 via-transparent to-transparent' 
+                : 'from-black/50 via-transparent to-transparent'"
+            ></div>
+            <div class="absolute bottom-0 left-0 right-0 p-8">
+              <h1 
+                class="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg"
+              >{{ article.title }}</h1>
+            </div>
+          </div>
+          <div v-else class="p-8">
+            <h1 
+              class="text-3xl md:text-4xl font-bold mb-4 transition-colors"
+              :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+            >{{ article.title }}</h1>
+          </div>
+          <div class="p-8">
+            <div v-if="article.coverImage" class="flex items-center gap-4 mb-8">
+              <span 
+                class="text-sm flex items-center gap-2 transition-colors"
+                :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
+              >
+                <i class="pi pi-calendar"></i>
+                {{ formatDate(article.publishedAt || article.createdAt) }}
+              </span>
+              <Tag v-if="article.category" :value="article.category" severity="info"/>
+            </div>
+            <div v-else class="flex items-center gap-4 mb-8">
+              <span 
+                class="text-sm flex items-center gap-2 transition-colors"
+                :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
+              >
+                <i class="pi pi-calendar"></i>
+                {{ formatDate(article.publishedAt || article.createdAt) }}
+              </span>
+              <Tag v-if="article.category" :value="article.category" severity="info"/>
+            </div>
+            <div class="prose prose-invert max-w-none">
+              <div 
+                class="whitespace-pre-line leading-relaxed text-lg transition-colors"
+                :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'"
+              >{{ article.content }}</div>
+            </div>
           </div>
         </div>
         

@@ -49,7 +49,7 @@
             </div>
             
             <div>
-              <label class="block text-sm font-medium mb-2 text-white/80">CV (PDF) *</label>
+              <label class="block text-sm font-medium mb-2 text-white/80">CV (PDF) - Optionnel</label>
               <FileUpload 
                 mode="basic" 
                 accept="application/pdf"
@@ -58,7 +58,7 @@
                 @select="onFileSelect"
                 class="w-full"
               />
-              <small class="text-white/60 block mt-2">Taille max: 5MB</small>
+              <small class="text-white/60 block mt-2">Taille max: 5MB - Le fichier ne sera pas téléchargé (mock)</small>
               <div v-if="form.cv" class="mt-2 p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
                 <span class="text-sm text-white/80">{{ form.cv.name }}</span>
                 <Button 
@@ -158,30 +158,23 @@ export default {
     }
     
     const submitApplication = async () => {
-      if (!form.value.cv) {
-        toast.add({
-          severity: 'warn',
-          summary: 'CV requis',
-          detail: 'Veuillez télécharger votre CV',
-          life: 3000
-        })
-        return
-      }
-      
       submitting.value = true
       try {
-        const formData = new FormData()
-        formData.append('fullName', form.value.fullName)
-        formData.append('email', form.value.email)
-        formData.append('phone', form.value.phone)
-        formData.append('cv', form.value.cv)
-        formData.append('coverLetter', form.value.coverLetter)
-        formData.append('experience', form.value.experience)
-        if (form.value.availability) {
-          formData.append('availability', form.value.availability.toISOString())
+        // Prepare application data according to backend model
+        const applicationData = {
+          jobId: route.params.id || '',
+          jobTitle: job.value?.title || '',
+          fullName: form.value.fullName || '',
+          email: form.value.email || '',
+          phone: form.value.phone || '',
+          coverLetter: form.value.coverLetter || '',
+          experience: form.value.experience ? parseInt(form.value.experience) : null,
+          availability: form.value.availability ? new Date(form.value.availability).toISOString() : null,
+          cvFileName: form.value.cv ? form.value.cv.name : '',
+          cvFileSize: form.value.cv ? parseInt(form.value.cv.size) : null
         }
         
-        await jobsStore.submitApplication(route.params.id, formData)
+        await jobsStore.submitApplication(route.params.id, applicationData)
         
         toast.add({
           severity: 'success',

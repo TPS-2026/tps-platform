@@ -1,8 +1,5 @@
 import {defineStore} from 'pinia'
-import axios from "axios";
-
-// API Base URL - Always use localhost:3000 for now
-const apiBaseURL = 'http://localhost:3000/api'
+import apiClient from '@/utils/axios.js'
 
 export const useNewsStore = defineStore('news', {
     state: () => ({
@@ -19,7 +16,7 @@ export const useNewsStore = defineStore('news', {
         async fetchNews(page = 1) {
             this.loading = true
             try {
-                const response = await axios.get(`${apiBaseURL}/news`, {
+                const response = await apiClient.get('/news', {
                     params: {
                         page,
                         pageSize: this.pagination.pageSize
@@ -32,7 +29,7 @@ export const useNewsStore = defineStore('news', {
                 return this.news
             } catch (error) {
                 console.error('Error fetching news:', error)
-                console.error('API URL:', `${apiBaseURL}/news`)
+                console.error('API URL:', '/news')
                 console.error('Error details:', error.response?.data || error.message)
                 this.news = []
                 throw error
@@ -42,7 +39,7 @@ export const useNewsStore = defineStore('news', {
         },
         async fetchArticleById(articleId) {
             try {
-                const response = await axios.get(`${apiBaseURL}/news/${articleId}`)
+                const response = await apiClient.get(`/news/${articleId}`)
                 this.currentArticle = response.data
                 return response.data
             } catch (error) {

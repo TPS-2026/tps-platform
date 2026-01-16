@@ -1,9 +1,6 @@
 import {defineStore} from 'pinia'
-import axios from "axios";
-import {getToastForError} from "@/utils/errors.js";
-
-// API Base URL - Always use localhost:3000 for now
-const accountBaseURL = 'http://localhost:3000/api'
+import apiClient from '@/utils/axios.js'
+import {getToastForError} from "@/utils/errors.js"
 
 export const useAccountStore = defineStore('account', {
     state: () => ({
@@ -15,25 +12,23 @@ export const useAccountStore = defineStore('account', {
         getMePromise: null
     }),
     actions: {
+        // Note: User registration is now admin-only via POST /api/users
+        // This function is kept for compatibility but will not work without admin auth
         register(email, password) {
             this.userEmail = email
             localStorage.setItem('userEmail', email)
 
-            const promise = axios.post(
-                `${accountBaseURL}/auth/register`,
+            const promise = apiClient.post(
+                '/users',
                 {
                     email: email,
-                    password: password
+                    password: password,
+                    fullName: email.split('@')[0] // Default fullName from email
                 }
             ).then(res => {
                 if (res.data) {
-                    this.userID = res.data["user_id"]
-                    this.accessToken = res.data["access_token"]
-                    this.accessTokenExpirationDate = res.data["access_token_expires_in"] * 1000 + Date.now()
-
-                    localStorage.setItem('userID', this.userID)
-                    localStorage.setItem('accessToken', this.accessToken)
-                    localStorage.setItem('accessTokenExpirationDate', this.accessTokenExpirationDate)
+                    // Registration doesn't automatically log in, user needs to login separately
+                    console.warn('User created. Please login with your credentials.')
                 }
             })
 
@@ -43,21 +38,32 @@ export const useAccountStore = defineStore('account', {
             this.userEmail = email
             localStorage.setItem('userEmail', email)
 
-            const promise = axios.post(
-                `${accountBaseURL}/auth/login`,
+            const promise = apiClient.post(
+                '/auth/login',
                 {
                     email: email,
                     password: password
                 }
             ).then(res => {
                 if (res.data) {
-                    this.userID = res.data["user_id"]
-                    this.accessToken = res.data["access_token"]
-                    this.accessTokenExpirationDate = res.data["access_token_expires_in"] * 1000 + Date.now()
+                    // New backend returns {token, user} instead of {access_token, user_id, ...}
+                    this.userID = res.data.user?.id || res.data.user_id
+                    this.accessToken = res.data.token || res.data.access_token
+                    // JWT tokens typically expire in 24h, set expiration accordingly
+                    // You may want to decode the JWT to get actual expiration
+                    this.accessTokenExpirationDate = Date.now() + (24 * 60 * 60 * 1000) // 24 hours
 
                     localStorage.setItem('userID', this.userID)
                     localStorage.setItem('accessToken', this.accessToken)
                     localStorage.setItem('accessTokenExpirationDate', this.accessTokenExpirationDate)
+                    
+                    // Store user info if available
+                    if (res.data.user) {
+                        localStorage.setItem('userEmail', res.data.user.email || email)
+                        if (res.data.user.fullName) {
+                            localStorage.setItem('userFullName', res.data.user.fullName)
+                        }
+                    }
                 }
             })
 
@@ -76,38 +82,24 @@ export const useAccountStore = defineStore('account', {
             localStorage.removeItem('accessTokenExpirationDate')
             localStorage.removeItem('userEmail')
         },
+        // Note: Password reset functionality not implemented in new backend yet
         askResetPassword(email) {
-            return axios.post(
-                `${accountBaseURL}/auth/reset-password/request`,
-                {
-                    email: email,
-                }
-            )
+            return Promise.reject(new Error('Password reset not available. Please contact an administrator.'))
         },
         submitResetPassword(code, password) {
-            return axios.post(
-                `${accountBaseURL}/auth/reset-password/submit`,
-                {
-                    reset_password_code: code,
-                    password: password,
-                }
-            )
+            return Promise.reject(new Error('Password reset not available. Please contact an administrator.'))
         },
         getMe() {
-            this.getMePromise = axios.get(
-                `${accountBaseURL}/user/me`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${this.accessToken}`,
-                    }
-                }
-            ).then(res => {
+            this.getMePromise = apiClient.get('/users/me').then(res => {
                 this.profile = res.data
-                this.userID = res.data["user_id"]
-                this.userEmail = res.data["email"]
+                this.userID = res.data.id || res.data["user_id"]
+                this.userEmail = res.data.email || res.data["email"]
 
                 localStorage.setItem('userID', this.userID)
                 localStorage.setItem('userEmail', this.userEmail)
+                if (res.data.fullName) {
+                    localStorage.setItem('userFullName', res.data.fullName)
+                }
             })
 
             this.getMePromise.catch(err => {
@@ -125,6 +117,36 @@ export const useAccountStore = defineStore('account', {
 
             return this.getMe()
         },
+        isAuthenticated() {
+            // Check if token exists and is not expired
+            if (!this.accessToken) {
+                return false
+            }
+            
+            const expirationDate = this.accessTokenExpirationDate
+            if (expirationDate && parseInt(expirationDate) < Date.now()) {
+                return false
+            }
+            
+            return true
+        },
+        async verifyAuth() {
+            // Verify authentication by calling getMe
+            if (!this.isAuthenticated()) {
+                return false
+            }
+            
+            try {
+                await this.getMe()
+                return true
+            } catch (err) {
+                if (err.response && err.response.status === 401) {
+                    this.logout()
+                    return false
+                }
+                throw err
+            }
+        }
     }
 })
 

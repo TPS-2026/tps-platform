@@ -1,25 +1,15 @@
 <template>
-  <div class="min-h-screen text-white overflow-x-hidden relative bg-gradient-to-br from-purple-900/30 via-blue-900/40 to-indigo-900/50">
-    <BackgroundEffects/>
-    
-    <div class="relative z-10 py-12 px-6 md:px-12 lg:px-24">
+  <BackOfficeLayout>
+    <div class="py-6 px-6 md:px-12">
       <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-8">
           <div>
-            <h1 class="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
               {{ $t('backoffice.jobs.title') }}
             </h1>
-            <p class="text-white/70">{{ $t('backoffice.jobs.subtitle') }}</p>
+            <p class="text-white/70 dark:text-gray-400">{{ $t('backoffice.jobs.subtitle') }}</p>
           </div>
           <div class="flex gap-3">
-            <Button 
-              :label="$t('common.back')" 
-              icon="pi pi-arrow-left" 
-              severity="secondary" 
-              outlined
-              class="border-white/30 text-white hover:bg-white/10 transition-all"
-              @click="$router.push({ name: 'backoffice-dashboard' })"
-            />
             <Button 
               :label="$t('backoffice.jobs.new')" 
               icon="pi pi-plus" 
@@ -32,14 +22,19 @@
 
         <div v-if="loading" class="text-center py-20">
           <ProgressSpinner size="large"/>
-          <p class="mt-4 text-white/70">{{ $t('common.loading') }}</p>
+          <p class="mt-4" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ $t('common.loading') }}</p>
         </div>
 
-        <div v-else-if="jobs.length === 0" class="text-center py-20 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
-          <div class="w-24 h-24 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="pi pi-inbox text-4xl text-blue-400/50"></i>
+        <div v-else-if="jobs.length === 0" 
+             class="text-center py-20 rounded-2xl"
+             :class="themeStore.isDark 
+               ? 'bg-white/5 backdrop-blur-sm border border-white/10' 
+               : 'bg-white border border-gray-200 shadow-sm'">
+          <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6"
+               :class="themeStore.isDark ? 'bg-blue-500/10' : 'bg-blue-50'">
+            <i class="pi pi-inbox text-4xl" :class="themeStore.isDark ? 'text-blue-400/50' : 'text-blue-400'"></i>
           </div>
-          <p class="text-xl text-white/70 mb-4">{{ $t('backoffice.jobs.noJobs') }}</p>
+          <p class="text-xl mb-4" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ $t('backoffice.jobs.noJobs') }}</p>
           <Button 
             :label="$t('backoffice.jobs.createFirst')" 
             icon="pi pi-plus"
@@ -53,18 +48,21 @@
           <div 
             v-for="job in jobs" 
             :key="job.id"
-            class="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-white/30 transition-all"
+            class="p-6 rounded-2xl transition-all"
+            :class="themeStore.isDark 
+              ? 'bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30' 
+              : 'bg-white border border-gray-200 hover:border-gray-300 shadow-sm'"
           >
             <div class="flex items-start justify-between">
               <div class="flex-1">
-                <h3 class="text-xl font-semibold mb-2">{{ job.title }}</h3>
+                <h3 class="text-xl font-semibold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">{{ job.title }}</h3>
                 <div class="flex flex-wrap gap-2 mb-3">
                   <Tag :value="job.sector === 'telecom' ? $t('jobs.sectors.telecom') : $t('jobs.sectors.btp')" severity="info" class="text-xs"/>
                   <Tag :value="job.location" severity="secondary" class="text-xs"/>
                   <Tag :value="formatContractType(job.contractType)" severity="success" class="text-xs"/>
                 </div>
-                <p class="text-white/70 line-clamp-2 mb-3">{{ job.description }}</p>
-                <span class="text-sm text-white/60">
+                <p class="line-clamp-2 mb-3" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ job.description }}</p>
+                <span class="text-sm" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-500'">
                   <i class="pi pi-calendar mr-2"></i>
                   {{ $t('common.created') }} {{ formatDate(job.createdAt) }}
                 </span>
@@ -75,9 +73,11 @@
                   severity="secondary" 
                   outlined
                   rounded
-                  class="border-white/30 text-white hover:bg-white/10"
+                  :class="themeStore.isDark 
+                    ? 'border-white/30 text-white hover:bg-white/10' 
+                    : 'border-gray-300 text-gray-700 hover:bg-gray-100'"
                   @click="openJobDialog(job)"
-                  :v-tooltip.top="$t('common.edit')"
+                  v-tooltip.top="$t('common.edit')"
                 />
                 <Button 
                   icon="pi pi-trash" 
@@ -86,7 +86,7 @@
                   rounded
                   class="border-red-400/30 text-red-400 hover:bg-red-400/10"
                   @click="confirmDelete(job)"
-                  :v-tooltip.top="$t('common.delete')"
+                  v-tooltip.top="$t('common.delete')"
                 />
               </div>
             </div>
@@ -94,7 +94,6 @@
         </div>
       </div>
     </div>
-
     <!-- Job Dialog -->
     <Dialog 
       v-model:visible="showDialog" 
@@ -207,7 +206,7 @@
 
     <!-- Delete Confirmation -->
     <ConfirmDialog />
-  </div>
+  </BackOfficeLayout>
 </template>
 
 <script>
@@ -215,18 +214,18 @@ import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
-import axios from 'axios'
-import BackgroundEffects from '@/components/BackgroundEffects.vue'
-
-const apiBaseURL = 'http://localhost:3000/api'
+import apiClient from '@/utils/axios.js'
+import BackOfficeLayout from './BackOfficeLayout.vue'
+import { useThemeStore } from '@/stores/theme.js'
 
 export default {
   name: 'JobsManagement',
   components: {
-    BackgroundEffects
+    BackOfficeLayout
   },
   setup() {
     const { t } = useI18n()
+    const themeStore = useThemeStore()
     const jobs = ref([])
     const loading = ref(false)
     const showDialog = ref(false)
@@ -316,15 +315,21 @@ export default {
     const fetchJobs = async () => {
       loading.value = true
       try {
-        const response = await axios.get(`${apiBaseURL}/jobs`)
-        jobs.value = response.data
+        console.log('Fetching jobs from:', '/jobs')
+        const response = await apiClient.get('/jobs', {
+          params: { admin: 'true' } // Get all jobs including unpublished
+        })
+        console.log('Jobs response:', response.data)
+        jobs.value = Array.isArray(response.data) ? response.data : []
       } catch (error) {
         console.error('Error fetching jobs:', error)
+        console.error('Error response:', error.response?.data)
+        console.error('Error status:', error.response?.status)
         toast.add({
           severity: 'error',
           summary: 'Erreur',
-          detail: 'Impossible de charger les offres d\'emploi',
-          life: 3000
+          detail: error.response?.data?.error || 'Impossible de charger les offres d\'emploi. Vérifiez que le serveur est démarré (npm run server)',
+          life: 5000
         })
       } finally {
         loading.value = false
@@ -334,32 +339,22 @@ export default {
     const openJobDialog = (job) => {
       if (job) {
         editingJob.value = job
-        // Migrate old format to new format if needed
-        if (job.translations) {
-          jobForm.value = {
-            sector: job.sector?.value || job.sector || null,
-            location: job.location || '',
-            contractType: job.contractType?.value || job.contractType || null,
-            tjm: job.tjm || null,
-            translations: job.translations || initTranslations()
-          }
-        } else {
-          // Old format - migrate to new format
-          jobForm.value = {
-            sector: job.sector?.value || job.sector || null,
-            location: job.location || '',
-            contractType: job.contractType?.value || job.contractType || null,
-            tjm: job.tjm || null,
-            translations: {
-              fr: {
-                title: job.title || '',
-                description: job.description || '',
-                requirements: job.requirements || [],
-                responsibilities: job.responsibilities || [],
-                benefits: job.benefits || []
-              },
-              en: initTranslations().en
-            }
+        // Backend now returns title, description, requirements, etc. directly (not in translations)
+        // We still use translations structure in the form for UI purposes, but map from backend format
+        jobForm.value = {
+          sector: job.sector?.value || job.sector || null,
+          location: job.location || '',
+          contractType: job.contractType?.value || job.contractType || null,
+          tjm: job.tjm || null,
+          translations: {
+            fr: {
+              title: job.title || '',
+              description: job.description || '',
+              requirements: Array.isArray(job.requirements) ? job.requirements : [],
+              responsibilities: Array.isArray(job.responsibilities) ? job.responsibilities : [],
+              benefits: Array.isArray(job.benefits) ? job.benefits : []
+            },
+            en: initTranslations().en
           }
         }
         currentLanguage.value = 'fr'
@@ -384,26 +379,106 @@ export default {
 
     const saveJob = async () => {
       try {
-        const jobData = {
-          ...jobForm.value,
-          sector: typeof jobForm.value.sector === 'string' ? jobForm.value.sector : jobForm.value.sector?.value || jobForm.value.sector,
-          contractType: typeof jobForm.value.contractType === 'string' ? jobForm.value.contractType : jobForm.value.contractType?.value || jobForm.value.contractType
+        // Validate required fields
+        if (!jobForm.value.translations[currentLanguage.value]?.title?.trim()) {
+          toast.add({
+            severity: 'warn',
+            summary: 'Validation',
+            detail: 'Le titre est obligatoire',
+            life: 3000
+          })
+          return
         }
         
+        if (!jobForm.value.sector) {
+          toast.add({
+            severity: 'warn',
+            summary: 'Validation',
+            detail: 'Le secteur est obligatoire',
+            life: 3000
+          })
+          return
+        }
+        
+        if (!jobForm.value.location?.trim()) {
+          toast.add({
+            severity: 'warn',
+            summary: 'Validation',
+            detail: 'La localisation est obligatoire',
+            life: 3000
+          })
+          return
+        }
+        
+        if (!jobForm.value.contractType) {
+          toast.add({
+            severity: 'warn',
+            summary: 'Validation',
+            detail: 'Le type de contrat est obligatoire',
+            life: 3000
+          })
+          return
+        }
+
+        // Prepare job data - new format without translations
+        const sectorValue = typeof jobForm.value.sector === 'string' ? jobForm.value.sector : jobForm.value.sector?.value || jobForm.value.sector
+        const contractTypeValue = typeof jobForm.value.contractType === 'string' ? jobForm.value.contractType : jobForm.value.contractType?.value || jobForm.value.contractType
+        
+        // Get current language data or fallback to fr
+        const currentLang = currentLanguage.value || 'fr'
+        const langData = jobForm.value.translations[currentLang] || jobForm.value.translations.fr || {}
+        
+        // Ensure arrays are properly formatted
+        const requirements = Array.isArray(langData.requirements) 
+          ? langData.requirements.filter(r => r && r.trim())
+          : (typeof langData.requirements === 'string' && langData.requirements.trim()
+              ? langData.requirements.split('\n').filter(l => l.trim())
+              : [])
+        
+        const responsibilities = Array.isArray(langData.responsibilities)
+          ? langData.responsibilities.filter(r => r && r.trim())
+          : (typeof langData.responsibilities === 'string' && langData.responsibilities.trim()
+              ? langData.responsibilities.split('\n').filter(l => l.trim())
+              : [])
+        
+        const benefits = Array.isArray(langData.benefits)
+          ? langData.benefits.filter(b => b && b.trim())
+          : (typeof langData.benefits === 'string' && langData.benefits.trim()
+              ? langData.benefits.split('\n').filter(l => l.trim())
+              : [])
+        
+        const jobData = {
+          sector: sectorValue,
+          location: jobForm.value.location.trim(),
+          contractType: contractTypeValue,
+          tjm: jobForm.value.tjm ? parseInt(jobForm.value.tjm) : null,
+          title: langData.title?.trim() || '',
+          description: langData.description?.trim() || '',
+          requirements: requirements,
+          responsibilities: responsibilities,
+          benefits: benefits
+        }
+        
+        console.log('Saving job data:', JSON.stringify(jobData, null, 2))
+        
         if (editingJob.value) {
-          await axios.put(`${apiBaseURL}/jobs/${editingJob.value.id}`, jobData)
+          console.log('Updating job:', editingJob.value.id)
+          const response = await apiClient.put(`/jobs/${editingJob.value.id}`, jobData)
+          console.log('Update response:', response.data)
           toast.add({
             severity: 'success',
             summary: t('common.save'),
-            detail: t('backoffice.jobs.form.update') + ' ' + t('common.save'),
+            detail: 'Offre d\'emploi modifiée avec succès',
             life: 3000
           })
         } else {
-          await axios.post(`${apiBaseURL}/jobs`, jobData)
+          console.log('Creating new job')
+          const response = await apiClient.post('/jobs', jobData)
+          console.log('Create response:', response.data)
           toast.add({
             severity: 'success',
             summary: t('common.save'),
-            detail: t('backoffice.jobs.form.create') + ' ' + t('common.save'),
+            detail: 'Offre d\'emploi créée avec succès',
             life: 3000
           })
         }
@@ -411,11 +486,13 @@ export default {
         await fetchJobs()
       } catch (error) {
         console.error('Error saving job:', error)
+        console.error('Error response:', error.response?.data)
+        console.error('Error status:', error.response?.status)
         toast.add({
           severity: 'error',
           summary: t('common.error'),
-          detail: 'Impossible de sauvegarder l\'offre d\'emploi',
-          life: 3000
+          detail: error.response?.data?.error || 'Impossible de sauvegarder l\'offre d\'emploi. Vérifiez que le serveur est démarré (npm run server)',
+          life: 5000
         })
       }
     }
@@ -428,7 +505,7 @@ export default {
         acceptClass: 'p-button-danger',
         accept: async () => {
           try {
-            await axios.delete(`${apiBaseURL}/jobs/${job.id}`)
+            await apiClient.delete(`/jobs/${job.id}`)
             toast.add({
               severity: 'success',
               summary: 'Succès',
@@ -486,7 +563,8 @@ export default {
       formatDate,
       currentLanguage,
       languageOptions,
-      loadLanguageData
+      loadLanguageData,
+      themeStore
     }
   }
 }

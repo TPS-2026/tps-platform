@@ -17,6 +17,8 @@ import ResetPassword from '../views/Connection/ResetPassword.vue'
 import BackOfficeDashboard from '../views/BackOffice/Dashboard.vue'
 import JobsManagement from '../views/BackOffice/JobsManagement.vue'
 import NewsManagement from '../views/BackOffice/NewsManagement.vue'
+import ApplicationsManagement from '../views/BackOffice/ApplicationsManagement.vue'
+import UsersManagement from '../views/BackOffice/UsersManagement.vue'
 import Reviews from '../views/Reviews.vue'
 
 export const routes = [
@@ -62,7 +64,7 @@ export const routes = [
         path: '/news',
         name: 'news',
         component: News,
-        icon: 'pi pi-newspaper',
+        icon: 'pi pi-calendar-plus',
         label: 'Actualités',
         menuGroup: 'main',
         needAuth: false,
@@ -123,19 +125,36 @@ export const routes = [
         path: '/backoffice',
         name: 'backoffice-dashboard',
         component: BackOfficeDashboard,
-        displayInMenu: false
+        displayInMenu: false,
+        needAuth: true
     },
     {
         path: '/backoffice/jobs',
         name: 'backoffice-jobs',
         component: JobsManagement,
-        displayInMenu: false
+        displayInMenu: false,
+        needAuth: true
     },
     {
         path: '/backoffice/news',
         name: 'backoffice-news',
         component: NewsManagement,
-        displayInMenu: false
+        displayInMenu: false,
+        needAuth: true
+    },
+    {
+        path: '/backoffice/applications',
+        name: 'backoffice-applications',
+        component: ApplicationsManagement,
+        displayInMenu: false,
+        needAuth: true
+    },
+    {
+        path: '/backoffice/users',
+        name: 'backoffice-users',
+        component: UsersManagement,
+        displayInMenu: false,
+        needAuth: true
     },
 ];
 
@@ -158,41 +177,64 @@ router.beforeEach(async (to, from) => {
     }
 
     const accountStore = useAccountStore()
+    
+    // Check if route requires authentication
     if (currentRoute && currentRoute.needAuth) {
-        if (!accountStore.accessToken || accountStore.accessTokenExpirationDate < Date.now().valueOf()) {
+        // Check if token exists
+        if (!accountStore.accessToken) {
             accountStore.logout()
-            const query = {...to.query, next: to.name};
             return {
-                name: 'sign-in', query: query
+                name: 'sign-in',
+                query: { next: to.fullPath }
             }
         }
 
+        // Check if token is expired
+        const expirationDate = accountStore.accessTokenExpirationDate
+        if (expirationDate && parseInt(expirationDate) < Date.now()) {
+            accountStore.logout()
+            return {
+                name: 'sign-in',
+                query: { next: to.fullPath, expired: 'true' }
+            }
+        }
+
+        // Verify token with backend
         try {
             await accountStore.getMeIfNeeded()
         } catch (err) {
+            // If 401, token is invalid
             if (err.response && err.response.status === 401) {
                 accountStore.logout()
-                const query = {...to.query, next: to.name};
                 return {
-                    name: 'sign-in', query: query
+                    name: 'sign-in',
+                    query: { next: to.fullPath, expired: 'true' }
                 }
             }
+            // For other errors, still allow access but log the error
+            console.error('Error verifying authentication:', err)
         }
-    } else if (currentRoute.name === 'sign-in' || currentRoute.name === 'sign-up') {
-        if (accountStore.accessToken && accountStore.accessTokenExpirationDate > Date.now().valueOf()) {
-            try {
-                await accountStore.getMe()
-                return {
-                    name: 'home'
-                }
-            } catch (err) {
-                if (err.response && err.response.status === 401) {
-                    accountStore.logout()
-                    const query = {...to.query, next: to.name};
+    } 
+    // Redirect authenticated users away from login/signup pages
+    else if (currentRoute.name === 'sign-in' || currentRoute.name === 'sign-up') {
+        if (accountStore.accessToken) {
+            const expirationDate = accountStore.accessTokenExpirationDate
+            if (expirationDate && parseInt(expirationDate) > Date.now()) {
+                try {
+                    await accountStore.getMe()
+                    // If user is authenticated, redirect to backoffice or home
                     return {
-                        name: 'sign-in', query: query
+                        name: 'backoffice-dashboard'
+                    }
+                } catch (err) {
+                    // If token is invalid, clear it and allow access to login page
+                    if (err.response && err.response.status === 401) {
+                        accountStore.logout()
                     }
                 }
+            } else {
+                // Token expired, clear it
+                accountStore.logout()
             }
         }
     }

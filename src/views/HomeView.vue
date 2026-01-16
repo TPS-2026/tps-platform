@@ -69,7 +69,7 @@
           >
             <div class="flex items-center gap-3 mb-4">
               <div class="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <i class="pi pi-newspaper text-2xl text-purple-400"></i>
+                <i class="pi pi-calendar-plus text-2xl text-purple-400"></i>
               </div>
               <span 
                 class="text-xl font-semibold transition-colors"

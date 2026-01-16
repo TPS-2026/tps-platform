@@ -1,63 +1,27 @@
 [
   {
-    "id": "1766480766014",
-    "title": "Conducteur de Travaux Télécommunications FTTH (H/F)",
+    "id": "1768565855537",
     "sector": "telecom",
-    "location": "Villepinte",
+    "location": "test",
     "contractType": "regie",
-    "tjm": null,
-    "description": "Entreprise spécialisée dans les réseaux de télécommunications et le déploiement FTTH, nous intervenons sur des projets d’envergure pour des opérateurs nationaux et des collectivités. Dans le cadre du renforcement de nos équipes, nous recherchons un Conducteur de Travaux Télécommunications FTTH pour notre base opérationnelle de Villepinte.\n",
-    "requirements": [
-      "Formation Bac +2 à Bac +5 (Télécoms, Génie Civil, Réseaux, ou équivalent)",
-      "Expérience significative en conduite de travaux Télécommunications / FTTH",
-      "Maîtrise des environnements FTTH (opérateurs, RIP, normes, process)",
-      "Solides compétences en gestion de chantier et management d’équipes",
-      "Bonne maîtrise des outils informatiques (Excel, logiciels métiers FTTH)",
-      "Autonomie, rigueur, sens des responsabilités et esprit d’analyse",
-      "Permis B obligatoire"
-    ],
-    "responsibilities": [
-      "Préparation, organisation et planification des chantiers FTTH (D1, D2, D3)",
-      "Encadrement des équipes terrain (chefs d’équipe, techniciens, sous-traitants)",
-      "Suivi de l’avancement des travaux dans le respect des délais, coûts et qualité",
-      "Interface avec les donneurs d’ordres, collectivités, opérateurs et bureaux d’études",
-      "Gestion des approvisionnements et du matériel chantier",
-      "Contrôle de la conformité technique (GC, tirage, raccordement, mesures)",
-      "Suivi administratif des chantiers (DOE, rapports, situations, facturation)",
-      "Application et contrôle des règles QHSE",
-      "Participation aux réunions de chantier et comptes rendus"
-    ],
-    "benefits": [
-      "Avantages (une ligne par élément)"
-    ],
-    "createdAt": "2025-12-23T09:06:06.014Z",
-    "updatedAt": "2026-01-09T10:51:32.907Z",
+    "tjm": 500,
     "translations": {
       "fr": {
-        "title": "Conducteur de Travaux Télécommunications FTTH (H/F)",
-        "description": "Entreprise spécialisée dans les réseaux de télécommunications et le déploiement FTTH, nous intervenons sur des projets d’envergure pour des opérateurs nationaux et des collectivités. Dans le cadre du renforcement de nos équipes, nous recherchons un Conducteur de Travaux Télécommunications FTTH pour notre base opérationnelle de Villepinte.\n",
+        "title": "test",
+        "description": "Description\nDescription\nDescription\nDescription",
         "requirements": [
-          "Formation Bac +2 à Bac +5 (Télécoms, Génie Civil, Réseaux, ou équivalent)",
-          "Expérience significative en conduite de travaux Télécommunications / FTTH",
-          "Maîtrise des environnements FTTH (opérateurs, RIP, normes, process)",
-          "Solides compétences en gestion de chantier et management d’équipes",
-          "Bonne maîtrise des outils informatiques (Excel, logiciels métiers FTTH)",
-          "Autonomie, rigueur, sens des responsabilités et esprit d’analyse",
-          "Permis B obligatoire"
+          "profile",
+          "profile",
+          "profile"
         ],
         "responsibilities": [
-          "Préparation, organisation et planification des chantiers FTTH (D1, D2, D3)",
-          "Encadrement des équipes terrain (chefs d’équipe, techniciens, sous-traitants)",
-          "Suivi de l’avancement des travaux dans le respect des délais, coûts et qualité",
-          "Interface avec les donneurs d’ordres, collectivités, opérateurs et bureaux d’études",
-          "Gestion des approvisionnements et du matériel chantier",
-          "Contrôle de la conformité technique (GC, tirage, raccordement, mesures)",
-          "Suivi administratif des chantiers (DOE, rapports, situations, facturation)",
-          "Application et contrôle des règles QHSE",
-          "Participation aux réunions de chantier et comptes rendus"
+          "Mission",
+          "Mission",
+          "Mission"
         ],
         "benefits": [
-          "Avantages (une ligne par élément)"
+          "TT",
+          "Formation continue"
         ]
       },
       "en": {
@@ -67,6 +31,430 @@
         "responsibilities": [],
         "benefits": []
       }
-    }
+    },
+    "createdAt": "2026-01-16T12:17:35.537Z",
+    "updatedAt": "2026-01-16T12:17:35.537Z"
+  },
+  {
+    "id": "1768566000001",
+    "sector": "telecom",
+    "location": "Paris",
+    "contractType": "tjm",
+    "tjm": 450,
+    "translations": {
+      "fr": {
+        "title": "Ingénieur Études FTTH (H/F)",
+        "description": "Nous recherchons un Ingénieur Études FTTH pour renforcer notre équipe d'ingénierie. Vous serez en charge de la conception et du dimensionnement des réseaux de télécommunications fibre optique.\n\nVous travaillerez sur des projets d'envergure pour des opérateurs majeurs et des collectivités locales, dans un environnement dynamique et innovant.",
+        "requirements": [
+          "Bac+5 en Télécommunications, Génie Civil ou équivalent",
+          "Minimum 3 ans d'expérience en études FTTH",
+          "Maîtrise des outils de CAO/DAO (AutoCAD, QGIS)",
+          "Connaissance des normes et réglementations FTTH",
+          "Bonne maîtrise des outils bureautiques",
+          "Autonomie et capacité d'adaptation",
+          "Permis B obligatoire"
+        ],
+        "responsibilities": [
+          "Réalisation des études techniques FTTH (D1, D2, D3)",
+          "Dimensionnement des réseaux de distribution",
+          "Élaboration des dossiers techniques et plans d'exécution",
+          "Coordination avec les bureaux d'études et opérateurs",
+          "Suivi des projets de la conception à la réalisation",
+          "Validation technique des solutions proposées",
+          "Rédaction de rapports et documentation technique"
+        ],
+        "benefits": [
+          "Télétravail possible 2 jours/semaine",
+          "Formation continue et évolution de carrière",
+          "Mutuelle et prévoyance",
+          "Tickets restaurant",
+          "Prime d'intéressement"
+        ]
+      },
+      "en": {
+        "title": "FTTH Engineering Engineer (M/F)",
+        "description": "We are looking for an FTTH Engineering Engineer to strengthen our engineering team. You will be responsible for the design and sizing of fiber optic telecommunications networks.",
+        "requirements": [
+          "Master's degree in Telecommunications, Civil Engineering or equivalent",
+          "Minimum 3 years of experience in FTTH engineering",
+          "Proficiency in CAD/DAO tools (AutoCAD, QGIS)",
+          "Knowledge of FTTH standards and regulations"
+        ],
+        "responsibilities": [
+          "FTTH technical studies (D1, D2, D3)",
+          "Distribution network sizing",
+          "Technical documentation and execution plans"
+        ],
+        "benefits": [
+          "Remote work possible 2 days/week",
+          "Continuous training and career development"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:20:00.000Z",
+    "updatedAt": "2026-01-16T12:20:00.000Z"
+  },
+  {
+    "id": "1768566000002",
+    "sector": "telecom",
+    "location": "Lyon",
+    "contractType": "regie",
+    "tjm": null,
+    "translations": {
+      "fr": {
+        "title": "Technicien FTTH - Déploiement Réseaux (H/F)",
+        "description": "Poste de Technicien FTTH pour le déploiement et la maintenance des réseaux fibre optique. Vous interviendrez sur le terrain pour l'installation, le raccordement et la maintenance des équipements FTTH.\n\nVous rejoindrez une équipe expérimentée et bénéficierez d'une formation continue pour développer vos compétences techniques.",
+        "requirements": [
+          "Bac+2 en Électronique, Télécommunications ou équivalent",
+          "Expérience en installation/réparation réseaux télécoms",
+          "Connaissance des techniques de tirage et raccordement fibre",
+          "Maîtrise des outils de mesure optique (OTDR, réflectomètre)",
+          "Sens du service client et bonne communication",
+          "Rigueur et respect des procédures qualité",
+          "Permis B obligatoire"
+        ],
+        "responsibilities": [
+          "Installation et raccordement des clients FTTH",
+          "Réalisation des tirages de câbles fibre optique",
+          "Soudure et épissure de fibres optiques",
+          "Tests et mesures optiques (puissance, perte)",
+          "Intervention de maintenance et dépannage",
+          "Rédaction de rapports d'intervention",
+          "Respect des normes de sécurité et qualité"
+        ],
+        "benefits": [
+          "Véhicule de service fourni",
+          "Téléphone professionnel",
+          "Tenue de travail fournie",
+          "Formation technique continue",
+          "Mutuelle et prévoyance",
+          "13ème mois"
+        ]
+      },
+      "en": {
+        "title": "FTTH Technician - Network Deployment (M/F)",
+        "description": "FTTH Technician position for fiber optic network deployment and maintenance.",
+        "requirements": [
+          "Associate degree in Electronics, Telecommunications or equivalent",
+          "Experience in telecom network installation/repair"
+        ],
+        "responsibilities": [
+          "FTTH customer installation and connection",
+          "Fiber optic cable pulling",
+          "Fiber splicing and welding"
+        ],
+        "benefits": [
+          "Company vehicle provided",
+          "Professional phone",
+          "Work uniform provided"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:25:00.000Z",
+    "updatedAt": "2026-01-16T12:25:00.000Z"
+  },
+  {
+    "id": "1768566000003",
+    "sector": "btp",
+    "location": "Marseille",
+    "contractType": "package",
+    "tjm": null,
+    "translations": {
+      "fr": {
+        "title": "Chef de Chantier BTP - Gros Œuvre (H/F)",
+        "description": "Nous recherchons un Chef de Chantier expérimenté pour encadrer nos équipes sur des projets de construction et de rénovation. Vous serez responsable de la coordination des travaux, du respect des délais et de la qualité d'exécution.\n\nVous travaillerez sur des projets variés (bâtiments résidentiels, tertiaires, équipements publics) dans la région marseillaise.",
+        "requirements": [
+          "Bac+2 à Bac+5 en BTP, Génie Civil ou équivalent",
+          "Minimum 5 ans d'expérience en conduite de travaux",
+          "Maîtrise des techniques de gros œuvre et second œuvre",
+          "Connaissance de la réglementation construction (RT2012, RE2020)",
+          "Maîtrise des outils de planification (MS Project, Gantt)",
+          "Capacité de management d'équipe (10-20 personnes)",
+          "Permis B obligatoire, permis poids lourd apprécié"
+        ],
+        "responsibilities": [
+          "Planification et organisation des chantiers",
+          "Encadrement et coordination des équipes",
+          "Suivi de l'avancement des travaux (délais, coûts, qualité)",
+          "Interface avec les maîtres d'œuvre et maîtres d'ouvrage",
+          "Gestion des approvisionnements et du matériel",
+          "Respect des normes de sécurité (QHSE)",
+          "Rédaction de rapports de chantier et situations de travaux",
+          "Gestion des relations avec les sous-traitants"
+        ],
+        "benefits": [
+          "Véhicule de fonction",
+          "Téléphone professionnel",
+          "Ordinateur portable",
+          "Mutuelle et prévoyance",
+          "Tickets restaurant",
+          "Prime de performance",
+          "Formation continue"
+        ]
+      },
+      "en": {
+        "title": "Construction Site Manager - Main Works (M/F)",
+        "description": "We are looking for an experienced Construction Site Manager to lead our teams on construction and renovation projects.",
+        "requirements": [
+          "Associate to Master's degree in Construction, Civil Engineering or equivalent",
+          "Minimum 5 years of experience in construction management"
+        ],
+        "responsibilities": [
+          "Site planning and organization",
+          "Team management and coordination",
+          "Progress monitoring (deadlines, costs, quality)"
+        ],
+        "benefits": [
+          "Company car",
+          "Professional phone",
+          "Laptop computer"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:30:00.000Z",
+    "updatedAt": "2026-01-16T12:30:00.000Z"
+  },
+  {
+    "id": "1768566000004",
+    "sector": "btp",
+    "location": "Toulouse",
+    "contractType": "tjm",
+    "tjm": 550,
+    "translations": {
+      "fr": {
+        "title": "Secrétaire Technique BTP (H/F)",
+        "description": "Poste de Secrétaire Technique pour le suivi administratif et technique de projets de construction. Vous serez le lien entre le terrain et le bureau, en charge de la gestion documentaire et du suivi administratif des chantiers.\n\nVous travaillerez dans un environnement dynamique au sein d'une équipe pluridisciplinaire.",
+        "requirements": [
+          "Bac+2 à Bac+3 en BTP, Secrétariat technique ou équivalent",
+          "Expérience en secrétariat technique BTP appréciée",
+          "Maîtrise des outils bureautiques (Word, Excel, PowerPoint)",
+          "Connaissance des logiciels métiers BTP (Ged, CMMS)",
+          "Bonne connaissance de la réglementation construction",
+          "Rigueur et sens de l'organisation",
+          "Bonne communication écrite et orale"
+        ],
+        "responsibilities": [
+          "Gestion documentaire des projets (plans, devis, factures)",
+          "Suivi administratif des chantiers",
+          "Rédaction de comptes-rendus et rapports",
+          "Interface avec les clients, fournisseurs et sous-traitants",
+          "Gestion des appels d'offres et devis",
+          "Suivi des commandes et approvisionnements",
+          "Archivage et classement des documents",
+          "Assistance au chef de projet"
+        ],
+        "benefits": [
+          "Télétravail possible 1 jour/semaine",
+          "Formation continue",
+          "Mutuelle et prévoyance",
+          "Tickets restaurant",
+          "Horaires flexibles"
+        ]
+      },
+      "en": {
+        "title": "Construction Technical Secretary (M/F)",
+        "description": "Technical Secretary position for administrative and technical follow-up of construction projects.",
+        "requirements": [
+          "Associate to Bachelor's degree in Construction, Technical Secretarial or equivalent",
+          "Experience in construction technical secretarial appreciated"
+        ],
+        "responsibilities": [
+          "Project document management (plans, quotes, invoices)",
+          "Administrative follow-up of construction sites",
+          "Writing reports and minutes"
+        ],
+        "benefits": [
+          "Remote work possible 1 day/week",
+          "Continuous training"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:35:00.000Z",
+    "updatedAt": "2026-01-16T12:35:00.000Z"
+  },
+  {
+    "id": "1768566000005",
+    "sector": "telecom",
+    "location": "Nantes",
+    "contractType": "regie",
+    "tjm": null,
+    "translations": {
+      "fr": {
+        "title": "Conducteur de Travaux Télécommunications FTTH (H/F)",
+        "description": "Nous recherchons un Conducteur de Travaux expérimenté pour piloter nos projets de déploiement FTTH. Vous serez responsable de la coordination opérationnelle des équipes terrain et du respect des objectifs qualité, délais et coûts.\n\nVous interviendrez sur des projets d'envergure pour des opérateurs nationaux dans la région nantaise.",
+        "requirements": [
+          "Bac+2 à Bac+5 en Télécommunications, Génie Civil ou équivalent",
+          "Minimum 4 ans d'expérience en conduite de travaux télécoms/FTTH",
+          "Maîtrise des process FTTH (D1, D2, D3, RIP)",
+          "Solides compétences en gestion de chantier et management",
+          "Connaissance des outils de suivi de travaux",
+          "Autonomie, rigueur et sens des responsabilités",
+          "Permis B obligatoire"
+        ],
+        "responsibilities": [
+          "Préparation et planification des chantiers FTTH",
+          "Encadrement des équipes terrain (10-15 personnes)",
+          "Suivi de l'avancement dans le respect des délais et qualité",
+          "Interface avec opérateurs, collectivités et bureaux d'études",
+          "Gestion des approvisionnements et matériel chantier",
+          "Contrôle de conformité technique (GC, tirage, raccordement)",
+          "Suivi administratif (DOE, rapports, situations)",
+          "Application des règles QHSE"
+        ],
+        "benefits": [
+          "Véhicule de service",
+          "Téléphone professionnel",
+          "Ordinateur portable",
+          "Mutuelle et prévoyance",
+          "Tickets restaurant",
+          "Formation continue",
+          "Prime de performance"
+        ]
+      },
+      "en": {
+        "title": "FTTH Telecommunications Works Manager (M/F)",
+        "description": "We are looking for an experienced Works Manager to lead our FTTH deployment projects.",
+        "requirements": [
+          "Associate to Master's degree in Telecommunications, Civil Engineering or equivalent",
+          "Minimum 4 years of experience in telecom/FTTH works management"
+        ],
+        "responsibilities": [
+          "FTTH site preparation and planning",
+          "Field team management (10-15 people)",
+          "Progress monitoring respecting deadlines and quality"
+        ],
+        "benefits": [
+          "Company vehicle",
+          "Professional phone",
+          "Laptop computer"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:40:00.000Z",
+    "updatedAt": "2026-01-16T12:40:00.000Z"
+  },
+  {
+    "id": "1768566000006",
+    "sector": "btp",
+    "location": "Bordeaux",
+    "contractType": "regie",
+    "tjm": null,
+    "translations": {
+      "fr": {
+        "title": "Chef d'Équipe BTP - Second Œuvre (H/F)",
+        "description": "Poste de Chef d'Équipe pour encadrer une équipe de 5 à 8 ouvriers spécialisés en second œuvre (plâtrerie, carrelage, peinture, menuiserie).\n\nVous serez responsable de l'organisation du travail, de la qualité d'exécution et du respect des délais sur les chantiers de rénovation et construction neuve.",
+        "requirements": [
+          "CAP à Bac Pro en BTP ou équivalent",
+          "Minimum 5 ans d'expérience en second œuvre",
+          "Maîtrise des techniques de plâtrerie, carrelage, peinture",
+          "Capacité d'encadrement d'équipe",
+          "Connaissance des normes et réglementations",
+          "Rigueur et sens de l'organisation",
+          "Permis B obligatoire"
+        ],
+        "responsibilities": [
+          "Encadrement et organisation de l'équipe",
+          "Répartition des tâches et suivi de l'avancement",
+          "Contrôle qualité des travaux réalisés",
+          "Respect des délais et planning",
+          "Gestion du matériel et outillage",
+          "Application des règles de sécurité",
+          "Interface avec le chef de chantier",
+          "Formation des apprentis et nouveaux arrivants"
+        ],
+        "benefits": [
+          "Véhicule de service",
+          "Téléphone professionnel",
+          "Tenue de travail fournie",
+          "Mutuelle et prévoyance",
+          "Tickets restaurant",
+          "Prime d'ancienneté",
+          "Formation continue"
+        ]
+      },
+      "en": {
+        "title": "Construction Team Leader - Finishing Works (M/F)",
+        "description": "Team Leader position to manage a team of 5 to 8 workers specialized in finishing works.",
+        "requirements": [
+          "CAP to Vocational Baccalaureate in Construction or equivalent",
+          "Minimum 5 years of experience in finishing works"
+        ],
+        "responsibilities": [
+          "Team management and organization",
+          "Task distribution and progress monitoring",
+          "Quality control of completed work"
+        ],
+        "benefits": [
+          "Company vehicle",
+          "Professional phone",
+          "Work uniform provided"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:45:00.000Z",
+    "updatedAt": "2026-01-16T12:45:00.000Z"
+  },
+  {
+    "id": "1768566000007",
+    "sector": "telecom",
+    "location": "Strasbourg",
+    "contractType": "package",
+    "tjm": null,
+    "translations": {
+      "fr": {
+        "title": "Ingénieur Projet Réseaux Télécoms (H/F)",
+        "description": "Nous recherchons un Ingénieur Projet pour piloter des projets de déploiement de réseaux télécoms. Vous serez en charge de la gestion complète de projets depuis la phase d'études jusqu'à la mise en service.\n\nVous travaillerez sur des projets variés (FTTH, réseaux mobiles, infrastructures) pour des opérateurs et collectivités dans la région Grand Est.",
+        "requirements": [
+          "Bac+5 en Télécommunications, Génie Civil ou équivalent",
+          "Minimum 3 ans d'expérience en gestion de projets télécoms",
+          "Maîtrise des méthodologies de gestion de projet (Agile, Prince2)",
+          "Connaissance des réseaux télécoms (FTTH, 4G/5G, IP)",
+          "Maîtrise des outils de gestion de projet (MS Project, Jira)",
+          "Excellentes compétences relationnelles et communication",
+          "Autonomie et capacité de leadership",
+          "Permis B obligatoire"
+        ],
+        "responsibilities": [
+          "Pilotage de projets télécoms de A à Z",
+          "Coordination des équipes techniques et terrain",
+          "Gestion des budgets et planning",
+          "Interface avec clients, opérateurs et collectivités",
+          "Suivi des risques et opportunités",
+          "Reporting et présentation des résultats",
+          "Gestion des relations avec les prestataires",
+          "Respect des objectifs qualité, coûts, délais"
+        ],
+        "benefits": [
+          "Télétravail possible 2 jours/semaine",
+          "Véhicule de fonction",
+          "Ordinateur portable haut de gamme",
+          "Téléphone professionnel",
+          "Mutuelle et prévoyance premium",
+          "Tickets restaurant",
+          "Formation continue et certifications",
+          "Prime de performance"
+        ]
+      },
+      "en": {
+        "title": "Telecom Networks Project Engineer (M/F)",
+        "description": "We are looking for a Project Engineer to manage telecom network deployment projects.",
+        "requirements": [
+          "Master's degree in Telecommunications, Civil Engineering or equivalent",
+          "Minimum 3 years of experience in telecom project management"
+        ],
+        "responsibilities": [
+          "End-to-end telecom project management",
+          "Technical and field team coordination",
+          "Budget and schedule management"
+        ],
+        "benefits": [
+          "Remote work possible 2 days/week",
+          "Company car",
+          "High-end laptop"
+        ]
+      }
+    },
+    "createdAt": "2026-01-16T12:50:00.000Z",
+    "updatedAt": "2026-01-16T12:50:00.000Z"
   }
 ]
