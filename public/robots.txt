@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /backoffice/
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://tpstalent.fr/sitemap.xml
