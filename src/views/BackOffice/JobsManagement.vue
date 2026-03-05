@@ -125,7 +125,9 @@
             <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.sector') }} *</label>
             <Select 
               v-model="jobForm.sector" 
-              :options="sectorOptions" 
+              :options="sectorOptions"
+              optionLabel="label"
+              optionValue="value"
               required
               class="w-full"
             />
@@ -141,7 +143,9 @@
             <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.contractType') }} *</label>
             <Select 
               v-model="jobForm.contractType" 
-              :options="contractTypeOptions" 
+              :options="contractTypeOptions"
+              optionLabel="label"
+              optionValue="value"
               required
               class="w-full"
             />

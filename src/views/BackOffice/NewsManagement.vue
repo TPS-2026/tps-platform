@@ -123,16 +123,38 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-2">Image de couverture (URL)</label>
-          <InputText v-model="articleForm.coverImage" placeholder="/image.jpg" class="w-full" />
-          <small class="text-white/60 dark:text-gray-400 block mt-1">Chemin relatif depuis le dossier public (ex: /image.jpg)</small>
-          <div v-if="articleForm.coverImage" class="mt-3">
-            <img 
-              :src="articleForm.coverImage" 
-              alt="Aperçu" 
-              class="w-full h-48 object-cover rounded-lg border border-white/10 dark:border-gray-700"
-              @error="$event.target.style.display='none'"
+          <label class="block text-sm font-medium mb-2">Image de couverture</label>
+          <div class="space-y-3">
+            <FileUpload 
+              mode="basic" 
+              accept="image/*"
+              :maxFileSize="5000000"
+              chooseLabel="Choisir une image"
+              @select="onImageSelect"
+              class="w-full"
             />
+            <small class="text-white/60 dark:text-gray-400 block">Taille max: 5MB - Formats: JPG, PNG, GIF, WEBP</small>
+            
+            
+            <div v-if="articleForm.coverImage" class="mt-3">
+              <div class="relative">
+                <img 
+                  :src="articleForm.coverImage" 
+                  alt="Aperçu" 
+                  class="w-full h-48 object-cover rounded-lg border border-white/10 dark:border-gray-700"
+                  @error="$event.target.style.display='none'"
+                />
+                <Button 
+                  icon="pi pi-times" 
+                  severity="danger" 
+                  rounded
+                  size="small"
+                  class="absolute top-2 right-2"
+                  @click="removeImage"
+                  v-tooltip.top="'Supprimer l\'image'"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -175,6 +197,7 @@ import { useToast } from 'primevue/usetoast'
 import apiClient from '@/utils/axios.js'
 import BackOfficeLayout from './BackOfficeLayout.vue'
 import { useThemeStore } from '@/stores/theme.js'
+import { uploadImage } from '@/services/upload.js'
 
 export default {
   name: 'NewsManagement',
@@ -189,6 +212,7 @@ export default {
     const editingArticle = ref(null)
     const confirm = useConfirm()
     const toast = useToast()
+    const uploadingImage = ref(false)
 
     const articleForm = ref({
       title: '',
@@ -250,6 +274,37 @@ export default {
         }
       }
       showDialog.value = true
+    }
+
+    const onImageSelect = async (event) => {
+      const file = event.files[0]
+      if (!file) return
+      
+      uploadingImage.value = true
+      try {
+        const result = await uploadImage(file)
+        articleForm.value.coverImage = result.url
+        
+        toast.add({
+          severity: 'success',
+          summary: 'Image uploadée',
+          detail: 'L\'image a été uploadée avec succès',
+          life: 3000
+        })
+      } catch (error) {
+        toast.add({
+          severity: 'error',
+          summary: 'Erreur d\'upload',
+          detail: error.message || 'Impossible d\'uploader l\'image',
+          life: 5000
+        })
+      } finally {
+        uploadingImage.value = false
+      }
+    }
+    
+    const removeImage = () => {
+      articleForm.value.coverImage = ''
     }
 
     const closeDialog = () => {
@@ -365,8 +420,11 @@ export default {
       editingArticle,
       articleForm,
       isEditing,
+      uploadingImage,
       openArticleDialog,
       closeDialog,
+      onImageSelect,
+      removeImage,
       saveArticle,
       confirmDelete,
       formatDate,

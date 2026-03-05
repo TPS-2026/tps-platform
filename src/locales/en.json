@@ -28,7 +28,33 @@
     "created": "Created on",
     "error": "Error",
     "darkMode": "Light Mode",
-    "lightMode": "Dark Mode"
+    "lightMode": "Dark Mode",
+    "accessibility": "Accessibility",
+    "whoWeAre": "Who we are",
+    "ourCommitments": "Our Commitments",
+    "legalNotice": "Legal notice",
+    "clientsPartners": "Clients & Partners",
+    "glossary": "Telecom Glossary",
+    "faq": "Candidate FAQ"
+  },
+  "captcha": {
+    "label": "Anti-bot verification",
+    "notConfigured": "CAPTCHA not configured (VITE_TURNSTILE_SITE_KEY). Form remains usable in development."
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Send us a message for your projects or any enquiry.",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your{'@'}email.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "Subject of your message",
+    "message": "Message",
+    "messagePlaceholder": "Your message...",
+    "send": "Send",
+    "success": "Your message has been sent successfully. We will get back to you shortly.",
+    "error": "An error occurred while sending your message. Please try again."
   },
   "header": {
     "title": "Talent Power Service",
@@ -38,11 +64,26 @@
   "landing": {
     "hero": {
       "badge": "Leader in field engineering",
+      "tagline": "Connect your ambitions build your networks",
+      "tagline1": "Connect your ambitions",
+      "tagline2": "build your networks",
+      "quickAbout": "Who we are",
+      "quickContact": "Contact us",
+      "aboutTitle": "TPS in a few words",
       "title1": "Technical Expertise",
       "title2": "Operational Excellence",
-      "description": "TPS provides engineers and technicians specialized in fiber optics (FTTH) and construction/field engineering. Fast staffing, credible technical selection, operational support.",
+      "description": "TPS is the essential link between engineering talent and telecom giants. For technicians and engineers, we are the springboard that propels you onto the most strategic projects; for companies like Circet, we are the trusted partner that instantly injects the expertise needed for your deployments. By simplifying the match between technical know-how and field needs, TPS turns recruitment into an immediate operational force to build, together, the infrastructures of tomorrow.",
       "cta1": "Discover offers",
       "cta2": "Our services"
+    },
+    "aboutHighlights": {
+      "talents": "Field Experts",
+      "talentsDesc": "Qualified technicians and engineers for your projects",
+      "reactivity": "Maximum Responsiveness",
+      "reactivityDesc": "Fast mobilisation within 48h",
+      "expertise": "Technical Excellence",
+      "expertiseDesc": "Recognised expertise in telecoms and construction",
+      "learnMore": "Learn more about TPS"
     },
     "carousel": {
       "conception": {
@@ -123,7 +164,11 @@
     },
     "keyStats": {
       "title": "Key Figures",
-      "subtitle": "Our measured impact on the field and with our clients"
+      "subtitle": "Our measured impact on the field and with our clients",
+      "employees": "Employees",
+      "projects": "Projects completed",
+      "experience": "Years of experience",
+      "satisfaction": "Satisfaction"
     },
     "footer": {
       "tagline": "Technical expertise and operational excellence in fiber optics and construction.",
@@ -196,6 +241,154 @@
     "readMore": "Read more",
     "notFound": "Article not found",
     "seeAll": "View all news"
+  },
+  "accessibility": {
+    "title": "Accessibility",
+    "subtitle": "Accessibility statement and WCAG 2.1 Level AA compliance",
+    "conformityTitle": "Compliance status",
+    "conformityStatement": "This website is partially compliant with the digital accessibility rules (WCAG 2.1 – Level AA).",
+    "conformityReference": "Reference: WCAG 2.1 Level AA (Web Content Accessibility Guidelines).",
+    "scopeTitle": "Scope",
+    "scopeText": "This statement applies to the TPS (Talent Power Service) website and all publicly available pages and features: home, job offers, news, services, about, application forms and login pages.",
+    "techTitle": "Accessibility technologies",
+    "techText": "The site relies on the following technologies to be accessible:",
+    "techList": {
+      "html": "Semantic HTML5",
+      "css": "CSS3 (contrast, relative sizes, light/dark themes)",
+      "js": "JavaScript (Vue.js) for interactivity, with alternatives or graceful degradation"
+    },
+    "limitationsTitle": "Non-accessible content or known limitations",
+    "limitationsIntro": "Some content or features may not be fully accessible:",
+    "limitationsList": {
+      "carousel": "Image carousel: keyboard navigation and screen reader announcements to be enhanced.",
+      "thirdParty": "Third-party content (social networks, maps): accessibility not under our control.",
+      "pdf": "Any PDF documents: may not be tagged for accessibility."
+    },
+    "improvementsTitle": "Improvements and audit",
+    "improvementsText": "We are committed to improving accessibility. Checks have been carried out on:",
+    "improvementsList": {
+      "contrast": "Text and link contrast (light and dark mode).",
+      "focus": "Keyboard focus visibility on links and buttons.",
+      "labels": "Form labels and text alternatives for images.",
+      "structure": "Heading structure (h1, h2, h3) and landmark regions."
+    },
+    "contactTitle": "Report an issue or request assistance",
+    "contactText": "If you encounter an accessibility issue on this site, you can contact us:",
+    "skipToContent": "Skip to main content"
+  },
+  "legal": {
+    "title": "Legal notice",
+    "identity": "Company identity",
+    "sas": "Simplified joint-stock company (SAS) – Talent Power Service",
+    "hq": "Headquarters:",
+    "siteCreation": "Site creation date:",
+    "publisher": "Publication manager",
+    "publisherContent": "The publication manager of the site is the legal representative of Talent Power Service.",
+    "hosting": "Hosting",
+    "hostingContent": "Site hosting information will be provided here (host, address).",
+    "rgpd": "GDPR & Data protection",
+    "rgpdContent": "In accordance with the General Data Protection Regulation (GDPR), personal data of candidates (CV, phone number, address, etc.) collected via application forms are processed confidentially and securely. They are used only for the recruitment process and are not shared with third parties without your consent. You have the right to access, rectify and delete your data.",
+    "rgpdContact": "For any questions: gestion{'@'}tpstalent.fr or via the Accessibility page."
+  },
+  "commitments": {
+    "title": "Our Commitments",
+    "subtitle": "TPS's commitment to the environment, safety and corporate social responsibility.",
+    "environment": {
+      "title": "Ecology and environment",
+      "content": "TPS is committed to reducing its environmental impact and promoting sustainable practices in its activities and field operations."
+    },
+    "hse": {
+      "title": "HSE – Health and safety at work",
+      "content": "Employee safety is a priority. We implement HSE (Health, Safety, Environment) approaches and ensure compliance with rules and training (electrical authorisations, working at height, CACES, etc.)."
+    },
+    "equality": {
+      "title": "Equality and parity",
+      "content": "We are committed to fair distribution and equitable working conditions (gender ratio, non-discrimination, promotion of diversity)."
+    },
+    "rse": {
+      "title": "Corporate social responsibility (CSR)",
+      "content": "TPS carries out daily CSR actions: respect for employees, quality of life at work, training, inclusion and responsible partnerships."
+    }
+  },
+  "clientsPartners": {
+    "title": "Clients & Partners",
+    "subtitle": "They trust us for their telecoms and construction projects.",
+    "clientsTitle": "Clients",
+    "partnersTitle": "Partners"
+  },
+  "glossary": {
+    "title": "Telecom Glossary",
+    "subtitle": "Definitions of technical terms for trainees and sector professionals.",
+    "ftth": "Fiber To The Home – fibre to the subscriber's premises for very high speeds.",
+    "reflectometry": "Measurement technique (OTDR or equivalent) to characterise a fibre link: losses, reflections, faults.",
+    "devoiement": "Action of diverting an existing cable (copper or fibre) for the passage of works (road, pipeline); often associated with civil engineering.",
+    "caces": "Certificate of Aptitude for Safe Driving – authorisation to operate equipment (forklifts, platforms, etc.).",
+    "aipr": "Authorisation to Work Near Networks – mandatory training to work near networks (gas, electricity, etc.).",
+    "tjm": "Daily rate – daily remuneration of a consultant on a time-and-materials basis.",
+    "fiveg": "Fifth generation of mobile networks; deployment of antennas and associated fibre backhaul.",
+    "regie": "Mode of intervention where the consultant works on the client's site and is billed per day (daily rate)."
+  },
+  "faq": {
+    "title": "Candidate FAQ",
+    "subtitle": "Answers to the most frequently asked questions from candidates.",
+    "equipment": {
+      "q": "What equipment is provided?",
+      "a": "Depending on the mission, TPS and our clients may provide PPE, tools, vehicle or allowances. Details are specified before the mission."
+    },
+    "travel": {
+      "q": "Do you offer assignments with significant travel?",
+      "a": "Yes. We offer mobile assignments (national or international) with accommodation and travel covered according to the project."
+    },
+    "delay": {
+      "q": "What is the average recruitment time?",
+      "a": "Our aim is maximum responsiveness: first contact within 48 hours, recruitment and onboarding process tailored to the client's urgency."
+    }
+  },
+  "whoWeAre": {
+    "title": "Who we are",
+    "tagline": "Expertise at the source, performance at the end of the line.",
+    "history": {
+      "title": "Our History: An ambition born in the field",
+      "content": "It all started with a simple observation: the telecoms world moves faster than recruitment. TPS (Talent Power Service) was born from the desire to streamline this high-pressure sector. From the outset, we chose to position ourselves not as mere recruiters, but as architects of human solutions. By understanding the real challenges of technicians and the production imperatives of giants like Circet, we built a model where technical responsiveness becomes a competitive advantage."
+    },
+    "mission": {
+      "title": "Our Mission: Connect talent, build the future",
+      "intro": "TPS is the strategic link between excellence in engineering and the infrastructures of tomorrow. We act as a performance catalyst by synchronising two vital needs:",
+      "talentsTitle": "For our Talent",
+      "talentsContent": "We are your career agent. Technicians and engineers, we take you out of the crowd to place you at the heart of large-scale missions (5G, Fibre, FTTH) that turn your CV into a market reference.",
+      "clientsTitle": "For our Clients",
+      "clientsContent": "We are your operational right arm. We instantly inject the necessary expertise into your projects to guarantee fault-free deployment and rigorous deadline compliance."
+    },
+    "dna": {
+      "title": "The TPS DNA: Why trust us?",
+      "reactivityTitle": "Responsiveness",
+      "reactivityDesc": "A need detected, an expert mobilised. No downtime.",
+      "precisionTitle": "Precision",
+      "precisionDesc": "We master your technology. We speak your language.",
+      "partnershipTitle": "Partnership",
+      "partnershipDesc": "Your operational success in the field is our only unit of measure.",
+      "tagline": "TPS: The human engine of tomorrow's networks."
+    },
+    "orgchart": {
+      "title": "Organisation chart",
+      "president": "President",
+      "director": "Director",
+      "activities": "Activities Manager",
+      "poleAdmin": "Administrative & Financial",
+      "poleRH": "HR",
+      "poleCommercial": "Commercial",
+      "rhManager": "HR Manager, HR Division"
+    },
+    "certifications": {
+      "title": "Certifications and labels",
+      "content": "TPS is committed to displaying on this site the certifications and labels it holds (quality, safety, CSR, etc.) to strengthen the trust of clients and candidates.",
+      "note": "Additional certifications and labels are currently being obtained. This section will be updated regularly."
+    },
+    "cta": {
+      "title": "Ready to shift into high gear?",
+      "projects": "Contact us for your projects",
+      "join": "Join our experts"
+    }
   },
   "auth": {
     "login": {

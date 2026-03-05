@@ -1,15 +1,26 @@
 <template>
   <ConfirmDialog group="consent" :draggable="false"></ConfirmDialog>
 
+  <!-- Lien d'évitement pour l'accessibilité (WCAG 2.1) -->
+  <a
+    href="#main-content"
+    class="skip-link absolute -left-[9999px] top-4 z-[100] px-4 py-2 bg-blue-600 text-white rounded-lg focus:left-4 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#08090A]"
+  >
+    {{ $t('accessibility.skipToContent') }}
+  </a>
+
   <main 
+    id="main-content"
     class="min-h-screen transition-colors duration-300"
     :class="{
       'bg-[#08090A]': themeStore.isDark,
       'bg-gray-50': themeStore.isLight
     }"
+    role="main"
   >
     <Header v-if="shouldShowHeader"/>
     <RouterView/>
+    <Footer v-if="shouldShowFooter"/>
     <Toast/>
     <ConfirmPopup/>
   </main>
@@ -22,7 +33,7 @@ import {useAccountStore} from "@/stores/account.js";
 import {useThemeStore} from "@/stores/theme.js";
 import {useRoute} from "vue-router";
 import Header from "@/components/Header.vue";
-
+import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
@@ -37,13 +48,42 @@ export default {
       if (!this.route || !this.route.name) {
         return true // Default to showing header if route is not ready
       }
-      const hiddenRoutes = ['sign-in', 'sign-up', 'forgot-password', 'reset-password']
-      return !hiddenRoutes.includes(this.route.name)
+      const hiddenRoutes = [
+        'sign-in', 
+        'sign-up', 
+        'forgot-password', 
+        'reset-password',
+        'backoffice-dashboard',
+        'backoffice-jobs',
+        'backoffice-applications',
+        'backoffice-news',
+        'backoffice-users'
+      ]
+      // Hide header for backoffice routes or auth routes
+      return !hiddenRoutes.includes(this.route.name) && !this.route.name?.startsWith('backoffice')
+    },
+    shouldShowFooter() {
+      if (!this.route || !this.route.name) {
+        return true
+      }
+      const hiddenRoutes = [
+        'sign-in',
+        'sign-up',
+        'forgot-password',
+        'reset-password',
+        'backoffice-dashboard',
+        'backoffice-jobs',
+        'backoffice-applications',
+        'backoffice-news',
+        'backoffice-users'
+      ]
+      return !hiddenRoutes.includes(this.route.name) && !this.route.name?.startsWith('backoffice')
     }
   },
 
   components: {
-    Header: Header,
+    Header,
+    Footer,
   },
 
   provide() {

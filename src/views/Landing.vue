@@ -73,7 +73,7 @@
       <div class="relative z-10 flex-1 flex flex-col justify-between px-6 md:px-12 lg:px-24 py-20">
         <div class="max-w-7xl mx-auto w-full">
           <div class="flex flex-col items-center justify-center text-center mb-12">
-            <div class="space-y-10 max-w-4xl">
+            <div class="space-y-8 md:space-y-12 max-w-4xl">
               <div 
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm backdrop-blur-sm transition-colors"
                 :class="themeStore.isDark 
@@ -87,34 +87,32 @@
                 <span>{{ $t('landing.hero.badge') }}</span>
               </div>
               
-              <h1 class="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                <span 
-                  class="bg-clip-text text-transparent transition-all"
-                  :class="themeStore.isDark 
-                    ? 'bg-gradient-to-r from-white via-blue-200 to-purple-200' 
-                    : 'bg-gradient-to-r from-gray-900 via-blue-700 to-purple-700'"
-                >
-                  {{ $t('landing.hero.title1') }}
-                </span>
-                <br/>
-                <span 
-                  class="bg-clip-text text-transparent transition-all"
-                  :class="themeStore.isDark 
-                    ? 'bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400' 
-                    : 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600'"
-                >
-                  {{ $t('landing.hero.title2') }}
-                </span>
-              </h1>
-              
-              <p 
-                class="text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light transition-colors"
-                :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'"
-              >
-                {{ $t('landing.hero.description') }}
-              </p>
-              
-              <div class="flex flex-col sm:flex-row gap-4 pt-6 justify-center">
+              <div class="space-y-2 md:space-y-3">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.2] max-w-3xl mx-auto uppercase tracking-[0.02em]">
+                  <span 
+                    class="bg-clip-text text-transparent transition-all block"
+                    :class="themeStore.isDark 
+                      ? 'bg-gradient-to-r from-white via-blue-200 to-purple-200' 
+                      : 'bg-gradient-to-r from-gray-900 via-blue-700 to-purple-700'"
+                  >
+                    {{ $t('landing.hero.tagline1') }}
+                  </span>
+                  <span 
+                    class="bg-clip-text text-transparent transition-all block"
+                    :class="themeStore.isDark 
+                      ? 'bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400' 
+                      : 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600'"
+                  >
+                    {{ $t('landing.hero.tagline2') }}
+                  </span>
+                </h1>
+                <div 
+                  class="w-20 h-0.5 rounded-full mx-auto opacity-70 transition-colors"
+                  :class="themeStore.isDark ? 'bg-blue-400' : 'bg-blue-600'"
+                  aria-hidden="true"
+                ></div>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center">
                 <RouterLink to="/jobs">
                   <Button 
                     :label="$t('landing.hero.cta1')" 
@@ -194,6 +192,178 @@
         </div>
       </div>
     </div>
+
+    <!-- TPS en quelques mots - Enhanced Section -->
+    <section
+      class="relative py-20 md:py-28 px-6 md:px-12 lg:px-24 overflow-hidden transition-colors duration-300"
+      :class="themeStore.isDark
+        ? 'bg-gradient-to-b from-purple-900/40 via-indigo-900/50 to-blue-900/40'
+        : 'bg-gradient-to-b from-gray-50 via-white to-gray-50'"
+    >
+      <!-- Decorative background elements -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          class="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl opacity-20"
+          :class="themeStore.isDark ? 'bg-blue-500' : 'bg-blue-300'"
+        ></div>
+        <div
+          class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl opacity-20"
+          :class="themeStore.isDark ? 'bg-purple-500' : 'bg-purple-300'"
+        ></div>
+      </div>
+
+      <div class="max-w-5xl mx-auto relative z-10">
+        <!-- Section Header with Icon -->
+        <div class="text-center mb-12">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 shadow-lg"
+            :class="themeStore.isDark
+              ? 'bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10'
+              : 'bg-gradient-to-br from-blue-100 to-purple-100 border border-gray-200'"
+          >
+            <i
+              class="pi pi-building text-2xl"
+              :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            ></i>
+          </div>
+          <h2
+            class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-clip-text text-transparent"
+            :class="themeStore.isDark
+              ? 'bg-gradient-to-r from-white via-blue-200 to-purple-200'
+              : 'bg-gradient-to-r from-gray-900 via-blue-700 to-purple-700'"
+          >
+            {{ $t('landing.hero.aboutTitle') }}
+          </h2>
+          <div
+            class="w-24 h-1 mx-auto rounded-full"
+            :class="themeStore.isDark
+              ? 'bg-gradient-to-r from-blue-500 to-purple-500'
+              : 'bg-gradient-to-r from-blue-400 to-purple-400'"
+          ></div>
+        </div>
+
+        <!-- Main Content Card -->
+        <div
+          class="relative p-8 md:p-12 rounded-3xl backdrop-blur-sm border transition-all"
+          :class="themeStore.isDark
+            ? 'bg-white/5 border-white/10 shadow-2xl shadow-blue-500/5'
+            : 'bg-white/80 border-gray-200/50 shadow-xl shadow-gray-200/50'"
+        >
+          <!-- Quote decoration -->
+          <div class="absolute top-6 left-6 opacity-10">
+            <i
+              class="pi pi-quote-left text-6xl"
+              :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            ></i>
+          </div>
+
+          <!-- Description Text -->
+          <p
+            class="text-base md:text-lg lg:text-xl leading-[1.9] font-light text-center relative z-10 mb-10"
+            :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'"
+          >
+            {{ $t('landing.hero.description') }}
+          </p>
+
+          <!-- Key Value Props -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t"
+            :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'"
+          >
+            <div class="text-center group">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3 transition-transform group-hover:scale-110"
+                :class="themeStore.isDark
+                  ? 'bg-blue-500/20'
+                  : 'bg-blue-100'"
+              >
+                <i
+                  class="pi pi-users text-xl"
+                  :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+                ></i>
+              </div>
+              <h3
+                class="font-semibold mb-1"
+                :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+              >
+                {{ $t('landing.aboutHighlights.talents') }}
+              </h3>
+              <p
+                class="text-sm"
+                :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
+              >
+                {{ $t('landing.aboutHighlights.talentsDesc') }}
+              </p>
+            </div>
+
+            <div class="text-center group">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3 transition-transform group-hover:scale-110"
+                :class="themeStore.isDark
+                  ? 'bg-purple-500/20'
+                  : 'bg-purple-100'"
+              >
+                <i
+                  class="pi pi-bolt text-xl"
+                  :class="themeStore.isDark ? 'text-purple-400' : 'text-purple-600'"
+                ></i>
+              </div>
+              <h3
+                class="font-semibold mb-1"
+                :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+              >
+                {{ $t('landing.aboutHighlights.reactivity') }}
+              </h3>
+              <p
+                class="text-sm"
+                :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
+              >
+                {{ $t('landing.aboutHighlights.reactivityDesc') }}
+              </p>
+            </div>
+
+            <div class="text-center group">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3 transition-transform group-hover:scale-110"
+                :class="themeStore.isDark
+                  ? 'bg-pink-500/20'
+                  : 'bg-pink-100'"
+              >
+                <i
+                  class="pi pi-check-circle text-xl"
+                  :class="themeStore.isDark ? 'text-pink-400' : 'text-pink-600'"
+                ></i>
+              </div>
+              <h3
+                class="font-semibold mb-1"
+                :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+              >
+                {{ $t('landing.aboutHighlights.expertise') }}
+              </h3>
+              <p
+                class="text-sm"
+                :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
+              >
+                {{ $t('landing.aboutHighlights.expertiseDesc') }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Link -->
+        <div class="text-center mt-8">
+          <RouterLink
+            to="/about"
+            class="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
+            :class="themeStore.isDark
+              ? 'text-blue-400 hover:text-blue-300'
+              : 'text-blue-600 hover:text-blue-700'"
+          >
+            {{ $t('landing.aboutHighlights.learnMore') }}
+            <i class="pi pi-arrow-right text-xs"></i>
+          </RouterLink>
+        </div>
+      </div>
+    </section>
 
     <!-- Services Section with 2-Column Layout -->
     <section 
@@ -419,13 +589,13 @@
               class="text-4xl font-bold mb-2 transition-colors"
               :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
             >
-              500+
+              70
             </div>
             <div 
               class="text-sm transition-colors"
               :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'"
             >
-              {{ $t('landing.stats.professionals') }}
+              {{ $t('landing.keyStats.employees') }}
             </div>
           </div>
           <div 
@@ -444,7 +614,7 @@
               class="text-sm transition-colors"
               :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'"
             >
-              {{ $t('landing.stats.projects') }}
+              {{ $t('landing.keyStats.projects') }}
             </div>
           </div>
           <div 
@@ -745,7 +915,7 @@
             >
               {{ $t('landing.cta.description') }}
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
               <RouterLink to="/jobs">
                 <Button 
                   :label="$t('landing.cta.button1')" 
@@ -754,6 +924,19 @@
                   icon="pi pi-briefcase"
                   iconPos="right"
                   class="min-w-[200px] bg-gradient-to-r from-blue-500 to-purple-600 border-0 hover:from-blue-600 hover:to-purple-700 transition-all"
+                />
+              </RouterLink>
+              <RouterLink to="/contact">
+                <Button 
+                  :label="$t('contact.title')" 
+                  severity="contrast" 
+                  size="large"
+                  icon="pi pi-envelope"
+                  iconPos="right"
+                  class="min-w-[200px] transition-all"
+                  :class="themeStore.isDark 
+                    ? 'border-white/30 text-white bg-white/10 hover:bg-white/20' 
+                    : 'border-gray-800/30 text-gray-900 bg-gray-100 hover:bg-gray-200'"
                 />
               </RouterLink>
               <RouterLink to="/services">
@@ -773,135 +956,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Footer -->
-    <footer 
-      class="py-12 px-6 md:px-12 lg:px-24 transition-colors duration-300"
-      :class="themeStore.isDark 
-        ? 'border-t border-white/10 bg-gradient-to-b from-indigo-900/60 to-blue-900/70' 
-        : 'border-t border-gray-200 bg-gradient-to-b from-gray-50 to-white'"
-    >
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <RouterLink to="/" class="flex items-center group">
-              <img 
-                :src="themeStore.isDark ? '/Logo TPS.png' : '/Light Logo TPS.png'"
-                alt="TPS Logo" 
-                class="h-48 w-auto group-hover:scale-105 transition-transform duration-200"
-              />
-            </RouterLink>
-          </div>
-          
-          <div>
-            <h4 
-              class="font-semibold mb-4 transition-colors"
-              :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
-            >{{ $t('landing.footer.navigation') }}</h4>
-            <ul 
-              class="space-y-2 text-sm transition-colors"
-              :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
-            >
-              <li><RouterLink 
-                to="/jobs" 
-                class="transition-colors"
-                :class="themeStore.isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'"
-              >{{ $t('common.jobs') }}</RouterLink></li>
-              <li><RouterLink 
-                to="/services" 
-                class="transition-colors"
-                :class="themeStore.isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'"
-              >{{ $t('common.services') }}</RouterLink></li>
-              <li><RouterLink 
-                to="/news" 
-                class="transition-colors"
-                :class="themeStore.isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'"
-              >{{ $t('common.news') }}</RouterLink></li>
-              <li><RouterLink 
-                to="/about" 
-                class="transition-colors"
-                :class="themeStore.isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'"
-              >{{ $t('common.about') }}</RouterLink></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 
-              class="font-semibold mb-4 transition-colors"
-              :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
-            >{{ $t('landing.footer.sectors') }}</h4>
-            <ul 
-              class="space-y-2 text-sm transition-colors"
-              :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
-            >
-              <li>{{ $t('landing.footer.sectorsList.telecom') }}</li>
-              <li>{{ $t('landing.footer.sectorsList.btp') }}</li>
-              <li>{{ $t('landing.footer.sectorsList.projectManagement') }}</li>
-              <li>{{ $t('landing.footer.sectorsList.engineering') }}</li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 
-              class="font-semibold mb-4 transition-colors"
-              :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
-            >{{ $t('landing.footer.contact') }}</h4>
-            <ul 
-              class="space-y-2 text-sm transition-colors"
-              :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
-            >
-              <li class="flex items-center gap-2">
-                <i 
-                  class="pi pi-envelope transition-colors"
-                  :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
-                ></i>
-                <span>contact@tps-platform.com</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i 
-                  class="pi pi-phone transition-colors"
-                  :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
-                ></i>
-                <span>+33 1 XX XX XX XX</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i 
-                  class="pi pi-map-marker transition-colors"
-                  :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"
-                ></i>
-                <span>France</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div 
-          class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 transition-colors"
-          :class="themeStore.isDark ? 'border-t border-white/10' : 'border-t border-gray-200'"
-        >
-          <p 
-            class="text-sm transition-colors"
-            :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'"
-          >{{ $t('landing.footer.copyright') }}</p>
-          <div class="flex gap-4">
-            <a 
-              href="#" 
-              class="transition-colors hover:scale-110 inline-block"
-              :class="themeStore.isDark ? 'text-white/60 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'"
-            >
-              <i class="pi pi-linkedin text-xl"></i>
-            </a>
-            <a 
-              href="#" 
-              class="transition-colors hover:scale-110 inline-block"
-              :class="themeStore.isDark ? 'text-white/60 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'"
-            >
-              <i class="pi pi-twitter text-xl"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 

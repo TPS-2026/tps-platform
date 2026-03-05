@@ -101,7 +101,11 @@ Créer un fichier `.env` pour configurer les variables d'environnement :
 
 ```env
 VITE_API_URL=http://localhost:3000/api
+# Optionnel : clé publique Cloudflare Turnstile pour protéger les formulaires (Contact, Candidature)
+# VITE_TURNSTILE_SITE_KEY=votre_site_key
 ```
+
+Voir [docs/CAPTCHA.md](docs/CAPTCHA.md) pour la configuration du CAPTCHA et la vérification côté backend.
 
 ## Notes
 

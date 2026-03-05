@@ -52,6 +52,8 @@
               <Select 
                 v-model="filters.sector" 
                 :options="sectorOptions" 
+                optionLabel="label"
+                optionValue="value"
                 placeholder="Tous les secteurs"
                 class="w-full custom-select"
               />
@@ -75,6 +77,8 @@
               <Select 
                 v-model="filters.contractType" 
                 :options="contractTypeOptions" 
+                optionLabel="label"
+                optionValue="value"
                 placeholder="Tous les types"
                 class="w-full custom-select"
               />

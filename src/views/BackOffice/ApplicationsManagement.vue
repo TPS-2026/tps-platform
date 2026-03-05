@@ -454,16 +454,13 @@
               severity="secondary"
               outlined
               size="small"
-              disabled
-              v-tooltip.top="'Fonctionnalité à venir'"
+              @click="downloadCV(selectedApplication)"
+              v-tooltip.top="'Télécharger le CV'"
             />
           </div>
         </div>
       </div>
     </Dialog>
-
-    <!-- Delete Confirmation -->
-    <ConfirmDialog />
   </BackOfficeLayout>
 </template>
 
@@ -606,9 +603,6 @@ export default {
     const confirmDelete = (application) => {
       confirm.require({
         message: `Êtes-vous sûr de vouloir supprimer la candidature de ${application.fullName} ?`,
-        header: 'Confirmer la suppression',
-        icon: 'pi pi-exclamation-triangle',
-        acceptClass: 'p-button-danger',
         accept: async () => {
           try {
             await apiClient.delete(`/applications/${application.id}`)
@@ -715,6 +709,46 @@ export default {
       return (bytes / (1024 * 1024)).toFixed(2) + ' MB'
     }
 
+    const downloadCV = async (application) => {
+      if (!application.cvFileName) {
+        toast.add({
+          severity: 'warn',
+          summary: 'Aucun CV',
+          detail: 'Aucun CV disponible pour cette candidature',
+          life: 3000
+        })
+        return
+      }
+
+      try {
+        // Check if cvFileName is a URL (presigned or public)
+        // Supports AWS S3, Railway Storage, and other S3-compatible services
+        const isUrl = application.cvFileName.startsWith('http://') || 
+                     application.cvFileName.startsWith('https://')
+        
+        if (isUrl) {
+          // Open URL directly (presigned URLs are already valid)
+          window.open(application.cvFileName, '_blank')
+        } else {
+          // Legacy: if it's just a filename, try to construct URL
+          // This shouldn't happen with new uploads, but handle gracefully
+          toast.add({
+            severity: 'warn',
+            summary: 'CV non disponible',
+            detail: 'Le CV n\'est pas disponible en ligne',
+            life: 3000
+          })
+        }
+      } catch (error) {
+        console.error('Error downloading CV:', error)
+        toast.add({
+          severity: 'error',
+          summary: 'Erreur',
+          detail: 'Impossible de télécharger le CV',
+          life: 3000
+        })
+      }
+    }
 
     onMounted(() => {
       fetchApplications(1)
@@ -735,6 +769,7 @@ export default {
       updateApplicationStatus,
       viewApplication,
       confirmDelete,
+      downloadCV,
       getStatusLabel,
       getStatusSeverity,
       getStatusColor,

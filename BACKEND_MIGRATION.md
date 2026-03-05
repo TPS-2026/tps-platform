@@ -107,3 +107,4 @@ Le token JWT est obtenu via `POST /api/auth/login` et doit être stocké dans le
 2. **HTTPS** : Le backend Railway utilise HTTPS, donc toutes les requêtes doivent être en HTTPS en production
 3. **Variables d'environnement** : Les variables d'environnement Vite doivent commencer par `VITE_` pour être accessibles dans le code client
 
+

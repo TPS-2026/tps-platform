@@ -1,25 +1,29 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import {useAccountStore} from "@/stores/account.js";
+import {useAccountStore} from "@/stores/account.js"
 
+// Only import Landing eagerly (first page users see)
 import Landing from '../views/Landing.vue'
-import HomeView from '../views/HomeView.vue'
-import JobBoard from '../views/Jobs/JobBoard.vue'
-import JobDetails from '../views/Jobs/JobDetails.vue'
-import ApplicationForm from '../views/Jobs/ApplicationForm.vue'
-import News from '../views/News/News.vue'
-import NewsArticle from '../views/News/NewsArticle.vue'
-import About from '../views/About.vue'
-import Services from '../views/Services.vue'
-import SignIn from '../views/Connection/SignIn.vue'
-import SignUp from '../views/Connection/SignUp.vue'
-import ForgotPassword from '../views/Connection/ForgotPassword.vue'
-import ResetPassword from '../views/Connection/ResetPassword.vue'
-import BackOfficeDashboard from '../views/BackOffice/Dashboard.vue'
-import JobsManagement from '../views/BackOffice/JobsManagement.vue'
-import NewsManagement from '../views/BackOffice/NewsManagement.vue'
-import ApplicationsManagement from '../views/BackOffice/ApplicationsManagement.vue'
-import UsersManagement from '../views/BackOffice/UsersManagement.vue'
-import Reviews from '../views/Reviews.vue'
+
+// Lazy load all other views for code splitting
+const JobBoard = () => import('../views/Jobs/JobBoard.vue')
+const JobDetails = () => import('../views/Jobs/JobDetails.vue')
+const ApplicationForm = () => import('../views/Jobs/ApplicationForm.vue')
+const News = () => import('../views/News/News.vue')
+const NewsArticle = () => import('../views/News/NewsArticle.vue')
+const About = () => import('../views/About.vue')
+const Services = () => import('../views/Services.vue')
+const SignIn = () => import('../views/Connection/SignIn.vue')
+const SignUp = () => import('../views/Connection/SignUp.vue')
+const ForgotPassword = () => import('../views/Connection/ForgotPassword.vue')
+const ResetPassword = () => import('../views/Connection/ResetPassword.vue')
+
+// BackOffice - lazy load (admin only)
+const BackOfficeDashboard = () => import('../views/BackOffice/Dashboard.vue')
+const BackOfficeLayout = () => import('../views/BackOffice/BackOfficeLayout.vue')
+const JobsManagement = () => import('../views/BackOffice/JobsManagement.vue')
+const NewsManagement = () => import('../views/BackOffice/NewsManagement.vue')
+const ApplicationsManagement = () => import('../views/BackOffice/ApplicationsManagement.vue')
+const UsersManagement = () => import('../views/BackOffice/UsersManagement.vue')
 
 export const routes = [
     {
@@ -92,10 +96,59 @@ export const routes = [
         name: 'about',
         component: About,
         icon: 'pi pi-info-circle',
-        label: 'À propos',
+        label: 'Qui sommes-nous ?',
         menuGroup: 'main',
         needAuth: false,
         displayInMenu: true
+    },
+    {
+        path: '/contact',
+        name: 'contact',
+        component: () => import('../views/Contact.vue'),
+        needAuth: false,
+        displayInMenu: false
+    },
+    {
+        path: '/commitments',
+        name: 'commitments',
+        component: () => import('../views/Commitments.vue'),
+        needAuth: false,
+        displayInMenu: false
+    },
+    {
+        path: '/legal',
+        name: 'legal',
+        component: () => import('../views/LegalNotice.vue'),
+        needAuth: false,
+        displayInMenu: false
+    },
+    {
+        path: '/clients-partners',
+        name: 'clients-partners',
+        component: () => import('../views/ClientsPartners.vue'),
+        needAuth: false,
+        displayInMenu: false
+    },
+    {
+        path: '/glossary',
+        name: 'glossary',
+        component: () => import('../views/Glossary.vue'),
+        needAuth: false,
+        displayInMenu: false
+    },
+    {
+        path: '/faq',
+        name: 'faq',
+        component: () => import('../views/Faq.vue'),
+        needAuth: false,
+        displayInMenu: false
+    },
+    {
+        path: '/accessibility',
+        name: 'accessibility',
+        component: () => import('../views/Accessibility.vue'),
+        needAuth: false,
+        displayInMenu: false
     },
     {
         path: '/sign-in',
@@ -177,7 +230,7 @@ router.beforeEach(async (to, from) => {
     }
 
     const accountStore = useAccountStore()
-    
+
     // Check if route requires authentication
     if (currentRoute && currentRoute.needAuth) {
         // Check if token exists
@@ -214,7 +267,7 @@ router.beforeEach(async (to, from) => {
             // For other errors, still allow access but log the error
             console.error('Error verifying authentication:', err)
         }
-    } 
+    }
     // Redirect authenticated users away from login/signup pages
     else if (currentRoute.name === 'sign-in' || currentRoute.name === 'sign-up') {
         if (accountStore.accessToken) {
@@ -241,4 +294,3 @@ router.beforeEach(async (to, from) => {
 })
 
 export default router
-

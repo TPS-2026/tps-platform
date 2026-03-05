@@ -54,7 +54,10 @@
           </RouterLink>
         </nav>
 
-        <div class="absolute bottom-0 left-0 right-0 p-4 border-t" :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'">
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t space-y-2" :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'">
+          <div v-if="accountStore.userEmail" class="px-4 py-2 text-xs" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-500'">
+            {{ accountStore.userEmail }}
+          </div>
           <Button 
             label="Retour au site" 
             icon="pi pi-arrow-left" 
@@ -63,6 +66,15 @@
             class="w-full"
             :class="themeStore.isDark ? 'border-white/30 text-white hover:bg-white/10' : 'border-gray-300 text-gray-700 hover:bg-gray-100'"
             @click="$router.push({ name: 'home' })"
+          />
+          <Button 
+            label="Déconnexion" 
+            icon="pi pi-sign-out" 
+            severity="danger" 
+            outlined
+            class="w-full"
+            :class="themeStore.isDark ? 'border-red-400/30 text-red-400 hover:bg-red-400/10' : 'border-red-300 text-red-600 hover:bg-red-50'"
+            @click="handleLogout"
           />
         </div>
       </aside>
@@ -88,41 +100,18 @@
 
         <!-- Authenticated content -->
         <template v-else>
-          <!-- Top bar -->
-          <div 
-            class="sticky top-0 z-30 p-4 border-b backdrop-blur-sm"
-            :class="themeStore.isDark ? 'bg-white/5 border-white/10' : 'bg-white/80 border-gray-200'"
-          >
-            <div class="flex items-center justify-between">
-              <Button 
-                icon="pi pi-bars" 
-                severity="secondary" 
-                text
-                rounded
-                class="md:hidden"
-                :class="themeStore.isDark ? 'text-white' : 'text-gray-700'"
-                @click="mobileMenuOpen = !mobileMenuOpen"
-              />
-              <h1 class="text-xl font-semibold md:hidden" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
-                {{ currentPageTitle }}
-              </h1>
-              <div class="flex items-center gap-4">
-                <span v-if="accountStore.userEmail" class="text-sm" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">
-                  {{ accountStore.userEmail }}
-                </span>
-                <Button 
-                  icon="pi pi-sign-out" 
-                  severity="secondary" 
-                  text
-                  rounded
-                  :class="themeStore.isDark ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'"
-                  @click="handleLogout"
-                  v-tooltip.top="'Déconnexion'"
-                />
-              </div>
-            </div>
+          <!-- Mobile menu button -->
+          <div class="md:hidden p-4">
+            <Button 
+              icon="pi pi-bars" 
+              severity="secondary" 
+              text
+              rounded
+              :class="themeStore.isDark ? 'text-white' : 'text-gray-700'"
+              @click="mobileMenuOpen = !mobileMenuOpen"
+            />
           </div>
-
+          
           <!-- Page content -->
           <slot />
         </template>

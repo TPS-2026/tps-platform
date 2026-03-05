@@ -68,15 +68,18 @@
           <!-- Theme Toggle -->
           <button
             @click="toggleTheme"
-            class="hidden md:flex items-center justify-center w-10 h-10 rounded-lg border transition-all"
+            type="button"
+            class="hidden md:flex items-center justify-center w-10 h-10 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             :class="themeStore.isDark 
-              ? 'bg-white/5 border-white/10 hover:bg-white/10 text-white/70 hover:text-white' 
-              : 'bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-700 hover:text-gray-900'"
+              ? 'bg-white/5 border-white/10 hover:bg-white/10 text-white/70 hover:text-white focus:ring-offset-blue-900' 
+              : 'bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-700 hover:text-gray-900 focus:ring-offset-gray-50'"
             :title="themeStore.isDark ? $t('common.lightMode') : $t('common.darkMode')"
+            :aria-label="themeStore.isDark ? $t('common.lightMode') : $t('common.darkMode')"
           >
             <i 
               :class="themeStore.isDark ? 'pi pi-sun' : 'pi pi-moon'" 
               class="text-lg transition-all"
+              aria-hidden="true"
             ></i>
           </button>
           
@@ -88,58 +91,37 @@
               : 'bg-gray-100 border-gray-200'"
           >
             <button
+              type="button"
               @click="changeLanguage('fr')"
               :class="[
-                'px-2 py-1 rounded text-sm font-semibold transition-all',
+                'px-2 py-1 rounded text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
                 selectedLanguage === 'fr' 
                   ? 'bg-blue-500 text-white shadow-lg' 
                   : (themeStore.isDark ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200')
               ]"
               :title="$t('common.language') + ' - Français'"
+              aria-label="Français"
+              :aria-pressed="selectedLanguage === 'fr'"
             >
               🇫🇷
             </button>
             <button
+              type="button"
               @click="changeLanguage('en')"
               :class="[
-                'px-2 py-1 rounded text-sm font-semibold transition-all',
+                'px-2 py-1 rounded text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
                 selectedLanguage === 'en' 
                   ? 'bg-blue-500 text-white shadow-lg' 
                   : (themeStore.isDark ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200')
               ]"
               :title="$t('common.language') + ' - English'"
+              aria-label="English"
+              :aria-pressed="selectedLanguage === 'en'"
             >
               🇬🇧
             </button>
           </div>
           
-          <!-- User Menu (if logged in) -->
-          <div v-if="accountStore.accessToken" class="hidden md:flex items-center gap-3 relative user-menu-container">
-            <Avatar 
-              :label="accountStore.userEmail?.charAt(0).toUpperCase()" 
-              shape="circle" 
-              class="bg-gradient-to-br from-blue-500 to-purple-600 cursor-pointer hover:scale-110 transition-transform"
-              @click="showUserMenu = !showUserMenu"
-            />
-            <div 
-              v-if="showUserMenu" 
-              class="absolute top-full right-0 mt-2 w-48 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-xl p-2 z-50"
-              @click.stop
-            >
-              <div class="px-3 py-2 mb-2 border-b border-white/10">
-                <div class="text-sm font-semibold text-white">{{ accountStore.userEmail }}</div>
-              </div>
-              <Button 
-                :label="$t('common.logout')" 
-                severity="secondary" 
-                text 
-                icon="pi pi-sign-out"
-                class="w-full justify-start"
-                @click="logout"
-              />
-            </div>
-          </div>
-
           <!-- Mobile Menu Button -->
           <Button 
             v-if="isMobile"
@@ -185,28 +167,6 @@
             <span>{{ item.label }}</span>
           </RouterLink>
           
-          <div 
-            v-if="accountStore.accessToken" 
-            class="pt-4 border-t"
-            :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'"
-          >
-            <div class="px-4 py-2 mb-2">
-              <div 
-                class="text-sm font-semibold"
-                :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
-              >
-                {{ accountStore.userEmail }}
-              </div>
-            </div>
-            <Button 
-              :label="$t('common.logout')" 
-              severity="secondary" 
-              text 
-              icon="pi pi-sign-out"
-              class="w-full justify-start"
-              @click="logout"
-            />
-          </div>
           <div 
             class="pt-4 border-t space-y-3"
             :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'"
@@ -286,7 +246,6 @@ export default {
     const i18nStore = useI18nStore()
     const mobileMenuOpen = ref(false)
     const scrolled = ref(false)
-    const showUserMenu = ref(false)
     
     // Get initial locale from store (ensure it's a string)
     const initialLocale = i18nStore.currentLocale || 'fr'
@@ -380,31 +339,16 @@ export default {
       themeStore.toggleTheme()
     }
 
-    const logout = () => {
-      accountStore.logout()
-      mobileMenuOpen.value = false
-      showUserMenu.value = false
-      router.push({ name: 'home' })
-    }
-
     const handleScroll = () => {
       scrolled.value = window.scrollY > 20
     }
 
-    const handleClickOutside = (event) => {
-      if (showUserMenu.value && !event.target.closest('.user-menu-container')) {
-        showUserMenu.value = false
-      }
-    }
-
     onMounted(() => {
       window.addEventListener('scroll', handleScroll)
-      document.addEventListener('click', handleClickOutside)
     })
 
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll)
-      document.removeEventListener('click', handleClickOutside)
     })
 
     return {
@@ -412,11 +356,9 @@ export default {
       themeStore,
       mobileMenuOpen,
       scrolled,
-      showUserMenu,
       currentRoute,
       menuItems,
       isActive,
-      logout,
       toggleTheme,
       isMobile,
       selectedLanguage,
