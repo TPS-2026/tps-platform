@@ -101,9 +101,6 @@
               />
             </div>
             <div>
-              <p class="block text-sm font-medium mb-2 transition-colors" :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'">
-                {{ $t('captcha.label') }}
-              </p>
               <TurnstileWidget
                 ref="turnstileRef"
                 :theme="themeStore.isDark ? 'dark' : 'light'"

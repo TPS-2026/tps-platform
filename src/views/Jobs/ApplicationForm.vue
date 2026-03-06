@@ -213,10 +213,6 @@
             </div>
 
             <div>
-              <p
-                class="block text-sm font-medium mb-2"
-                :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'"
-              >Vérification anti-robot</p>
               <TurnstileWidget
                 ref="turnstileRef"
                 :theme="themeStore.isDark ? 'dark' : 'light'"
