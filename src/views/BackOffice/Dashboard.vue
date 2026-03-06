@@ -290,20 +290,22 @@ export default {
         // Fetch all data
         const [jobsRes, applicationsRes, articlesRes] = await Promise.all([
           apiClient.get('/jobs'),
-          apiClient.get('/applications'),
+          apiClient.get('/applications', { params: { page: 1, pageSize: 1000 } }),
           apiClient.get('/news', { params: { page: 1, pageSize: 100, admin: 'true' } })
         ])
 
         jobs.value = jobsRes.data || []
-        applications.value = applicationsRes.data || []
+        applications.value = applicationsRes.data?.items || applicationsRes.data || []
         articles.value = articlesRes.data?.items || articlesRes.data || []
 
         // Calculate stats
+        const totalApps = applicationsRes.data?.total || applications.value.length
+        const totalNews = articlesRes.data?.total || articles.value.length
         stats.value = {
           totalJobs: jobs.value.length,
-          totalApplications: applications.value.length,
+          totalApplications: totalApps,
           pendingApplications: applications.value.filter(app => app.status === 'pending').length,
-          totalArticles: articles.value.filter(article => article.published).length
+          totalArticles: totalNews
         }
       } catch (error) {
         console.error('Error fetching stats:', error)
