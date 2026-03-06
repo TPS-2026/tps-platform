@@ -4,10 +4,10 @@
       <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-8">
           <div>
-            <h1 class="text-3xl md:text-4xl font-bold mb-2">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
               Gestion des candidatures
             </h1>
-            <p class="text-white/70 dark:text-gray-400">Consultez et gérez toutes les candidatures reçues</p>
+            <p :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">Consultez et gérez toutes les candidatures reçues</p>
           </div>
         </div>
 
@@ -60,11 +60,14 @@
           <p class="mt-4 text-white/70 dark:text-gray-400">Chargement...</p>
         </div>
 
-        <div v-else-if="applications.length === 0" class="text-center py-20 bg-white/5 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-white/10 dark:border-gray-700">
+        <div v-else-if="applications.length === 0" class="text-center py-20 backdrop-blur-sm rounded-2xl"
+             :class="themeStore.isDark
+               ? 'bg-white/5 border border-white/10'
+               : 'bg-white border border-gray-200'">
           <div class="w-24 h-24 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="pi pi-inbox text-4xl text-blue-400/50"></i>
+            <i class="pi pi-inbox text-4xl" :class="themeStore.isDark ? 'text-blue-400/50' : 'text-blue-500'"></i>
           </div>
-          <p class="text-xl text-white/70 dark:text-gray-400 mb-4">Aucune candidature trouvée</p>
+          <p class="text-xl mb-4" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">Aucune candidature trouvée</p>
         </div>
 
         <div v-else>
@@ -523,9 +526,9 @@ export default {
         
         const response = await apiClient.get('/applications', { params })
         
-        if (response.data.items) {
-          // Paginated response
-          applications.value = response.data.items
+        if (response.data && response.data.hasOwnProperty('items')) {
+          // Paginated response (items can be null when empty in Go)
+          applications.value = response.data.items || []
           pagination.value = {
             page: response.data.page || page,
             pageSize: response.data.pageSize || pagination.value.pageSize,
