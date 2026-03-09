@@ -102,106 +102,144 @@
       :modal="true"
       class="p-fluid"
     >
-      <form @submit.prevent="saveJob" class="space-y-6">
+      <form @submit.prevent="saveJob" class="space-y-1">
+        <!-- Section: Langue -->
+        <div class="flex items-center gap-2 pt-2 pb-3">
+          <i class="pi pi-globe text-blue-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Langue</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
         <div>
-          <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.language') }} *</label>
-          <Select 
-            v-model="currentLanguage" 
-            :options="languageOptions" 
+          <Select
+            v-model="currentLanguage"
+            :options="languageOptions"
             optionLabel="label"
             optionValue="value"
             class="w-full"
             @change="loadLanguageData"
           />
         </div>
-        
-        <div>
-          <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.title') }} *</label>
-          <InputText v-model="jobForm.translations[currentLanguage].title" required class="w-full" />
+
+        <!-- Section: Informations principales -->
+        <div class="flex items-center gap-2 pt-6 pb-3">
+          <i class="pi pi-info-circle text-blue-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Informations principales</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+          <div>
+            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.title') }} <span class="text-red-400">*</span></label>
+            <InputText v-model="jobForm.translations[currentLanguage].title" required class="w-full" placeholder="Ex: Technicien Fibre Optique FTTH" />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.sector') }} <span class="text-red-400">*</span></label>
+              <Select
+                v-model="jobForm.sector"
+                :options="sectorOptions"
+                optionLabel="label"
+                optionValue="value"
+                required
+                placeholder="Choisir un secteur"
+                class="w-full"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.location') }} <span class="text-red-400">*</span></label>
+              <InputText v-model="jobForm.location" required class="w-full" placeholder="Ex: Paris, Île-de-France" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.contractType') }} <span class="text-red-400">*</span></label>
+              <Select
+                v-model="jobForm.contractType"
+                :options="contractTypeOptions"
+                optionLabel="label"
+                optionValue="value"
+                required
+                placeholder="Choisir un type"
+                class="w-full"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.tjm') }}</label>
+              <InputNumber v-model="jobForm.tjm" :min="0" class="w-full" placeholder="0" />
+            </div>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Section: Description -->
+        <div class="flex items-center gap-2 pt-6 pb-3">
+          <i class="pi pi-file-edit text-purple-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Description du poste</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
           <div>
-            <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.sector') }} *</label>
-            <Select 
-              v-model="jobForm.sector" 
-              :options="sectorOptions"
-              optionLabel="label"
-              optionValue="value"
-              required
+            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.description') }} <span class="text-red-400">*</span></label>
+            <Textarea v-model="jobForm.translations[currentLanguage].description" rows="5" required class="w-full" placeholder="Décrivez le poste en détail..." />
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.requirements') }}</label>
+            <Textarea
+              v-model="requirementsText"
+              rows="3"
+              :placeholder="$t('backoffice.jobs.form.requirementsPlaceholder')"
               class="w-full"
             />
+            <small class="text-white/40 text-xs mt-1 block">Une ligne par critère</small>
           </div>
           <div>
-            <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.location') }} *</label>
-            <InputText v-model="jobForm.location" required class="w-full" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.contractType') }} *</label>
-            <Select 
-              v-model="jobForm.contractType" 
-              :options="contractTypeOptions"
-              optionLabel="label"
-              optionValue="value"
-              required
+            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.responsibilities') }}</label>
+            <Textarea
+              v-model="responsibilitiesText"
+              rows="3"
+              :placeholder="$t('backoffice.jobs.form.responsibilitiesPlaceholder')"
               class="w-full"
             />
+            <small class="text-white/40 text-xs mt-1 block">Une ligne par mission</small>
           </div>
           <div>
-            <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.tjm') }}</label>
-            <InputNumber v-model="jobForm.tjm" :min="0" class="w-full" />
+            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.benefits') }}</label>
+            <Textarea
+              v-model="benefitsText"
+              rows="3"
+              :placeholder="$t('backoffice.jobs.form.benefitsPlaceholder')"
+              class="w-full"
+            />
+            <small class="text-white/40 text-xs mt-1 block">Une ligne par avantage</small>
           </div>
         </div>
 
-        <div>
-          <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.description') }} *</label>
-          <Textarea v-model="jobForm.translations[currentLanguage].description" rows="5" required class="w-full" />
+        <!-- Section: Liens externes -->
+        <div class="flex items-center gap-2 pt-6 pb-3">
+          <i class="pi pi-link text-cyan-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Liens externes</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+          <label class="block text-xs font-medium mb-1.5 text-white/60">
+            <i class="pi pi-linkedin text-[#0A66C2] mr-1"></i>
+            Lien LinkedIn de l'offre
+          </label>
+          <InputText v-model="jobForm.linkedinUrl" placeholder="https://www.linkedin.com/jobs/view/..." class="w-full" />
         </div>
 
-        <div>
-          <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.requirements') }}</label>
-          <Textarea 
-            v-model="requirementsText" 
-            rows="4" 
-            :placeholder="$t('backoffice.jobs.form.requirementsPlaceholder')"
-            class="w-full" 
-          />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.responsibilities') }}</label>
-          <Textarea 
-            v-model="responsibilitiesText" 
-            rows="4" 
-            :placeholder="$t('backoffice.jobs.form.responsibilitiesPlaceholder')"
-            class="w-full" 
-          />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-2">{{ $t('backoffice.jobs.form.benefits') }}</label>
-          <Textarea 
-            v-model="benefitsText" 
-            rows="4" 
-            :placeholder="$t('backoffice.jobs.form.benefitsPlaceholder')"
-            class="w-full" 
-          />
-        </div>
-
-        <div class="flex justify-end gap-3 pt-4">
-          <Button 
-            :label="$t('common.cancel')" 
-            severity="secondary" 
+        <!-- Actions -->
+        <div class="flex justify-end gap-3 pt-6 border-t border-white/10 mt-2">
+          <Button
+            :label="$t('common.cancel')"
+            severity="secondary"
             outlined
+            icon="pi pi-times"
             @click="closeDialog"
           />
-          <Button 
-            :label="editingJob ? $t('backoffice.jobs.form.update') : $t('backoffice.jobs.form.create')" 
+          <Button
+            :label="editingJob ? $t('backoffice.jobs.form.update') : $t('backoffice.jobs.form.create')"
             type="submit"
             severity="contrast"
+            :icon="editingJob ? 'pi pi-check' : 'pi pi-plus'"
             class="bg-gradient-to-r from-blue-500 to-purple-600 border-0"
           />
         </div>
@@ -265,6 +303,7 @@ export default {
       location: '',
       contractType: null,
       tjm: null,
+      linkedinUrl: '',
       translations: initTranslations()
     })
 
@@ -350,6 +389,7 @@ export default {
           location: job.location || '',
           contractType: job.contractType?.value || job.contractType || null,
           tjm: job.tjm || null,
+          linkedinUrl: job.linkedinUrl || '',
           translations: {
             fr: {
               title: job.title || '',
@@ -369,6 +409,7 @@ export default {
           location: '',
           contractType: null,
           tjm: null,
+          linkedinUrl: '',
           translations: initTranslations()
         }
         currentLanguage.value = 'fr'
@@ -460,7 +501,8 @@ export default {
           description: langData.description?.trim() || '',
           requirements: requirements,
           responsibilities: responsibilities,
-          benefits: benefits
+          benefits: benefits,
+          linkedinUrl: jobForm.value.linkedinUrl?.trim() || ''
         }
         
         console.log('Saving job data:', JSON.stringify(jobData, null, 2))

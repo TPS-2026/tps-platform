@@ -443,8 +443,8 @@
                 <i class="pi pi-file-pdf text-lg" :class="themeStore.isDark ? 'text-blue-400' : 'text-blue-600'"></i>
               </div>
               <div>
-                <p class="text-sm font-medium" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
-                  {{ selectedApplication.cvFileName }}
+                <p class="text-sm font-medium truncate max-w-[300px]" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
+                  {{ getCVDisplayName(selectedApplication.cvFileName) }}
                 </p>
                 <p v-if="selectedApplication.cvFileSize" class="text-xs" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-500'">
                   {{ formatFileSize(selectedApplication.cvFileSize) }}
@@ -712,6 +712,23 @@ export default {
       return (bytes / (1024 * 1024)).toFixed(2) + ' MB'
     }
 
+    const getCVDisplayName = (cvFileName) => {
+      if (!cvFileName) return 'CV'
+      // If it's a signed URL, extract the filename from the path
+      if (cvFileName.startsWith('http://') || cvFileName.startsWith('https://')) {
+        try {
+          const url = new URL(cvFileName)
+          const path = url.pathname
+          const filename = path.split('/').pop()
+          // Decode URI and remove timestamp suffixes if present
+          return decodeURIComponent(filename) || 'CV'
+        } catch {
+          return 'CV'
+        }
+      }
+      return cvFileName
+    }
+
     const downloadCV = async (application) => {
       if (!application.cvFileName) {
         toast.add({
@@ -773,6 +790,7 @@ export default {
       viewApplication,
       confirmDelete,
       downloadCV,
+      getCVDisplayName,
       getStatusLabel,
       getStatusSeverity,
       getStatusColor,

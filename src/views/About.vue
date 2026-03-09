@@ -282,6 +282,48 @@
           </div>
         </section>
 
+        <!-- Nos Engagements -->
+        <section
+          class="p-8 backdrop-blur-sm rounded-2xl transition-colors"
+          :class="themeStore.isDark
+            ? 'bg-white/5 border border-white/10'
+            : 'bg-white/90 border border-gray-200/50 shadow-lg'"
+        >
+          <h2
+            class="text-2xl font-semibold mb-6 flex items-center gap-3 transition-colors"
+            :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+          >
+            <i class="pi pi-heart text-blue-400 text-2xl" aria-hidden="true"></i>
+            {{ $t('commitments.title') }}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              v-for="item in commitmentItems"
+              :key="item.titleKey"
+              class="p-6 rounded-xl transition-colors"
+              :class="themeStore.isDark
+                ? 'bg-white/5 border border-white/10'
+                : 'bg-white border border-gray-200/50 shadow-md'"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <i :class="item.icon" class="text-lg" :style="{ color: item.color }"></i>
+                <h3
+                  class="font-semibold transition-colors"
+                  :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+                >
+                  {{ $t(item.titleKey) }}
+                </h3>
+              </div>
+              <p
+                class="text-sm leading-relaxed transition-colors"
+                :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'"
+              >
+                {{ $t(item.contentKey) }}
+              </p>
+            </div>
+          </div>
+        </section>
+
         <!-- CTA -->
         <section 
           class="p-8 backdrop-blur-sm rounded-2xl transition-colors text-center"
@@ -366,7 +408,14 @@ export default {
       }
     ]
 
-    return { themeStore, dnaItems, certifications }
+    const commitmentItems = [
+      { titleKey: 'commitments.environment.title', contentKey: 'commitments.environment.content', icon: 'pi pi-globe', color: '#22c55e' },
+      { titleKey: 'commitments.hse.title', contentKey: 'commitments.hse.content', icon: 'pi pi-shield', color: '#f59e0b' },
+      { titleKey: 'commitments.equality.title', contentKey: 'commitments.equality.content', icon: 'pi pi-users', color: '#8b5cf6' },
+      { titleKey: 'commitments.rse.title', contentKey: 'commitments.rse.content', icon: 'pi pi-heart', color: '#ef4444' }
+    ]
+
+    return { themeStore, dnaItems, certifications, commitmentItems }
   }
 }
 </script>

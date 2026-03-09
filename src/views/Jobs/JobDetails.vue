@@ -82,18 +82,27 @@
             
             <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
               <RouterLink :to="{ name: 'job-apply', params: { id: job.id } }" class="flex-1">
-                <Button 
-                  label="Postuler maintenant" 
-                  severity="contrast" 
+                <Button
+                  label="Postuler maintenant"
+                  severity="contrast"
                   icon="pi pi-send"
                   iconPos="right"
                   class="w-full bg-gradient-to-r from-blue-500 to-purple-600 border-0 hover:from-blue-600 hover:to-purple-700 transition-all"
                 />
               </RouterLink>
-              <Button 
-                label="Partager" 
-                icon="pi pi-share-alt" 
-                severity="secondary" 
+              <a v-if="job.linkedinUrl" :href="job.linkedinUrl" target="_blank" rel="noopener noreferrer">
+                <Button
+                  label="Voir sur LinkedIn"
+                  icon="pi pi-linkedin"
+                  severity="secondary"
+                  outlined
+                  class="w-full border-[#0A66C2]/50 text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all"
+                />
+              </a>
+              <Button
+                label="Partager"
+                icon="pi pi-share-alt"
+                severity="secondary"
                 outlined
                 class="border-white/30 text-white hover:bg-white/10 transition-all"
                 @click="shareJob"

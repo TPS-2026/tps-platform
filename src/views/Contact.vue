@@ -51,6 +51,21 @@
         >
           <form @submit.prevent="submitContact" class="space-y-6">
             <div>
+              <p class="block text-sm font-medium mb-3 transition-colors" :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'">
+                {{ $t('contact.profileType') }}
+              </p>
+              <div class="flex gap-6">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" v-model="form.profileType" value="client" class="accent-blue-500" />
+                  <span :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'">{{ $t('contact.client') }}</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" v-model="form.profileType" value="jobseeker" class="accent-blue-500" />
+                  <span :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'">{{ $t('contact.jobseeker') }}</span>
+                </label>
+              </div>
+            </div>
+            <div>
               <label for="contact-name" class="block text-sm font-medium mb-2 transition-colors" :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'">
                 {{ $t('contact.name') }}
               </label>
@@ -158,6 +173,7 @@ export default {
     const successMessage = ref('')
     const errorMessage = ref('')
     const form = reactive({
+      profileType: 'client',
       name: '',
       email: '',
       subject: '',
@@ -176,7 +192,7 @@ export default {
           body: JSON.stringify({
             name: form.name,
             email: form.email,
-            subject: form.subject,
+            subject: `[${form.profileType === 'client' ? 'Client' : 'Chercheur d\'emploi'}] ${form.subject}`,
             message: form.message
           })
         })
@@ -195,6 +211,7 @@ export default {
     }
 
     function resetForm() {
+      form.profileType = 'client'
       form.name = ''
       form.email = ''
       form.subject = ''

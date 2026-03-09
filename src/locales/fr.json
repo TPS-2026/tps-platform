@@ -30,7 +30,7 @@
     "darkMode": "Mode clair",
     "lightMode": "Mode sombre",
     "accessibility": "Accessibilité",
-    "whoWeAre": "Qui sommes-nous ?",
+    "whoWeAre": "À propos",
     "ourCommitments": "Nos Engagements",
     "legalNotice": "Mentions légales",
     "clientsPartners": "Clients & Partenaires",
@@ -44,6 +44,9 @@
   "contact": {
     "title": "Contactez-nous",
     "subtitle": "Envoyez-nous un message pour vos projets ou toute demande.",
+    "profileType": "Vous êtes",
+    "client": "Client",
+    "jobseeker": "Chercheur d'emploi",
     "name": "Nom",
     "namePlaceholder": "Votre nom",
     "email": "E-mail",
@@ -345,7 +348,7 @@
     }
   },
   "whoWeAre": {
-    "title": "Qui sommes-nous ?",
+    "title": "À propos",
     "tagline": "L'expertise à la source, la performance au bout du fil.",
     "history": {
       "title": "Notre Histoire : Une ambition née du terrain",

@@ -103,82 +103,102 @@
       :modal="true"
       class="p-fluid"
     >
-      <form @submit.prevent="saveArticle" class="space-y-6">
-        <div>
-          <label class="block text-sm font-medium mb-2">Titre *</label>
-          <InputText v-model="articleForm.title" required class="w-full" />
+      <form @submit.prevent="saveArticle" class="space-y-1">
+        <!-- Section: Informations -->
+        <div class="flex items-center gap-2 pt-2 pb-3">
+          <i class="pi pi-info-circle text-blue-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Informations</span>
+          <div class="flex-1 h-px bg-white/10"></div>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
           <div>
-            <label class="block text-sm font-medium mb-2">Catégorie</label>
-            <InputText v-model="articleForm.category" class="w-full" />
+            <label class="block text-xs font-medium mb-1.5 text-white/60">Titre <span class="text-red-400">*</span></label>
+            <InputText v-model="articleForm.title" required class="w-full" placeholder="Titre de l'article" />
           </div>
-          <div>
-            <label class="flex items-center gap-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+            <div>
+              <label class="block text-xs font-medium mb-1.5 text-white/60">Catégorie</label>
+              <InputText v-model="articleForm.category" class="w-full" placeholder="Ex: Actualité, Projet, Événement" />
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08]">
               <Checkbox v-model="articleForm.published" :binary="true" />
-              <span>Publier immédiatement</span>
-            </label>
+              <div>
+                <span class="text-sm font-medium text-white/90">Publier immédiatement</span>
+                <p class="text-xs text-white/40">L'article sera visible sur le site</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div>
-          <label class="block text-sm font-medium mb-2">Image de couverture</label>
-          <div class="space-y-3">
-            <FileUpload 
-              mode="basic" 
-              accept="image/*"
-              :maxFileSize="5000000"
-              chooseLabel="Choisir une image"
-              @select="onImageSelect"
-              class="w-full"
-            />
-            <small class="text-white/60 dark:text-gray-400 block">Taille max: 5MB - Formats: JPG, PNG, GIF, WEBP</small>
-            
-            
-            <div v-if="articleForm.coverImage" class="mt-3">
-              <div class="relative">
-                <img 
-                  :src="articleForm.coverImage" 
-                  alt="Aperçu" 
-                  class="w-full h-48 object-cover rounded-lg border border-white/10 dark:border-gray-700"
-                  @error="$event.target.style.display='none'"
-                />
-                <Button 
-                  icon="pi pi-times" 
-                  severity="danger" 
+        <!-- Section: Image -->
+        <div class="flex items-center gap-2 pt-6 pb-3">
+          <i class="pi pi-image text-purple-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Image de couverture</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+          <div v-if="articleForm.coverImage" class="mb-4">
+            <div class="relative group">
+              <img
+                :src="articleForm.coverImage"
+                alt="Aperçu"
+                class="w-full h-48 object-cover rounded-lg border border-white/10"
+                @error="$event.target.style.display='none'"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                <Button
+                  icon="pi pi-trash"
+                  severity="danger"
                   rounded
-                  size="small"
-                  class="absolute top-2 right-2"
                   @click="removeImage"
                   v-tooltip.top="'Supprimer l\'image'"
                 />
               </div>
             </div>
           </div>
+          <FileUpload
+            mode="basic"
+            accept="image/*"
+            :maxFileSize="5000000"
+            :chooseLabel="articleForm.coverImage ? 'Changer l\'image' : 'Choisir une image'"
+            chooseIcon="pi pi-upload"
+            @select="onImageSelect"
+            class="w-full"
+          />
+          <small class="text-white/40 text-xs mt-2 block">Max 5 MB — JPG, PNG, GIF, WEBP</small>
         </div>
 
-        <div>
-          <label class="block text-sm font-medium mb-2">Extrait (résumé court)</label>
-          <Textarea v-model="articleForm.excerpt" rows="3" class="w-full" />
+        <!-- Section: Contenu -->
+        <div class="flex items-center gap-2 pt-6 pb-3">
+          <i class="pi pi-file-edit text-cyan-400"></i>
+          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Contenu</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+          <div>
+            <label class="block text-xs font-medium mb-1.5 text-white/60">Extrait (résumé court)</label>
+            <Textarea v-model="articleForm.excerpt" rows="2" class="w-full" placeholder="Un court résumé qui apparaîtra dans la liste des articles..." />
+          </div>
+          <div>
+            <label class="block text-xs font-medium mb-1.5 text-white/60">Contenu <span class="text-red-400">*</span></label>
+            <Textarea v-model="articleForm.content" rows="10" required class="w-full" placeholder="Rédigez le contenu complet de l'article..." />
+          </div>
         </div>
 
-        <div>
-          <label class="block text-sm font-medium mb-2">Contenu *</label>
-          <Textarea v-model="articleForm.content" rows="10" required class="w-full" />
-        </div>
-
-        <div class="flex justify-end gap-3 pt-4">
-          <Button 
-            label="Annuler" 
-            severity="secondary" 
+        <!-- Actions -->
+        <div class="flex justify-end gap-3 pt-6 border-t border-white/10 mt-2">
+          <Button
+            label="Annuler"
+            severity="secondary"
             outlined
+            icon="pi pi-times"
             @click="closeDialog"
           />
-          <Button 
-            :label="isEditing ? 'Modifier' : 'Créer'" 
+          <Button
+            :label="isEditing ? 'Modifier' : 'Créer'"
             type="submit"
             severity="contrast"
+            :icon="isEditing ? 'pi pi-check' : 'pi pi-plus'"
             class="bg-gradient-to-r from-blue-500 to-purple-600 border-0"
           />
         </div>
