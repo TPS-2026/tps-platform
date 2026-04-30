@@ -25,13 +25,9 @@ function loadScript() {
   scriptLoadPromise = new Promise((resolve, reject) => {
     const script = document.createElement('script')
     script.src = SCRIPT_URL
-    script.onload = () => {
-      if (window.turnstile && window.turnstile.ready) {
-        window.turnstile.ready(resolve)
-      } else {
-        resolve()
-      }
-    }
+    script.async = false
+    script.defer = false
+    script.onload = () => resolve()
     script.onerror = reject
     document.head.appendChild(script)
   })
