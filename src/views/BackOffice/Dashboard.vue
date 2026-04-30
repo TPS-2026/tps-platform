@@ -6,7 +6,7 @@
           <h1 class="text-3xl md:text-4xl font-bold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
             Tableau de bord
           </h1>
-          <p class="text-white/70 dark:text-gray-400">
+          <p :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">
             Vue d'ensemble de votre plateforme
           </p>
         </div>

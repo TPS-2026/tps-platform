@@ -7,7 +7,7 @@
             <h1 class="text-3xl md:text-4xl font-bold mb-2" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">
               {{ $t('backoffice.jobs.title') }}
             </h1>
-            <p class="text-white/70 dark:text-gray-400">{{ $t('backoffice.jobs.subtitle') }}</p>
+            <p :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ $t('backoffice.jobs.subtitle') }}</p>
           </div>
           <div class="flex gap-3">
             <Button 

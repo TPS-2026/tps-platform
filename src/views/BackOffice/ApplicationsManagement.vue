@@ -57,7 +57,7 @@
 
         <div v-if="loading" class="text-center py-20">
           <ProgressSpinner size="large"/>
-          <p class="mt-4 text-white/70 dark:text-gray-400">Chargement...</p>
+          <p class="mt-4" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">Chargement...</p>
         </div>
 
         <div v-else-if="applications.length === 0" class="text-center py-20 backdrop-blur-sm rounded-2xl"
