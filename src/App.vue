@@ -49,9 +49,8 @@ export default {
         return true // Default to showing header if route is not ready
       }
       const hiddenRoutes = [
-        'sign-in', 
-        'sign-up', 
-        'forgot-password', 
+        'sign-in',
+        'forgot-password',
         'reset-password',
         'backoffice-dashboard',
         'backoffice-jobs',
@@ -68,7 +67,6 @@ export default {
       }
       const hiddenRoutes = [
         'sign-in',
-        'sign-up',
         'forgot-password',
         'reset-password',
         'backoffice-dashboard',

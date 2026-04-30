@@ -107,24 +107,24 @@
         <!-- Section: Informations -->
         <div class="flex items-center gap-2 pt-2 pb-3">
           <i class="pi pi-info-circle text-blue-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Informations</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Informations</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
-        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+        <div class="space-y-4 p-4 rounded-xl" :class="themeStore.isDark ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-gray-50 border border-gray-200'">
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">Titre <span class="text-red-400">*</span></label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">Titre <span class="text-red-400">*</span></label>
             <InputText v-model="articleForm.title" required class="w-full" placeholder="Titre de l'article" />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
-              <label class="block text-xs font-medium mb-1.5 text-white/60">Catégorie</label>
+              <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">Catégorie</label>
               <InputText v-model="articleForm.category" class="w-full" placeholder="Ex: Actualité, Projet, Événement" />
             </div>
-            <div class="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08]">
+            <div class="flex items-center gap-3 p-3 rounded-lg border" :class="themeStore.isDark ? 'bg-white/[0.04] border-white/[0.08]' : 'bg-white border-gray-200'">
               <Checkbox v-model="articleForm.published" :binary="true" />
               <div>
-                <span class="text-sm font-medium text-white/90">Publier immédiatement</span>
-                <p class="text-xs text-white/40">L'article sera visible sur le site</p>
+                <span class="text-sm font-medium" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Publier immédiatement</span>
+                <p class="text-xs" :class="themeStore.isDark ? 'text-white/40' : 'text-gray-500'">L'article sera visible sur le site</p>
               </div>
             </div>
           </div>
@@ -133,16 +133,17 @@
         <!-- Section: Image -->
         <div class="flex items-center gap-2 pt-6 pb-3">
           <i class="pi pi-image text-purple-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Image de couverture</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Image de couverture</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
-        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+        <div class="p-4 rounded-xl" :class="themeStore.isDark ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-gray-50 border border-gray-200'">
           <div v-if="articleForm.coverImage" class="mb-4">
             <div class="relative group">
               <img
                 :src="articleForm.coverImage"
                 alt="Aperçu"
-                class="w-full h-48 object-cover rounded-lg border border-white/10"
+                class="w-full h-48 object-cover rounded-lg border"
+                :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'"
                 @error="$event.target.style.display='none'"
               />
               <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -165,28 +166,28 @@
             @select="onImageSelect"
             class="w-full"
           />
-          <small class="text-white/40 text-xs mt-2 block">Max 5 MB — JPG, PNG, GIF, WEBP</small>
+          <small class="text-xs mt-2 block" :class="themeStore.isDark ? 'text-white/40' : 'text-gray-500'">Max 5 MB — JPG, PNG, GIF, WEBP</small>
         </div>
 
         <!-- Section: Contenu -->
         <div class="flex items-center gap-2 pt-6 pb-3">
           <i class="pi pi-file-edit text-cyan-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Contenu</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Contenu</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
-        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+        <div class="space-y-4 p-4 rounded-xl" :class="themeStore.isDark ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-gray-50 border border-gray-200'">
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">Extrait (résumé court)</label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">Extrait (résumé court)</label>
             <Textarea v-model="articleForm.excerpt" rows="2" class="w-full" placeholder="Un court résumé qui apparaîtra dans la liste des articles..." />
           </div>
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">Contenu <span class="text-red-400">*</span></label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">Contenu <span class="text-red-400">*</span></label>
             <Textarea v-model="articleForm.content" rows="10" required class="w-full" placeholder="Rédigez le contenu complet de l'article..." />
           </div>
         </div>
 
         <!-- Actions -->
-        <div class="flex justify-end gap-3 pt-6 border-t border-white/10 mt-2">
+        <div class="flex justify-end gap-3 pt-6 border-t mt-2" :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'">
           <Button
             label="Annuler"
             severity="secondary"
@@ -454,92 +455,91 @@ export default {
 }
 </script>
 
-<style scoped>
-/* Dialog styles */
-:deep(.p-dialog) {
+<style>
+/* Dark-mode glassmorphic overrides — PrimeVue defaults are used in light mode */
+html.dark-mode .p-dialog {
   background: rgba(30, 30, 40, 0.95) !important;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-:deep(.p-dialog-header) {
+html.dark-mode .p-dialog-header {
   background: rgba(255, 255, 255, 0.05) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: white !important;
 }
 
-:deep(.p-dialog-title) {
+html.dark-mode .p-dialog-title {
   color: white !important;
 }
 
-:deep(.p-dialog-content) {
+html.dark-mode .p-dialog-content {
   background: transparent !important;
   color: white !important;
 }
 
-:deep(.p-dialog-footer) {
+html.dark-mode .p-dialog-footer {
   background: rgba(255, 255, 255, 0.05) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-:deep(.p-dialog-header-icon) {
+html.dark-mode .p-dialog-header-icon {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-:deep(.p-dialog-header-icon:hover) {
+html.dark-mode .p-dialog-header-icon:hover {
   color: white !important;
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Ensure all form fields in dialog have the custom style */
-:deep(.p-inputtext),
-:deep(.p-inputtextarea),
-:deep(.p-select),
-:deep(.p-inputnumber-input) {
+html.dark-mode .p-dialog .p-inputtext,
+html.dark-mode .p-dialog .p-inputtextarea,
+html.dark-mode .p-dialog .p-select,
+html.dark-mode .p-dialog .p-inputnumber-input {
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   color: white !important;
   backdrop-filter: blur(10px);
 }
 
-:deep(.p-inputtext:focus),
-:deep(.p-inputtextarea:focus),
-:deep(.p-select:focus),
-:deep(.p-inputnumber-input:focus) {
+html.dark-mode .p-dialog .p-inputtext:focus,
+html.dark-mode .p-dialog .p-inputtextarea:focus,
+html.dark-mode .p-dialog .p-select:focus,
+html.dark-mode .p-dialog .p-inputnumber-input:focus {
   background: rgba(255, 255, 255, 0.15) !important;
   border-color: rgba(96, 165, 250, 0.5) !important;
   box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.25) !important;
 }
 
-:deep(.p-inputtext::placeholder),
-:deep(.p-inputtextarea::placeholder) {
+html.dark-mode .p-dialog .p-inputtext::placeholder,
+html.dark-mode .p-dialog .p-inputtextarea::placeholder {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-:deep(.p-select-label),
-:deep(.p-placeholder) {
+html.dark-mode .p-dialog .p-select-label,
+html.dark-mode .p-dialog .p-placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-:deep(.p-select-overlay),
-:deep(.p-multiselect-overlay) {
+html.dark-mode .p-select-overlay,
+html.dark-mode .p-multiselect-overlay {
   background: rgba(30, 30, 40, 0.95) !important;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-:deep(.p-select-item),
-:deep(.p-multiselect-item) {
+html.dark-mode .p-select-item,
+html.dark-mode .p-multiselect-item {
   color: white !important;
 }
 
-:deep(.p-select-item:hover),
-:deep(.p-multiselect-item:hover) {
+html.dark-mode .p-select-item:hover,
+html.dark-mode .p-multiselect-item:hover {
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-:deep(.p-select-item.p-highlight),
-:deep(.p-multiselect-item.p-highlight) {
+html.dark-mode .p-select-item.p-highlight,
+html.dark-mode .p-multiselect-item.p-highlight {
   background: rgba(96, 165, 250, 0.3) !important;
   color: white !important;
 }

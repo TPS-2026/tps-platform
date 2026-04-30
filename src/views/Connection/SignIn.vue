@@ -40,10 +40,6 @@
             :loading="loading"
           />
           
-          <div class="text-center text-sm text-white/70">
-            Pas encore de compte ? 
-            <RouterLink to="/sign-up" class="text-blue-400 hover:text-blue-300 transition-colors">S'inscrire</RouterLink>
-          </div>
         </form>
       </div>
     </div>

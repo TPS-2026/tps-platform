@@ -106,8 +106,8 @@
         <!-- Section: Langue -->
         <div class="flex items-center gap-2 pt-2 pb-3">
           <i class="pi pi-globe text-blue-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Langue</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Langue</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
         <div>
           <Select
@@ -123,17 +123,17 @@
         <!-- Section: Informations principales -->
         <div class="flex items-center gap-2 pt-6 pb-3">
           <i class="pi pi-info-circle text-blue-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Informations principales</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Informations principales</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
-        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+        <div class="space-y-4 p-4 rounded-xl" :class="themeStore.isDark ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-gray-50 border border-gray-200'">
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.title') }} <span class="text-red-400">*</span></label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.title') }} <span class="text-red-400">*</span></label>
             <InputText v-model="jobForm.translations[currentLanguage].title" required class="w-full" placeholder="Ex: Technicien Fibre Optique FTTH" />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.sector') }} <span class="text-red-400">*</span></label>
+              <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.sector') }} <span class="text-red-400">*</span></label>
               <Select
                 v-model="jobForm.sector"
                 :options="sectorOptions"
@@ -145,13 +145,13 @@
               />
             </div>
             <div>
-              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.location') }} <span class="text-red-400">*</span></label>
+              <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.location') }} <span class="text-red-400">*</span></label>
               <InputText v-model="jobForm.location" required class="w-full" placeholder="Ex: Paris, Île-de-France" />
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.contractType') }} <span class="text-red-400">*</span></label>
+              <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.contractType') }} <span class="text-red-400">*</span></label>
               <Select
                 v-model="jobForm.contractType"
                 :options="contractTypeOptions"
@@ -163,7 +163,7 @@
               />
             </div>
             <div>
-              <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.tjm') }}</label>
+              <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.tjm') }}</label>
               <InputNumber v-model="jobForm.tjm" :min="0" class="w-full" placeholder="0" />
             </div>
           </div>
@@ -172,54 +172,54 @@
         <!-- Section: Description -->
         <div class="flex items-center gap-2 pt-6 pb-3">
           <i class="pi pi-file-edit text-purple-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Description du poste</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Description du poste</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
-        <div class="space-y-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+        <div class="space-y-4 p-4 rounded-xl" :class="themeStore.isDark ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-gray-50 border border-gray-200'">
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.description') }} <span class="text-red-400">*</span></label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.description') }} <span class="text-red-400">*</span></label>
             <Textarea v-model="jobForm.translations[currentLanguage].description" rows="5" required class="w-full" placeholder="Décrivez le poste en détail..." />
           </div>
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.requirements') }}</label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.requirements') }}</label>
             <Textarea
               v-model="requirementsText"
               rows="3"
               :placeholder="$t('backoffice.jobs.form.requirementsPlaceholder')"
               class="w-full"
             />
-            <small class="text-white/40 text-xs mt-1 block">Une ligne par critère</small>
+            <small class="text-xs mt-1 block" :class="themeStore.isDark ? 'text-white/40' : 'text-gray-500'">Une ligne par critère</small>
           </div>
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.responsibilities') }}</label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.responsibilities') }}</label>
             <Textarea
               v-model="responsibilitiesText"
               rows="3"
               :placeholder="$t('backoffice.jobs.form.responsibilitiesPlaceholder')"
               class="w-full"
             />
-            <small class="text-white/40 text-xs mt-1 block">Une ligne par mission</small>
+            <small class="text-xs mt-1 block" :class="themeStore.isDark ? 'text-white/40' : 'text-gray-500'">Une ligne par mission</small>
           </div>
           <div>
-            <label class="block text-xs font-medium mb-1.5 text-white/60">{{ $t('backoffice.jobs.form.benefits') }}</label>
+            <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">{{ $t('backoffice.jobs.form.benefits') }}</label>
             <Textarea
               v-model="benefitsText"
               rows="3"
               :placeholder="$t('backoffice.jobs.form.benefitsPlaceholder')"
               class="w-full"
             />
-            <small class="text-white/40 text-xs mt-1 block">Une ligne par avantage</small>
+            <small class="text-xs mt-1 block" :class="themeStore.isDark ? 'text-white/40' : 'text-gray-500'">Une ligne par avantage</small>
           </div>
         </div>
 
         <!-- Section: Liens externes -->
         <div class="flex items-center gap-2 pt-6 pb-3">
           <i class="pi pi-link text-cyan-400"></i>
-          <span class="text-sm font-semibold text-white/90 uppercase tracking-wide">Liens externes</span>
-          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-sm font-semibold uppercase tracking-wide" :class="themeStore.isDark ? 'text-white/90' : 'text-gray-700'">Liens externes</span>
+          <div class="flex-1 h-px" :class="themeStore.isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
         </div>
-        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-          <label class="block text-xs font-medium mb-1.5 text-white/60">
+        <div class="p-4 rounded-xl" :class="themeStore.isDark ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-gray-50 border border-gray-200'">
+          <label class="block text-xs font-medium mb-1.5" :class="themeStore.isDark ? 'text-white/60' : 'text-gray-600'">
             <i class="pi pi-linkedin text-[#0A66C2] mr-1"></i>
             Lien LinkedIn de l'offre
           </label>
@@ -227,7 +227,7 @@
         </div>
 
         <!-- Actions -->
-        <div class="flex justify-end gap-3 pt-6 border-t border-white/10 mt-2">
+        <div class="flex justify-end gap-3 pt-6 border-t mt-2" :class="themeStore.isDark ? 'border-white/10' : 'border-gray-200'">
           <Button
             :label="$t('common.cancel')"
             severity="secondary"
@@ -616,92 +616,91 @@ export default {
 }
 </script>
 
-<style scoped>
-/* Dialog styles */
-:deep(.p-dialog) {
+<style>
+/* Dark-mode glassmorphic overrides — PrimeVue defaults are used in light mode */
+html.dark-mode .p-dialog {
   background: rgba(30, 30, 40, 0.95) !important;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-:deep(.p-dialog-header) {
+html.dark-mode .p-dialog-header {
   background: rgba(255, 255, 255, 0.05) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: white !important;
 }
 
-:deep(.p-dialog-title) {
+html.dark-mode .p-dialog-title {
   color: white !important;
 }
 
-:deep(.p-dialog-content) {
+html.dark-mode .p-dialog-content {
   background: transparent !important;
   color: white !important;
 }
 
-:deep(.p-dialog-footer) {
+html.dark-mode .p-dialog-footer {
   background: rgba(255, 255, 255, 0.05) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-:deep(.p-dialog-header-icon) {
+html.dark-mode .p-dialog-header-icon {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-:deep(.p-dialog-header-icon:hover) {
+html.dark-mode .p-dialog-header-icon:hover {
   color: white !important;
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Ensure all form fields in dialog have the custom style */
-:deep(.p-inputtext),
-:deep(.p-inputtextarea),
-:deep(.p-select),
-:deep(.p-inputnumber-input) {
+html.dark-mode .p-dialog .p-inputtext,
+html.dark-mode .p-dialog .p-inputtextarea,
+html.dark-mode .p-dialog .p-select,
+html.dark-mode .p-dialog .p-inputnumber-input {
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   color: white !important;
   backdrop-filter: blur(10px);
 }
 
-:deep(.p-inputtext:focus),
-:deep(.p-inputtextarea:focus),
-:deep(.p-select:focus),
-:deep(.p-inputnumber-input:focus) {
+html.dark-mode .p-dialog .p-inputtext:focus,
+html.dark-mode .p-dialog .p-inputtextarea:focus,
+html.dark-mode .p-dialog .p-select:focus,
+html.dark-mode .p-dialog .p-inputnumber-input:focus {
   background: rgba(255, 255, 255, 0.15) !important;
   border-color: rgba(96, 165, 250, 0.5) !important;
   box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.25) !important;
 }
 
-:deep(.p-inputtext::placeholder),
-:deep(.p-inputtextarea::placeholder) {
+html.dark-mode .p-dialog .p-inputtext::placeholder,
+html.dark-mode .p-dialog .p-inputtextarea::placeholder {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-:deep(.p-select-label),
-:deep(.p-placeholder) {
+html.dark-mode .p-dialog .p-select-label,
+html.dark-mode .p-dialog .p-placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-:deep(.p-select-overlay),
-:deep(.p-multiselect-overlay) {
+html.dark-mode .p-select-overlay,
+html.dark-mode .p-multiselect-overlay {
   background: rgba(30, 30, 40, 0.95) !important;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-:deep(.p-select-item),
-:deep(.p-multiselect-item) {
+html.dark-mode .p-select-item,
+html.dark-mode .p-multiselect-item {
   color: white !important;
 }
 
-:deep(.p-select-item:hover),
-:deep(.p-multiselect-item:hover) {
+html.dark-mode .p-select-item:hover,
+html.dark-mode .p-multiselect-item:hover {
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-:deep(.p-select-item.p-highlight),
-:deep(.p-multiselect-item.p-highlight) {
+html.dark-mode .p-select-item.p-highlight,
+html.dark-mode .p-multiselect-item.p-highlight {
   background: rgba(96, 165, 250, 0.3) !important;
   color: white !important;
 }

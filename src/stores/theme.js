@@ -16,9 +16,10 @@ export const useThemeStore = defineStore('theme', {
       if (mode === 'dark' || mode === 'light') {
         this.mode = mode
         localStorage.setItem('theme', mode)
-        // Apply theme class to document element
-        document.documentElement.classList.remove('dark', 'light')
-        document.documentElement.classList.add(mode)
+        const root = document.documentElement
+        root.classList.remove('dark', 'light')
+        root.classList.add(mode)
+        root.classList.toggle('dark-mode', mode === 'dark')
       }
     },
 

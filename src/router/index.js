@@ -13,7 +13,6 @@ const NewsArticle = () => import('../views/News/NewsArticle.vue')
 const About = () => import('../views/About.vue')
 const Services = () => import('../views/Services.vue')
 const SignIn = () => import('../views/Connection/SignIn.vue')
-const SignUp = () => import('../views/Connection/SignUp.vue')
 const ForgotPassword = () => import('../views/Connection/ForgotPassword.vue')
 const ResetPassword = () => import('../views/Connection/ResetPassword.vue')
 
@@ -157,12 +156,6 @@ export const routes = [
         displayInMenu: false
     },
     {
-        path: '/sign-up',
-        name: 'sign-up',
-        component: SignUp,
-        displayInMenu: false
-    },
-    {
         path: '/forgot-password',
         name: 'forgot-password',
         component: ForgotPassword,
@@ -268,8 +261,8 @@ router.beforeEach(async (to, from) => {
             console.error('Error verifying authentication:', err)
         }
     }
-    // Redirect authenticated users away from login/signup pages
-    else if (currentRoute.name === 'sign-in' || currentRoute.name === 'sign-up') {
+    // Redirect authenticated users away from login page
+    else if (currentRoute.name === 'sign-in') {
         if (accountStore.accessToken) {
             const expirationDate = accountStore.accessTokenExpirationDate
             if (expirationDate && parseInt(expirationDate) > Date.now()) {
