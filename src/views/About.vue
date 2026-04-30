@@ -172,40 +172,32 @@
             {{ $t('whoWeAre.orgchart.title') }}
           </h2>
           <div class="space-y-4">
-            <div 
+            <div
               class="p-4 rounded-xl transition-colors text-center"
               :class="themeStore.isDark ? 'bg-blue-500/20 border border-blue-400/30' : 'bg-blue-50 border border-blue-200'"
             >
-              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Adel ABDELHANINE</div>
+              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Wadie DARDOURI</div>
               <div class="text-sm" :class="themeStore.isDark ? 'text-blue-200' : 'text-blue-700'">{{ $t('whoWeAre.orgchart.president') }}</div>
             </div>
-            <div 
+            <div
               class="p-4 rounded-xl transition-colors text-center"
               :class="themeStore.isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-50 border border-gray-200'"
             >
-              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Wadie DARDOURI</div>
+              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Adel ABDELHANINE</div>
               <div class="text-sm" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ $t('whoWeAre.orgchart.director') }}</div>
             </div>
-            <div 
+            <div
               class="p-4 rounded-xl transition-colors text-center"
               :class="themeStore.isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-50 border border-gray-200'"
             >
-              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Sarah THIMOTHE</div>
+              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Sarah THIMOTHÉ</div>
               <div class="text-sm" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ $t('whoWeAre.orgchart.activities') }}</div>
             </div>
-            <div 
-              class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center text-sm transition-colors"
-              :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'"
-            >
-              <span>{{ $t('whoWeAre.orgchart.poleAdmin') }}</span>
-              <span>{{ $t('whoWeAre.orgchart.poleRH') }}</span>
-              <span>{{ $t('whoWeAre.orgchart.poleCommercial') }}</span>
-            </div>
-            <div 
+            <div
               class="p-4 rounded-xl transition-colors text-center"
               :class="themeStore.isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-50 border border-gray-200'"
             >
-              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Tayssir BAYOU</div>
+              <div class="font-semibold" :class="themeStore.isDark ? 'text-white' : 'text-gray-900'">Taissir BAYOU</div>
               <div class="text-sm" :class="themeStore.isDark ? 'text-white/70' : 'text-gray-600'">{{ $t('whoWeAre.orgchart.rhManager') }}</div>
             </div>
           </div>
@@ -324,6 +316,68 @@
           </div>
         </section>
 
+        <!-- Nos Partenaires -->
+        <section
+          class="p-8 backdrop-blur-sm rounded-2xl transition-colors"
+          :class="themeStore.isDark
+            ? 'bg-white/5 border border-white/10'
+            : 'bg-white/90 border border-gray-200/50 shadow-lg'"
+        >
+          <h2
+            class="text-2xl font-semibold mb-6 flex items-center gap-3 transition-colors"
+            :class="themeStore.isDark ? 'text-white' : 'text-gray-900'"
+          >
+            <i class="pi pi-handshake text-blue-400 text-2xl" aria-hidden="true"></i>
+            {{ $t('whoWeAre.partners.title') }}
+          </h2>
+          <p
+            class="leading-relaxed mb-8 transition-colors"
+            :class="themeStore.isDark ? 'text-white/80' : 'text-gray-700'"
+          >
+            {{ $t('whoWeAre.partners.content') }}
+          </p>
+          <Carousel
+            :value="partners"
+            :numVisible="4"
+            :numScroll="1"
+            :responsiveOptions="partnersResponsiveOptions"
+            :circular="true"
+            :autoplayInterval="3000"
+            :showIndicators="false"
+            class="partners-carousel"
+          >
+            <template #item="slotProps">
+              <div class="px-3">
+                <div
+                  class="h-32 rounded-xl flex flex-col items-center justify-center transition-all hover:scale-105"
+                  :class="themeStore.isDark
+                    ? 'bg-white/5 border border-white/10 hover:border-white/30'
+                    : 'bg-white border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md'"
+                >
+                  <img
+                    v-if="slotProps.data.logo"
+                    :src="slotProps.data.logo"
+                    :alt="slotProps.data.name"
+                    class="max-h-16 max-w-[80%] object-contain"
+                  />
+                  <template v-else>
+                    <i
+                      class="pi pi-image text-4xl mb-2"
+                      :class="themeStore.isDark ? 'text-white/30' : 'text-gray-300'"
+                    ></i>
+                    <span
+                      class="text-sm font-medium"
+                      :class="themeStore.isDark ? 'text-white/50' : 'text-gray-400'"
+                    >
+                      {{ slotProps.data.name }}
+                    </span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </Carousel>
+        </section>
+
         <!-- CTA -->
         <section 
           class="p-8 backdrop-blur-sm rounded-2xl transition-colors text-center"
@@ -415,7 +469,31 @@ export default {
       { titleKey: 'commitments.rse.title', contentKey: 'commitments.rse.content', icon: 'pi pi-heart', color: '#ef4444' }
     ]
 
-    return { themeStore, dnaItems, certifications, commitmentItems }
+    const partners = [
+      { name: 'Partenaire 1', logo: null },
+      { name: 'Partenaire 2', logo: null },
+      { name: 'Partenaire 3', logo: null },
+      { name: 'Partenaire 4', logo: null },
+      { name: 'Partenaire 5', logo: null },
+      { name: 'Partenaire 6', logo: null },
+      { name: 'Partenaire 7', logo: null },
+      { name: 'Partenaire 8', logo: null }
+    ]
+
+    const partnersResponsiveOptions = [
+      { breakpoint: '1400px', numVisible: 4, numScroll: 1 },
+      { breakpoint: '992px', numVisible: 3, numScroll: 1 },
+      { breakpoint: '768px', numVisible: 2, numScroll: 1 },
+      { breakpoint: '576px', numVisible: 1, numScroll: 1 }
+    ]
+
+    return { themeStore, dnaItems, certifications, commitmentItems, partners, partnersResponsiveOptions }
   }
 }
 </script>
+
+<style scoped>
+.partners-carousel :deep(.p-carousel-indicators) {
+  display: none;
+}
+</style>

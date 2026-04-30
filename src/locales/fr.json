@@ -377,15 +377,16 @@
       "president": "Président",
       "director": "Directeur",
       "activities": "Responsable d'activités",
-      "poleAdmin": "Pôle Administratif et Financier",
-      "poleRH": "Pôle RH",
-      "poleCommercial": "Pôle Commercial",
-      "rhManager": "Responsable RH, Pôle RH"
+      "rhManager": "Responsable RH"
     },
     "certifications": {
       "title": "Certifications et labels",
       "content": "TPS s'engage à faire figurer sur ce site les certifications et labels dont elle dispose (qualité, sécurité, RSE, etc.) pour renforcer la confiance des clients et des candidats.",
       "note": "D'autres certifications et labels sont en cours d'obtention. Cette section sera mise à jour régulièrement."
+    },
+    "partners": {
+      "title": "Nos Partenaires",
+      "content": "Nous sommes fiers de collaborer avec des partenaires de confiance qui partagent notre engagement envers l'excellence et l'innovation."
     },
     "cta": {
       "title": "Prêt à passer à la vitesse supérieure ?",

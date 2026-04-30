@@ -377,15 +377,16 @@
       "president": "President",
       "director": "Director",
       "activities": "Activities Manager",
-      "poleAdmin": "Administrative & Financial",
-      "poleRH": "HR",
-      "poleCommercial": "Commercial",
-      "rhManager": "HR Manager, HR Division"
+      "rhManager": "HR Manager"
     },
     "certifications": {
       "title": "Certifications and labels",
       "content": "TPS is committed to displaying on this site the certifications and labels it holds (quality, safety, CSR, etc.) to strengthen the trust of clients and candidates.",
       "note": "Additional certifications and labels are currently being obtained. This section will be updated regularly."
+    },
+    "partners": {
+      "title": "Our Partners",
+      "content": "We are proud to work with trusted partners who share our commitment to excellence and innovation."
     },
     "cta": {
       "title": "Ready to shift into high gear?",

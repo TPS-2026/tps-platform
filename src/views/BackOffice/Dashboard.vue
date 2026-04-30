@@ -280,33 +280,22 @@ export default {
       pendingApplications: 0,
       totalArticles: 0
     })
-    const applications = ref([])
-    const jobs = ref([])
-    const articles = ref([])
+    const statusCounts = ref({ pending: 0, reviewed: 0, accepted: 0, rejected: 0 })
+    const dayBuckets = ref([])
 
     const fetchStats = async () => {
       loading.value = true
       try {
-        // Fetch all data
-        const [jobsRes, applicationsRes, articlesRes] = await Promise.all([
-          apiClient.get('/jobs'),
-          apiClient.get('/applications', { params: { page: 1, pageSize: 1000 } }),
-          apiClient.get('/news', { params: { page: 1, pageSize: 100, admin: 'true' } })
-        ])
+        const { data } = await apiClient.get('/stats')
 
-        jobs.value = jobsRes.data || []
-        applications.value = applicationsRes.data?.items || applicationsRes.data || []
-        articles.value = articlesRes.data?.items || articlesRes.data || []
-
-        // Calculate stats
-        const totalApps = applicationsRes.data?.total || applications.value.length
-        const totalNews = articlesRes.data?.total || articles.value.length
         stats.value = {
-          totalJobs: jobs.value.length,
-          totalApplications: totalApps,
-          pendingApplications: applications.value.filter(app => app.status === 'pending').length,
-          totalArticles: totalNews
+          totalJobs: data.totalJobs || 0,
+          totalApplications: data.totalApplications || 0,
+          pendingApplications: data.pendingApplications || 0,
+          totalArticles: data.totalArticles || 0
         }
+        statusCounts.value = data.applicationsByStatus || { pending: 0, reviewed: 0, accepted: 0, rejected: 0 }
+        dayBuckets.value = data.applicationsByDay || []
       } catch (error) {
         console.error('Error fetching stats:', error)
       } finally {
@@ -315,25 +304,13 @@ export default {
     }
 
     const applicationStatuses = computed(() => {
-      const statusCounts = {
-        pending: 0,
-        reviewed: 0,
-        accepted: 0,
-        rejected: 0
-      }
-
-      applications.value.forEach(app => {
-        if (statusCounts.hasOwnProperty(app.status)) {
-          statusCounts[app.status]++
-        }
-      })
-
-      const total = applications.value.length || 1
+      const counts = statusCounts.value
+      const total = (counts.pending + counts.reviewed + counts.accepted + counts.rejected) || 1
       const statuses = [
-        { label: 'En attente', value: 'pending', count: statusCounts.pending, color: 'bg-yellow-500' },
-        { label: 'Examinée', value: 'reviewed', count: statusCounts.reviewed, color: 'bg-blue-500' },
-        { label: 'Acceptée', value: 'accepted', count: statusCounts.accepted, color: 'bg-green-500' },
-        { label: 'Refusée', value: 'rejected', count: statusCounts.rejected, color: 'bg-red-500' }
+        { label: 'En attente', value: 'pending', count: counts.pending, color: 'bg-yellow-500' },
+        { label: 'Examinée', value: 'reviewed', count: counts.reviewed, color: 'bg-blue-500' },
+        { label: 'Acceptée', value: 'accepted', count: counts.accepted, color: 'bg-green-500' },
+        { label: 'Refusée', value: 'rejected', count: counts.rejected, color: 'bg-red-500' }
       ]
 
       return statuses.map(status => ({
@@ -343,31 +320,17 @@ export default {
     })
 
     const applicationsByDay = computed(() => {
-      const days = []
-      const today = new Date()
-      
-      for (let i = 6; i >= 0; i--) {
-        const date = new Date(today)
-        date.setDate(date.getDate() - i)
-        const dateStr = date.toISOString().split('T')[0]
-        
-        const count = applications.value.filter(app => {
-          const appDate = new Date(app.createdAt).toISOString().split('T')[0]
-          return appDate === dateStr
-        }).length
-
-        days.push({
+      const buckets = dayBuckets.value
+      const maxCount = Math.max(...buckets.map(d => d.count), 1)
+      return buckets.map(day => {
+        const date = new Date(day.date + 'T00:00:00')
+        return {
           label: date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' }),
-          count,
-          date: dateStr
-        })
-      }
-
-      const maxCount = Math.max(...days.map(d => d.count), 1)
-      return days.map(day => ({
-        ...day,
-        percentage: maxCount > 0 ? (day.count / maxCount) * 100 : 0
-      }))
+          count: day.count,
+          date: day.date,
+          percentage: maxCount > 0 ? (day.count / maxCount) * 100 : 0
+        }
+      })
     })
 
     onMounted(() => {
